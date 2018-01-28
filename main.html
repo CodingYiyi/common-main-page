@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script type="text/javascript" src="https://cdn.kyeegroup.com/repository/public/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="./js/main.js"></script>
+    <link href="./css/_frame/main.css" rel="stylesheet" type="text/css" />
+    <link href="./css/custom.css" rel="stylesheet" type="text/css" />
+    <link href="./assets/font-icon/kyee/style.css" rel="stylesheet" type="text/css" />
+    <title>主界面DEMO</title>
+</head>
+
+<body>
+
+    <div class="body">
+        <aside class="aside-box">
+            <div class="logo-box">
+                <span id="toggle-aside" class="clickable icon_classify"></span>
+                <img src="./assets/img/logo.png" />
+            </div>
+            <ul class="menu-items-box">
+                <li class="item-level-0-folded">
+                    <div class="clickable item-level-0">
+                        <i class="item-icon-left icon_friend_list"></i>
+                        <span class="item-label">审核管理</span>
+                        <i class="item-icon-right item-level-0-folded icon_next"></i>
+                    </div>
+                    <ul class="submenu-hide">
+                        <li>
+                            <div class="item-level-1">
+                                <i class="icon_add"></i>
+                                <span>信息管理</span>
+                            </div>
+                            <ul class="submenu-hide">
+                                <li class="item-level-2">人员综合查询</li>
+                                <li class="item-level-2">补签次数统计</li>
+                                <li class="item-level-2">人员综合查询</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <div class="item-level-1">
+                                <i class="icon_add"></i>
+                                <span>报表查询</span>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </aside>
+        <div class="main-box main-box-dynamic">
+            <header class="header">
+                <div class="system-name-box row-flex-box">
+                    <span id="system-name"></span>
+                </div>
+                <div class="func-config-box row-flex-box">
+                    <ul id="func-items" class="row-flex-box">
+                        <li id="func-item-temp" class="clickable func-item" style="display:none">
+                            <i></i>
+                            <span></span>
+                        </li>
+                    </ul>
+                </div>
+            </header>
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,18 @@
+@charset "UTF-8";
+
+/* 请在此处添加样式，不要修改【main.css】文件中的样式代码 */
+
+.user-info{
+    margin-left: 20px;
+}
+
+.user-info>img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.user-info>span{
+    margin-left: 10px;
+    color: #fff;
+}
