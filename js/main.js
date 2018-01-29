@@ -233,7 +233,7 @@ jQuery(function ($) {
     })
 
     // 切换侧边栏的固定（220px）、悬浮（70px）状态
-    function toogleAsideState(){
+    function toogleAsideState() {
         $(".aside-box").toggleClass("aside-folded"); // 侧边栏宽度 220px与70px 来回切换。
         $(".aside-box").off("mouseout").one("mouseout", function () { // 鼠标离开时触发（鼠标未离开，即使点击也不会触发）
             if ($(".aside-box").hasClass("aside-folded")) { // 由固定切换至悬浮状态时，切换右侧主体内容区域的样式（flex布局切换成absolute模式）、侧边栏添加hover效果。
@@ -256,6 +256,31 @@ jQuery(function ($) {
         KyeeToggleClass($(this).parent().children("ul"), "submenu-show", "submenu-hide");
         KyeeToggleClass($(this).children("i"), "icon_lessen", "icon_add");
     })
+
+
+    $(".visited-items>li").on("click", function () {
+        if (!$(this).hasClass("active-item")) {
+            $(this).parent().children("li").removeClass("active-item");
+            $(this).addClass("active-item");
+        }
+    })
+
+    $(".nav-pre").on("click", function () {
+        var target = $(this).next().children("ul");
+        var transformVal = target.css("transform") && target.css("transform")!=="none" ? +(target.css("transform").substring(7).split(',')[4]) : 0;
+        target.css({
+            "transform": `translateX(${transformVal-100}px)`
+        });
+    })
+
+    $(".nav-next").on("click", function () {
+        var target = $(this).prev().children("ul");
+        var transformVal = target.css("transform") && target.css("transform")!=="none" ? +(target.css("transform").substring(7).split(',')[4]) : 0;
+        target.css({
+            "transform": `translateX(${transformVal+100}px)`
+        });
+    })
+
 
     /**
      * 两个样式类互相切换，区别 jQuery 自带的 toogleClass 用法
