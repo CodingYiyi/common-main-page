@@ -9,8 +9,9 @@
     <script type="text/javascript" src="./js/main.js"></script>
     <link href="./css/_frame/main.css" rel="stylesheet" type="text/css" />
     <link href="./css/custom.css" rel="stylesheet" type="text/css" />
-    <link href="./assets/font-icon/kyee/style.css" rel="stylesheet" type="text/css" />
-    <title>主界面DEMO</title>
+    <link href="./assets/font-icon/kyee-framework-icon/style.css" rel="stylesheet" type="text/css" />
+    <link rel="icon" type="image/x-icon" href="">
+    <title></title>
 </head>
 
 <body>
@@ -18,33 +19,25 @@
     <div class="body">
         <aside class="aside-box">
             <div class="logo-box">
-                <span id="toggle-aside" class="clickable icon_classify"></span>
-                <img src="./assets/img/logo.png" />
+                <span id="toggle-aside" class="clickable icon-menu ripple"></span>
+                <img id="pro-logo" src="" />
             </div>
-            <ul class="menu-items-box">
-                <li class="item-level-0-folded">
+            <ul class="menu-items-box" id="menu-items-box">
+                <li id="menu-item-temp" class="item-level-0-folded" style="display:none">
                     <div class="clickable item-level-0">
-                        <i class="item-icon-left icon_friend_list"></i>
-                        <span class="item-label">审核管理</span>
-                        <i class="item-icon-right item-level-0-folded icon_next"></i>
+                        <i class="item-icon-left"></i>
+                        <span class="item-label"></span>
+                        <i class="item-icon-right item-icon-right-folded icon-arrow_right"></i>
                     </div>
                     <ul class="submenu-hide">
                         <li>
-                            <div class="item-level-1">
-                                <i class="icon_add"></i>
-                                <span>信息管理</span>
+                            <div class="clickable item-level-1">
+                                <i></i>
+                                <span></span>
                             </div>
                             <ul class="submenu-hide">
-                                <li class="item-level-2">人员综合查询</li>
-                                <li class="item-level-2">补签次数统计</li>
-                                <li class="item-level-2">人员综合查询</li>
+                                <li class="clickable item-level-2"></li>
                             </ul>
-                        </li>
-                        <li>
-                            <div class="item-level-1">
-                                <i class="icon_add"></i>
-                                <span>报表查询</span>
-                            </div>
                         </li>
                     </ul>
                 </li>
@@ -65,52 +58,20 @@
                 </div>
             </header>
             <div class="visited-nav-box row-flex-box">
-                <span class="clickable icon_return nav-pre"></span>
+                <span class="clickable icon-arrow_left nav-pre"></span>
                 <nav>
                     <ul class="visited-items">
-                        <li class="active-item">
-                            <span>信息管理</span>
-                            <i class="icon_close"></i>
-                        </li>
-                        <li>
-                            <span>信息管理</span>
-                            <i class="icon_close"></i>
-                        </li>
-                        <li>
-                            <span>信息管理</span>
-                            <i class="icon_close"></i>
-                        </li>
-                        <li>
-                            <span>信息管理</span>
-                            <i class="icon_close"></i>
-                        </li>
-                        <li>
-                            <span>信息管理</span>
-                            <i class="icon_close"></i>
-                        </li>
-                        <li>
-                            <span>信息管理</span>
-                            <i class="icon_close"></i>
-                        </li>
-                        <li>
-                            <span>信息管理</span>
-                            <i class="icon_close"></i>
-                        </li>
-                        <li>
-                            <span>信息管理</span>
-                            <i class="icon_close"></i>
-                        </li>
-                        <li>
-                            <span>信息管理</span>
-                            <i class="icon_close"></i>
-                        </li>
-                        <li>
-                            <span>信息管理</span>
-                            <i class="icon_close"></i>
-                        </li>
+                        
                     </ul>
+                    <li id="visited-item-temp" class="active-item" style="display:none;">
+                        <span class="clickable"></span>
+                        <i class="icon-X clickable"></i>
+                    </li>
                 </nav>
-                <span class="clickable icon_next nav-next"></span>
+                <span class="clickable icon-arrow_right nav-next"></span>
+            </div>
+            <div class="main-body-box">
+                <span style="font-size:20px;color:#fff">页面主体部分</span>
             </div>
         </div>
     </div>

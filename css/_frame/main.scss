@@ -56,7 +56,6 @@ body {
     overflow-y: auto;
     font-family: "Microsoft YaHei",helvetica, arial, verdana, sans-serif;
     font-weight: normal;
-    color: #404C51;
     -webkit-font-smoothing: antialiased;
     font-size: 14px;
     background-color: $bodyBgColor;
@@ -100,7 +99,7 @@ body {
 .header .system-name-box {
     height: 100%;
     min-width: 100px;
-    color: #fff;
+    color: $systemNameColor;
     font-size: 20px;
     font-weight: 700;
 }
@@ -110,7 +109,7 @@ body {
 }
 .header .func-item{
     margin-left: 10px;
-    color: #fff;
+    color: $systemNameColor;
     font-size: 16px;
 }
 
@@ -124,13 +123,11 @@ body {
     box-sizing: border-box;
     height: 100%;
     .aside-box {
-        flex-grow: 0;
-        flex-shrink: 0;
+        flex: none;
         width: 220px;
         height: 100%;
         overflow-x: hidden;
         overflow-y: auto;
-        background-color: #fff;
         -webkit-transition: width .2s linear;
         transition: width .2s linear;
         -webkit-transform: translateZ(0) scale(1, 1);
@@ -147,10 +144,13 @@ body {
                 width: 70px;
                 height: 100%;
                 font-size: 20px;
-                color: #fff;
+                color: $systemNameColor;
                 text-align: center;
                 line-height: 70px;
                 background-color: $toggleButtonBgColor;
+                &:hover{
+                    color: $menuItemHoverBgColor;
+                }
             }
             >img{
                 width: $logoWidth;
@@ -189,14 +189,24 @@ body {
                 padding: 0 20px 0 70px;
                 height: 30px;
                 line-height: 30px;
+                color: $menuFontDefaultColorSub;
+                >i{
+                    font-size: 12px;
+                }
+                &:hover{
+                    background-color: $menuItemHoverBgColor;
+                    color: $menuFontActiveColorSub;
+                    transition: all .3s ease;
+                }
             }
             .item-level-2{
                 height: 28px;
                 line-height: 28px;
                 padding: 0 20px 0 96px;
+                color: $menuFontDefaultColorSub;
                 &:hover{
                     background-color: $menuItemHoverBgColor;
-                    color:#fff;
+                    color: $menuFontActiveColorSub;
                     transition: all .3s ease;
                 }
             }
@@ -205,15 +215,13 @@ body {
     .aside-folded {
         width: 70px;
     }
-    // .aside-folded:hover{
-    //     width: 220px; 
-    // }
     .aside-box-hover:hover{
         width: 220px; 
     }
     .main-box{
         height: 100%;
         margin-left: 0;
+        overflow: auto;
         .visited-nav-box{
             position: relative;
             height: 50px;
@@ -241,7 +249,7 @@ body {
                 right: 0;
             }
             >nav{
-                flex: 1 1 auto;
+                flex: auto;
                 padding: 0 20px;
                 font-size: 0;
                 -webkit-text-size-adjust:none;
@@ -260,7 +268,6 @@ body {
                     transform: translateX(-40px);
                 }
                 li{
-                    display: inline-block;
                     box-sizing: border-box;
                     line-height: 47px;
                     font-size: 13px;
@@ -269,6 +276,10 @@ body {
                     border-right: 1px solid #D7D7D7;
                     border-bottom: 1px solid #D7D7D7;
                     background-color: $visitedItemBgColor;
+                    i{
+                        margin-left: 10px;
+                        font-size: 12px;
+                    }
                 }
                 .active-item{
                     border-top: 3px solid $activeVisitedItemBorderColor;
@@ -279,7 +290,8 @@ body {
         }
     }
     .main-box-dynamic {
-        flex: 1 1 auto;
+        position: relative;
+        flex: auto;
     }
     .main-box-fixed {
         position: absolute;
@@ -323,23 +335,24 @@ body {
         -o-transition: all .3s ease-in-out;
         transition: all .3s ease-in-out;
         .item-level-0{
+            color: $menuFontDefaultColor;
             border-left-color: $menuDefaultBgColor;
             -webkit-transition: all .3s ease-in-out;
             -moz-transition: all .3s ease-in-out;
             -o-transition: all .3s ease-in-out;
             transition: all .3s ease-in-out;
         }
-        .item-icon-right{
-            -webkit-transform: rotate(0deg);
-            -moz-transform: rotate(0deg);
-            -ms-transform: rotate(0deg);
-            -o-transform: rotate(0deg);
-            transform: rotate(0deg);
-            -webkit-transition: transform .2s ease-in-out;
-            -moz-transition: transform .2s ease-in-out;
-            -o-transition: transform .2s ease-in-out;
-            transition: transform .2s ease-in-out;
-        }
+    }
+    .item-icon-right-folded{
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+        -webkit-transition: transform .2s ease-in-out;
+        -moz-transition: transform .2s ease-in-out;
+        -o-transition: transform .2s ease-in-out;
+        transition: transform .2s ease-in-out;
     }
 
     .item-level-0-expanded {
@@ -350,23 +363,61 @@ body {
         -o-transition: all .3s ease-in-out;
         transition: all .3s ease-in-out;
         .item-level-0{
+            color: $menuFontActiveColor;
             border-left-color: $menuActiveBorderLeftColor;
             -webkit-transition: all .3s ease-in-out;
             -moz-transition: all .3s ease-in-out;
             -o-transition: all .3s ease-in-out;
             transition: all .3s ease-in-out;
         }
-        .item-icon-right{
-            -webkit-transform: rotate(90deg);
-            -moz-transform: rotate(90deg);
-            -ms-transform: rotate(90deg);
-            -o-transform: rotate(90deg);
-            transform: rotate(90deg);
-            -webkit-transition: transform .2s ease-in-out;
-            -moz-transition: transform .2s ease-in-out;
-            -o-transition: transform .2s ease-in-out;
-            transition: transform .2s ease-in-out;
-        }
+    }
+    .item-icon-right-expanded{
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        -ms-transform: rotate(90deg);
+        -o-transform: rotate(90deg);
+        transform: rotate(90deg);
+        -webkit-transition: transform .2s ease-in-out;
+        -moz-transition: transform .2s ease-in-out;
+        -o-transition: transform .2s ease-in-out;
+        transition: transform .2s ease-in-out;
     }
 
+    .main-body-box{
+        position: absolute;
+        top: 121px;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        overflow: auto;
+        background-color: red;
+    }
+
+}
+
+// 按钮点击波纹效果
+.ripple {
+    position: relative;
+    overflow: hidden;  //隐藏溢出的径向渐变背景
+}
+.ripple:after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    background-image: radial-gradient(circle, $menuItemHoverBgColor 10%, transparent 10%);   //设置径向渐变
+    background-repeat: no-repeat;
+    background-position: 50%;
+    transform: scale(10, 10);
+    opacity: 0;
+    transition: transform .3s, opacity .5s;
+}
+.ripple:active:after {
+    transform: scale(0, 0);
+    opacity: .3;
+    transition: 0s; //设置初始状态
 }
