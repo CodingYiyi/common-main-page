@@ -17,62 +17,79 @@
 <body>
 
     <div class="body">
+        <!-- 侧边导航栏区 -->
         <aside class="aside-box">
+            <!-- 头部标题区 -->
             <div class="logo-box">
-                <span id="toggle-aside" class="clickable icon-menu ripple"></span>
+                <span id="toggle-aside" class="kyee-clickable icon-menu ripple"></span>
                 <img id="pro-logo" src="" />
             </div>
+            <!-- 菜单导航区 -->
             <ul class="menu-items-box" id="menu-items-box">
                 <li id="menu-item-temp" class="item-level-0-folded" style="display:none">
-                    <div class="clickable item-level-0">
+                    <div class="kyee-clickable item-level-0">
                         <i class="item-icon-left"></i>
-                        <span class="item-label"></span>
+                        <span class="item-label kyee-text-ellipsis"></span>
                         <i class="item-icon-right item-icon-right-folded icon-arrow_right"></i>
                     </div>
                     <ul class="submenu-hide">
                         <li>
-                            <div class="clickable item-level-1">
+                            <div class="kyee-clickable item-level-1">
                                 <i></i>
-                                <span></span>
+                                <span class="kyee-text-ellipsis"></span>
                             </div>
                             <ul class="submenu-hide">
-                                <li class="clickable item-level-2"></li>
+                                <li class="kyee-clickable kyee-text-ellipsis item-level-2"></li>
                             </ul>
                         </li>
                     </ul>
                 </li>
             </ul>
         </aside>
+        <!-- 右侧内容区 -->
         <div class="main-box main-box-dynamic">
-            <header class="header">
+            <!-- 头部标题、功能区 -->
+            <header class="header-box">
                 <div class="system-name-box row-flex-box">
                     <span id="system-name"></span>
                 </div>
                 <div class="func-config-box row-flex-box">
-                    <ul id="func-items" class="row-flex-box">
-                        <li id="func-item-temp" class="clickable func-item" style="display:none">
+                    <ul id="func-items-box" class="row-flex-box">
+                        <li id="func-item-temp" class="kyee-clickable func-item" style="display:none">
                             <i></i>
                             <span></span>
                         </li>
                     </ul>
                 </div>
             </header>
+            <!-- 已访问列表区 -->
             <div class="visited-nav-box row-flex-box">
-                <span class="clickable icon-arrow_left nav-pre"></span>
+                <span class="kyee-clickable icon-arrow_left nav-pre"></span>
                 <nav>
                     <ul class="visited-items">
-                        
+
                     </ul>
                     <li id="visited-item-temp" class="active-item" style="display:none;">
-                        <span class="clickable"></span>
-                        <i class="icon-X clickable"></i>
+                        <span class="kyee-clickable"></span>
+                        <i class="icon-X kyee-clickable"></i>
                     </li>
                 </nav>
-                <span class="clickable icon-arrow_right nav-next"></span>
+                <span class="kyee-clickable icon-arrow_right nav-next"></span>
             </div>
+            <!-- 内容主体区 -->
             <div class="main-body-box">
-                <span style="font-size:20px;color:#fff">页面主体部分</span>
+                <span style="font-size:20px;">页面主体部分</span>
             </div>
+        </div>
+        <!-- 客服配置区 -->
+        <div class="customer-services-box" id="customer-services-box" hidden>
+            <div id="customer-services-item-temp" class="kyee-clickable customer-services-item" style="display:none">
+                <span></span>
+                <i class=""></i>
+            </div>
+            <span id="customer-services-toggle-btn" class="kyee-clickable ripple customer-services-folded">
+                <i class="icon-add"></i>
+            </span>
         </div>
     </div>
 

@@ -2,7 +2,7 @@ jQuery(function ($) {
     var userInfo = {
         name: "张毅"
     }
-    var visitedItemsList = [];
+    var visitedItemsList = []; // 已访问链接列表
     var MAIN_CONFIG = {
         "PRO_FAVICON": "./assets/favicon.ico", //收藏夹图标
         "PRO_TITLE": "京颐集团", //浏览器标题
@@ -52,11 +52,23 @@ jQuery(function ($) {
                 `
             }
         ],
-        "SHOW_CUSTOMER_SERVICES": false, //是否显示右下角客服区
+        "SHOW_CUSTOMER_SERVICES": true, //是否显示右下角客服区
         "CUSTOMER_SERVICES": [ //客服区域配置项
             {
-
-            }
+                "ITEM_ID": "1",
+                "ITEM_LABEL": "微信客服",
+                "ITEM_ICON": "icon-medicalrecord"
+            },
+            {
+                "ITEM_ID": "2",
+                "ITEM_LABEL": "QQ客服",
+                "ITEM_ICON": "icon-favorite"
+            },
+            {
+                "ITEM_ID": "3",
+                "ITEM_LABEL": "电话客服",
+                "ITEM_ICON": "icon-refresh"
+            },
         ],
         "SHOW_RECENT_FUNC": false, //是否显示最近常用功能区
         "ASIDE_MENU_ITEMS": [{
@@ -246,6 +258,30 @@ jQuery(function ($) {
         ]
     }
 
+    // 页面初始化
+    $(document).ready(function () {
+        initPage();
+    })
+
+    // 初始化页面
+    function initPage() {
+        basicConfig(); // 页面基本配置项
+        cloneAppendToolBars("func-item-temp", "func-items-box", "func-item-"); // 页面顶部工具栏
+        cloneAppendMenuItems("menu-item-temp", "menu-items-box", "menu-item-"); // 页面左侧导航栏
+        if (MAIN_CONFIG.SHOW_CUSTOMER_SERVICES && MAIN_CONFIG.CUSTOMER_SERVICES.length > 0) {
+            $("#customer-services-box").removeAttr("hidden");
+            cloneAppendCustomerServices("customer-services-item-temp", "customer-services-box", "service-itemd-"); // 页面右下角客服栏
+        }
+    }
+
+    // 页面基本配置
+    function basicConfig() {
+        $("title")[0].innerHTML = MAIN_CONFIG.PRO_TITLE; // 设置页面标题
+        $("link[rel='icon']").attr("href", MAIN_CONFIG.PRO_FAVICON); // 设置页面收藏夹图标
+        $("#pro-logo").attr("src", MAIN_CONFIG.PRO_LOGO); // 设置项目logo
+        $("#system-name")[0].innerText = MAIN_CONFIG.PRO_NAME; // 设置项目名称
+    }
+
     /**
      * 使用jQuery遍历工具栏配置项数据，克隆节点，添加到指定位置
      * @param {*} templateID 克隆节点模板
@@ -262,7 +298,7 @@ jQuery(function ($) {
                 var itemHTML = templateHTML.clone().attr("id", itemIdPrefix + item.TOOL_ID).css("display", "inline-block");
                 if (item.BIND_FUNC) { // 指定元素绑定事件
                     for (var x = 0, y = item.EVENT_FUNCS.length; x < y; x++) {
-                        $("#func-items").on(item.EVENT_FUNCS[x].EVENT_NAME, "#" + (itemIdPrefix + item.TOOL_ID), item.EVENT_FUNCS[x].EVENT_FUNC);
+                        $("#func-items-box").on(item.EVENT_FUNCS[x].EVENT_NAME, "#" + (itemIdPrefix + item.TOOL_ID), item.EVENT_FUNCS[x].EVENT_FUNC);
                     }
                 } else if (item.ROUTER_LINK) {
 
@@ -277,18 +313,6 @@ jQuery(function ($) {
         $(itemsHTML).appendTo($("#" + parentID));
     }
 
-    function initPage() {
-        basicConfig(); // 页面基本配置项
-        cloneAppendToolBars("func-item-temp", "func-items", "func-item-"); // 页面顶部工具栏
-        cloneAppendMenuItems("menu-item-temp", "menu-items-box", "menu-item-"); // 页面左侧导航栏
-    }
-
-    function basicConfig() {
-        $("title")[0].innerHTML = MAIN_CONFIG.PRO_TITLE; // 设置页面标题
-        $("link[rel='icon']").attr("href", MAIN_CONFIG.PRO_FAVICON); // 设置页面收藏夹图标
-        $("#pro-logo").attr("src", MAIN_CONFIG.PRO_LOGO); // 设置项目logo
-        $("#system-name")[0].innerText = MAIN_CONFIG.PRO_NAME; // 设置项目名称
-    }
     /**
      * 使用jQuery遍历左侧菜单栏配置项数据，克隆节点，添加到指定位置
      * @param {*} templateID 
@@ -327,10 +351,10 @@ jQuery(function ($) {
                         grandchildItemHTMLStr = '<ul class="submenu-hide">' + grandchildItemHTMLStr + "</ul>"; // 拼接三级菜单容器
                         childItemHTMLStr += '<li>' + childItemHTML[0].outerHTML + grandchildItemHTMLStr + '</li>'; // 拼接当前二级菜单
                     } else {
-                        childItemHTML.children("i").css({
-                            "display": "inline-block",
-                            "width": "12px"
-                        }); // 设置二级菜单左侧占位，使对齐
+                        // childItemHTML.children("i").css({
+                        //     "display": "inline-block",
+                        //     "width": "12px"
+                        // }); // 设置二级菜单左侧占位，使对齐
                         childItemHTMLStr += '<li>' + childItemHTML[0].outerHTML + '</li>'; // 拼接当前二级菜单
                     }
                 }
@@ -340,9 +364,25 @@ jQuery(function ($) {
         }
         $(htmlStr).appendTo($("#" + parentID)); // 将拼接完的菜单插入到目标容器中
     }
-    $(document).ready(function () {
-        initPage();
-    })
+
+    /**
+     * 使用jQuery遍历右下角客服区配置项数据，克隆节点，添加到指定位置
+     * @param {*} templateID 
+     * @param {*} parentID 
+     * @param {*} itemIdPrefix 
+     */
+    function cloneAppendCustomerServices(templateID, parentID, itemIdPrefix) {
+        var templateHTML = $("#" + templateID);
+        var itemsHTML = "";
+        for (var i = 0, j = MAIN_CONFIG.CUSTOMER_SERVICES.length; i < j; i++) {
+            var item = MAIN_CONFIG.CUSTOMER_SERVICES[i];
+            var itemHTML = templateHTML.clone().attr("id", itemIdPrefix + item.ITEM_ID);
+            itemHTML.children("span")[0].innerText = item.ITEM_LABEL;
+            itemHTML.children("i").addClass(item.ITEM_ICON);
+            itemsHTML += itemHTML[0].outerHTML;
+        }
+        $(itemsHTML).insertBefore("#customer-services-toggle-btn");
+    }
 
     // 左上角控制侧边栏固定或悬浮按钮点击事件
     $("#toggle-aside").on("click", function () {
@@ -368,28 +408,40 @@ jQuery(function ($) {
 
     // 一级菜单点击事件
     $("#menu-items-box").on("click", ".item-level-0", function () {
-        KyeeToggleClass($(this).parent(), "item-level-0-expanded", "item-level-0-folded");
-        if ($(this).parent().children("ul").length > 0) {
+        KyeeToggleClass($(this).parent(), "item-level-0-expanded", "item-level-0-folded"); // 切换一级菜单的展开折叠状态
+        var me = this;
+        $(".menu-items-box").children(".item-level-0-expanded").each(function () { // 折叠其他已展开的一级菜单
+            if ($(me).parent()[0] != this) {
+                $(this).removeClass("item-level-0-expanded").addClass("item-level-0-folded");
+                if ($(this).children("ul").length > 0) {
+                    $(this).children("ul").removeClass("submenu-show").addClass("submenu-hide");
+                    $(this).children(".item-level-0").children(".item-icon-right").removeClass("item-icon-right-expanded").addClass("item-icon-right-folded");
+                }
+            }
+        });
+        if ($(this).parent().children("ul").length > 0) { // 若存在二级菜单，则切换二级菜单展开、折叠状态
             KyeeToggleClass($(this).parent().children("ul"), "submenu-show", "submenu-hide");
             KyeeToggleClass($(this).children(".item-icon-right"), "item-icon-right-folded", "item-icon-right-expanded")
         }
-        $(this).hasClass("kyee-router-link-flag") && setItemToVisitedItems({
+        $(this).hasClass("kyee-router-link-flag") && setItemToVisitedItems({ // 若可以跳转，执行跳转操作
             "MENU_ID": $(this).attr("id").substring(10),
             "MENU_LABEL": $(this).children("span")[0].innerText
         });
     })
     // 二级菜单点击事件
     $("#menu-items-box").on("click", ".item-level-1", function () {
-        KyeeToggleClass($(this).parent().children("ul"), "submenu-show", "submenu-hide");
-        KyeeToggleClass($(this).children("i"), "icon-reduce", "icon-add");
-        $(this).hasClass("kyee-router-link-flag") && setItemToVisitedItems({
+        if ($(this).parent().children("ul").length > 0) { // 若存在三级菜单，则切换三级菜单展开、折叠状态
+            KyeeToggleClass($(this).parent().children("ul"), "submenu-show", "submenu-hide");
+            KyeeToggleClass($(this).children("i"), "icon-reduce", "icon-add");
+        }
+        $(this).hasClass("kyee-router-link-flag") && setItemToVisitedItems({ // 若可以跳转，执行跳转操作
             "MENU_ID": $(this).attr("id").substring(10),
             "MENU_LABEL": $(this).children("span")[0].innerText
         });
     })
     // 三级菜单点击事件
     $("#menu-items-box").on("click", ".item-level-2", function () {
-        $(this).hasClass("kyee-router-link-flag") && setItemToVisitedItems({
+        $(this).hasClass("kyee-router-link-flag") && setItemToVisitedItems({ // 若可以跳转，执行跳转操作
             "MENU_ID": $(this).attr("id").substring(10),
             "MENU_LABEL": $(this)[0].innerText
         });
@@ -415,7 +467,19 @@ jQuery(function ($) {
     }
 
     /**
-     * 
+     * 维护以访问链接列表
+     * @param {*} val 需要从已访问列表中删除的对象
+     */
+    function removeItemFromVisitedItems(val) {
+        var index = findArray(visitedItemsList, {
+            MENU_ID: val.MENU_ID
+        });
+        if (index > -1) {
+            visitedItemsList.splice(index, 1);
+        }
+    }
+
+    /**
      * 查找数组，返回匹配到的第一个index
      * 
      * @param array 被查找的数组
@@ -454,7 +518,14 @@ jQuery(function ($) {
             $(this).addClass("active-item");
         }
     })
-
+    // 已访问链接导航栏列表项目关闭按钮点击事件
+    $(".visited-items").on("click", "li>i", function (e) {
+        removeItemFromVisitedItems({ // 从访问列表中删除节点信息
+            "MENU_ID": $(this).parent().attr("id").substring(13)
+        });
+        $(this).parent().remove(); // 从DOM树中删除节点元素
+        e.stopPropagation();
+    })
     // 已访问菜单左箭头点击事件（向左偏移）
     $(".nav-pre").on("click", function () {
         var target = $(this).next().children("ul");
@@ -462,23 +533,44 @@ jQuery(function ($) {
         var containerWidth = $(".visited-items").outerWidth();
         var visitedItemsWidthSum = getVisitedItemsWidthSum();
         if (transformVal > (containerWidth - visitedItemsWidthSum)) {
+            // target.css({ // 暂不使用ES6的写法
+            //     "transform": `translateX(${transformVal-MAIN_CONFIG.SCROLL_STEP}px)`
+            // });
             target.css({
-                "transform": `translateX(${transformVal-MAIN_CONFIG.SCROLL_STEP}px)`
+                "transform": "translateX(" + (transformVal - MAIN_CONFIG.SCROLL_STEP) + "px)"
             });
         }
     })
-
     // 已访问菜单右箭头点击事件（向右偏移）
     $(".nav-next").on("click", function () {
         var target = $(this).prev().children("ul");
         var transformVal = target.css("transform") && target.css("transform") !== "none" ? +(target.css("transform").substring(7).split(',')[4]) : 0;
         if (transformVal < 0) {
+            // target.css({ // 暂不使用ES6的写法
+            //     "transform": `translateX(${transformVal+MAIN_CONFIG.SCROLL_STEP<=0?transformVal+MAIN_CONFIG.SCROLL_STEP:0}px)`
+            // });
             target.css({
-                "transform": `translateX(${transformVal+MAIN_CONFIG.SCROLL_STEP<=0?transformVal+MAIN_CONFIG.SCROLL_STEP:0}px)`
+                "transform": "translateX(" + (transformVal + MAIN_CONFIG.SCROLL_STEP <= 0 ? transformVal + MAIN_CONFIG.SCROLL_STEP : 0) + "px)"
             });
         }
     })
+    // 获取已访问菜单的总宽度
+    function getVisitedItemsWidthSum() {
+        var width = 0;
+        var visitedItems = $(".visited-items>li");
+        for (var i = 0, j = visitedItems.length; i < j; i++) {
+            width += visitedItems[i].offsetWidth;
+        }
+        return width;
+    }
 
+
+    // 右下角客服按钮点击事件
+    $("#customer-services-toggle-btn").on("click", function () {
+        $(this).toggleClass("customer-services-expanded");
+        $(".customer-services-item:not(#customer-services-item-temp)").fadeToggle("fast");
+        KyeeToggleClass($(this).children("i"), "icon-add", "icon-reduce");
+    })
 
     /**
      * 两个样式类互相切换，区别 jQuery 自带的 toogleClass 用法
@@ -492,15 +584,5 @@ jQuery(function ($) {
         } else if (target.hasClass(className2)) {
             target.removeClass(className2).addClass(className1);
         }
-    }
-
-    // 获取已访问菜单的总宽度
-    function getVisitedItemsWidthSum() {
-        var width = 0;
-        var visitedItems = $(".visited-items>li");
-        for (var i = 0, j = visitedItems.length; i < j; i++) {
-            width += visitedItems[i].offsetWidth;
-        }
-        return width;
     }
 })
