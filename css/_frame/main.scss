@@ -135,6 +135,9 @@ body {
             width: 220px;
             background-color: $themeColor;
             color: $menuFontDefaultColor;
+            .item-level-1-2-active{
+                color: $menuFontActiveColor !important;
+            }
             .item-level-0{
                 display: flex;
                 align-items: center;
@@ -173,7 +176,7 @@ body {
                 }
                 &:hover{
                     background-color: $menuItemHoverBgColor;
-                    color: $menuFontActiveColorSub;
+                    color: $menuFontHoverColorSub !important;
                     transition: all .3s ease;
                 }
             }
@@ -184,7 +187,7 @@ body {
                 color: $menuFontDefaultColorSub;
                 &:hover{
                     background-color: $menuItemHoverBgColor;
-                    color: $menuFontActiveColorSub;
+                    color: $menuFontHoverColorSub !important;
                     transition: all .3s ease;
                 }
             }
@@ -237,19 +240,19 @@ body {
         .visited-nav-box{
             position: relative;
             height: 50px;
-            border-bottom: 1px solid #D7D7D7;
+            border-bottom: 1px solid $visitedItemDefaultBorderColor;
             >span{
                 display: inline-block;
                 width: 18px;
                 line-height: 50px;
                 text-align: center;
                 color: #BEBEBE;
-                border-right: 1px solid #D7D7D7;
-                border-left: 1px solid #D7D7D7;
-                background-color: $visitedItemBgColor;
+                border-right: 1px solid $visitedItemDefaultBorderColor;
+                border-left: 1px solid $visitedItemDefaultBorderColor;
+                background-color: $visitedItemDefaultBgColor;
                 z-index: 2;
                 &:active{
-                    background-color: #D7D7D7;
+                    background-color: $visitedItemDefaultBorderColor;
                 }
             }
             .nav-pre{
@@ -284,16 +287,17 @@ body {
                     line-height: 47px;
                     font-size: 13px;
                     padding: 0 16px;
-                    border-top: 3px solid $visitedItemBgColor;
-                    border-right: 1px solid #D7D7D7;
-                    border-bottom: 1px solid #D7D7D7;
-                    background-color: $visitedItemBgColor;
+                    border-top: 3px solid $visitedItemDefaultBgColor;
+                    border-right: 1px solid $visitedItemDefaultBorderColor;
+                    border-bottom: 1px solid $visitedItemDefaultBorderColor;
+                    background-color: $visitedItemDefaultBgColor;
                     i{
                         margin-left: 10px;
                         font-size: 12px;
                     }
                 }
                 .active-item{
+                    color: $activeVisitedItemFontColor;
                     border-top: 3px solid $activeVisitedItemBorderColor;
                     border-bottom: 1px solid $bodyBgColor;
                     background-color: $bodyBgColor;
@@ -420,12 +424,12 @@ body {
             line-height: 66px;
             text-align: center;
             border-radius: 50%;
-            background-color: #52A3F6;
+            background-color: $assistItemsColor;
             font-size: 20px;
-            color: #fff;
+            color: #FFF;
         }
         .customer-services-expanded{
-            background-color: #C0C4CA;
+            background-color: $disabledStateColor;
         }
         .customer-services-item{
             display: flex;
@@ -439,7 +443,7 @@ body {
             transition: width .2s linear;
             -webkit-transform: translateZ(0) scale(1, 1);
             overflow: hidden;
-            color: #C0C4CA;
+            color: $disabledStateColor;
             border: 2px #DCE0E0 solid;
             box-sizing: border-box;
             margin-bottom: 8px;
@@ -457,8 +461,8 @@ body {
             }
             &:hover{
                 width: 160px;
-                color: #52A3F6;
-                border-color: #52A3F6;
+                color: $menuFontActiveColor;
+                border-color: $menuActiveBorderLeftColor;
             }
         }
     }

@@ -1,18 +1,24 @@
-$themeColor: #22345E;
-$bodyBgColor:  #fff;
-$systemNameColor: #fff;
-$toggleButtonBgColor: #132142;
+$themeColor: #22345E; // 主题背景颜色
+$bodyBgColor : #FFF; // 内容主体区背景颜色
+$systemNameColor: #FFF; // 系统名字体颜色
+$toggleButtonBgColor: #132142; // 侧边栏切换按钮、导航栏展开状态背景颜色（加重）
 
-$menuFontDefaultColor: #E9ECF2;
-$menuFontDefaultColorSub: #5B6E99;
-$menuFontActiveColor: #52A3F6;
-$menuFontActiveColorSub: #fff;
-$menuDefaultBgColor: #22345E;
-$menuActiveBgColor: #172850;
-$menuItemHoverBgColor: #52A3F6;
-$menuActiveBorderLeftColor: #52A3F6;
+$menuFontDefaultColor: #E9ECF2; // 一级菜单默认颜色
+$menuFontDefaultColorSub: #5B6E99; // 二级、三级菜单字体默认颜色
+$menuFontActiveColor: #52A3F6; // 菜单选中字体颜色
+$menuFontHoverColorSub: #FFF; // 菜单鼠标悬浮（Hover）状态字体颜色
+$menuDefaultBgColor: #22345E; // 侧边栏默认背景颜色
+$menuActiveBgColor: #172850; // 侧边栏展开状态背景颜色
+$menuItemHoverBgColor: #52A3F6; // 二级、三级菜单鼠标悬浮（Hover）状态背景颜色
+$menuActiveBorderLeftColor: #52A3F6; // 一级菜单展开状态，左侧边框颜色
 
-$visitedItemBgColor: #F2F2F2;
-$activeVisitedItemBorderColor: #EB370B;
+$visitedItemDefaultBgColor: #F2F2F2; // 已访问列表默认背景颜色
+$visitedItemFontDefaultColor: #222; // 已访问列表默认字体颜色
+$activeVisitedItemBorderColor: #EB370B; // 已访问列表当前显示连接顶部边框颜色
+$activeVisitedItemFontColor: #EB370B; // 已访问列表当前显示连接Tab文字颜色
+$visitedItemDefaultBorderColor: #D7D7D7; // 已访问列表默认边框（左、右）颜色
+
+$disabledStateColor:#C0C4CA; // 不可用状态灰
+$assistItemsColor: #006EFF; // 点睛色1（图标等辅助项目高亮显示用色）
 
 $logoWidth: 100px;

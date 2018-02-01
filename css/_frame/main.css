@@ -85,7 +85,7 @@ body {
   font-weight: normal;
   -webkit-font-smoothing: antialiased;
   font-size: 14px;
-  background-color: #fff; }
+  background-color: #FFF; }
 
 /* CSS RESET END*/
 .col-flex-box {
@@ -137,7 +137,7 @@ body {
         width: 70px;
         height: 100%;
         font-size: 20px;
-        color: #fff;
+        color: #FFF;
         text-align: center;
         line-height: 70px;
         background-color: #132142; }
@@ -151,6 +151,8 @@ body {
       width: 220px;
       background-color: #22345E;
       color: #E9ECF2; }
+      .body .aside-box .menu-items-box .item-level-1-2-active {
+        color: #52A3F6 !important; }
       .body .aside-box .menu-items-box .item-level-0 {
         display: flex;
         align-items: center;
@@ -183,7 +185,7 @@ body {
           font-size: 12px; }
         .body .aside-box .menu-items-box .item-level-1:hover {
           background-color: #52A3F6;
-          color: #fff;
+          color: #FFF !important;
           transition: all .3s ease; }
       .body .aside-box .menu-items-box .item-level-2 {
         height: 28px;
@@ -192,7 +194,7 @@ body {
         color: #5B6E99; }
         .body .aside-box .menu-items-box .item-level-2:hover {
           background-color: #52A3F6;
-          color: #fff;
+          color: #FFF !important;
           transition: all .3s ease; }
   .body .aside-folded {
     width: 70px; }
@@ -215,14 +217,14 @@ body {
       .body .main-box .header-box .system-name-box {
         height: 100%;
         min-width: 100px;
-        color: #fff;
+        color: #FFF;
         font-size: 20px;
         font-weight: 700; }
       .body .main-box .header-box .func-config-box {
         height: 100%; }
       .body .main-box .header-box .func-item {
         margin-left: 16px;
-        color: #fff;
+        color: #FFF;
         font-size: 16px; }
         .body .main-box .header-box .func-item:hover {
           color: #f4f4f4; }
@@ -277,9 +279,10 @@ body {
             margin-left: 10px;
             font-size: 12px; }
         .body .main-box .visited-nav-box > nav .active-item {
+          color: #EB370B;
           border-top: 3px solid #EB370B;
-          border-bottom: 1px solid #fff;
-          background-color: #fff;
+          border-bottom: 1px solid #FFF;
+          background-color: #FFF;
           -webkit-transition: all .2s linear;
           -moz-transition: all .2s linear;
           -o-transition: all .2s linear;
@@ -386,9 +389,9 @@ body {
       line-height: 66px;
       text-align: center;
       border-radius: 50%;
-      background-color: #52A3F6;
+      background-color: #006EFF;
       font-size: 20px;
-      color: #fff; }
+      color: #FFF; }
     .body .customer-services-box .customer-services-expanded {
       background-color: #C0C4CA; }
     .body .customer-services-box .customer-services-item {
