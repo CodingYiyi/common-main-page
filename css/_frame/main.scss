@@ -95,6 +95,7 @@ body {
     display: flex;
     box-sizing: border-box;
     height: 100%;
+    // 侧边导航栏区样式
     .aside-box {
         flex: none;
         width: 220px;
@@ -200,6 +201,7 @@ body {
         width: 220px; 
     }
 
+    // 右侧内容区样式
     .main-box{
         height: 100%;
         margin-left: 0;
@@ -238,6 +240,9 @@ body {
                 margin-left: 16px;
                 color: $systemNameColor;
                 font-size: 16px;
+                span{
+                    margin-left: 4px;
+                }
                 &:hover{
                     color: #f4f4f4;
                 }
@@ -437,6 +442,7 @@ body {
         transition: transform .2s ease-in-out;
     }
 
+    // 业务内容区样式
     .main-body-box{
         position: absolute;
         top: 111px;
@@ -446,6 +452,7 @@ body {
         overflow: auto;
     }
 
+    // 客服配置区样式
     .customer-services-box{
         position: fixed;
         bottom: 20px;
@@ -503,6 +510,31 @@ body {
             }
         }
     }
+
+    // 公共右侧边栏区样式
+    .kyee-next-sidebar-right{
+        position: absolute;
+        top: 70px;
+        right: 0px;
+        bottom: 0;
+        min-width: 200px;
+        background-color: $sidebarBgColor;
+        z-index: 12;
+        -webkit-transition: all .2s ease-in-out;
+        -moz-transition: all .2s ease-in-out;
+        -o-transition: all .2s ease-in-out;
+        transition: all .2s ease-in-out;
+    }
+    .kyee-next-sidebar-show{
+        -webkit-transform: translateX(0);
+        -ms-transform: translateX(0);
+        transform: translateX(0);
+    }
+    .kyee-next-sidebar-hidden{
+        -webkit-transform: translateX(100%);
+        -ms-transform: translateX(100%);
+        transform: translateX(100%);
+    }
 }
 
 // 按钮点击波纹效果
@@ -530,4 +562,16 @@ body {
     transform: scale(0, 0);
     opacity: .3;
     transition: 0s; //设置初始状态
+}
+
+// 遮罩层样式
+.ui-sidebar-mask{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: #666;
+    opacity: .5;
+    z-index: 11;
 }

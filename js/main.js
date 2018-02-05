@@ -63,6 +63,22 @@ jQuery(function ($) {
                 "ROUTER_LINK": "",
                 "USE_TEMPLATE": false,
                 "TEMPLATE": ""
+            },
+            {
+                "TOOL_ID": 103,
+                "TOOL_ICON": "icon_message",
+                "TOOL_LABEL": "消息",
+                "ROUTER_LINK": "",
+                "USE_TEMPLATE": false,
+                "TEMPLATE": "",
+                "BIND_FUNC": true,
+                "EVENT_FUNCS": [{
+                    "EVENT_NAME": "click",
+                    "EVENT_FUNC": function () {
+                        $(".ui-sidebar-mask").show();
+                        $(".kyee-next-sidebar-right").removeClass("kyee-next-sidebar-hidden").addClass("kyee-next-sidebar-show");
+                    }
+                }]
             }
             
         ],
@@ -321,7 +337,7 @@ jQuery(function ($) {
         for (var i = 0, j = MAIN_CONFIG.TOOL_BARS.length; i < j; i++) {
             var item = MAIN_CONFIG.TOOL_BARS[i];
             if (!item.USE_TEMPLATE) {
-                var itemHTML = templateHTML.clone().attr("id", itemIdPrefix + item.TOOL_ID).css("display", "inline-block");
+                var itemHTML = templateHTML.clone().attr("id", itemIdPrefix + item.TOOL_ID).removeAttr("style");
                 if (item.BIND_FUNC) { // 指定元素绑定事件
                     for (var x = 0, y = item.EVENT_FUNCS.length; x < y; x++) {
                         $("#func-items-box").on(item.EVENT_FUNCS[x].EVENT_NAME, "#" + (itemIdPrefix + item.TOOL_ID), item.EVENT_FUNCS[x].EVENT_FUNC);
@@ -536,7 +552,7 @@ jQuery(function ($) {
             }) < 0) { // 若不存在于已访问列表中，则插入相应数据
             visitedItemsList.push(val);
             $("#visited-items").children("li").removeClass("active-item");
-            var visitedItem = $("#visited-item-temp").clone().attr("id", "visited-item-" + val.MENU_ID).css("display", "inline-block");
+            var visitedItem = $("#visited-item-temp").clone().attr("id", "visited-item-" + val.MENU_ID).removeAttr("display", "inline-block");
             visitedItem.children("span")[0].innerText = val.MENU_LABEL;
             visitedItem.appendTo($("#visited-items"));
         } else if (!$("#visited-item-" + val.MENU_ID).hasClass("active-item")) { // 若已存在于访问列表中，使其为active状态
@@ -696,6 +712,12 @@ jQuery(function ($) {
         $(this).toggleClass("customer-services-expanded");
         $(".customer-services-item:not(#customer-services-item-temp)").fadeToggle("fast");
         KyeeToggleClass($(this).children("i"), "icon_add", "icon_reduce");
+    })
+
+    // 遮罩层点击事件
+    $(".ui-sidebar-mask").on("click",function(){
+        $(".kyee-next-sidebar-right").removeClass("kyee-next-sidebar-show").addClass("kyee-next-sidebar-hidden");
+        $(".ui-sidebar-mask").hide();
     })
 
     /**
