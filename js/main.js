@@ -552,7 +552,7 @@ jQuery(function ($) {
             }) < 0) { // 若不存在于已访问列表中，则插入相应数据
             visitedItemsList.push(val);
             $("#visited-items").children("li").removeClass("active-item");
-            var visitedItem = $("#visited-item-temp").clone().attr("id", "visited-item-" + val.MENU_ID).removeAttr("display", "inline-block");
+            var visitedItem = $("#visited-item-temp").clone().attr("id", "visited-item-" + val.MENU_ID).css("display", "inline-block");
             visitedItem.children("span")[0].innerText = val.MENU_LABEL;
             visitedItem.appendTo($("#visited-items"));
         } else if (!$("#visited-item-" + val.MENU_ID).hasClass("active-item")) { // 若已存在于访问列表中，使其为active状态
