@@ -5,13 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script type="text/javascript" src="https://cdn.kyeegroup.com/repository/public/jquery/1.12.4/jquery.min.js"></script>
-    <script type="text/javascript" src="./js/main.js"></script>
     <link href="./css/_frame/main.css" rel="stylesheet" type="text/css" />
     <link href="./css/custom.css" rel="stylesheet" type="text/css" />
     <link href="./assets/font-icon/kyee-framework-icon/style.css" rel="stylesheet" type="text/css" />
     <link rel="icon" type="image/x-icon" href="">
     <title></title>
+    <script type="text/javascript" src="https://cdn.kyeegroup.com/repository/public/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="./js/main.js"></script>
 </head>
 
 <body>
@@ -21,7 +21,7 @@
         <aside class="aside-box">
             <!-- 头部标题区 -->
             <div class="logo-box">
-                <span id="toggle-aside" class="kyee-clickable icon-menu ripple"></span>
+                <span id="toggle-aside" class="kyee-clickable icon_menu ripple"></span>
                 <img id="pro-logo" src="" />
             </div>
             <!-- 菜单导航区 -->
@@ -30,7 +30,7 @@
                     <div class="kyee-clickable item-level-0">
                         <i class="item-icon-left"></i>
                         <span class="item-label kyee-text-ellipsis"></span>
-                        <i class="item-icon-right item-icon-right-folded icon-arrow_right"></i>
+                        <i class="item-icon-right item-icon-right-folded icon_arrow_right"></i>
                     </div>
                     <ul class="submenu-hide">
                         <li>
@@ -52,6 +52,7 @@
             <header class="header-box">
                 <div class="system-name-box row-flex-box">
                     <span id="system-name"></span>
+                    <i class="icon_delta"></i>
                 </div>
                 <div class="func-config-box row-flex-box">
                     <ul id="func-items-box" class="row-flex-box">
@@ -61,20 +62,28 @@
                         </li>
                     </ul>
                 </div>
+                <div class="toggle-system-box">
+                    <ul id="toggle-system-items-box">
+                        <li id="toggle-system-temp" style="display:none">
+                            <i class=""></i>
+                            <span></span>
+                        </li>
+                    </ul>
+                </div>
             </header>
             <!-- 已访问列表区 -->
             <div class="visited-nav-box row-flex-box">
-                <span class="kyee-clickable icon-arrow_left nav-pre"></span>
+                <span class="kyee-clickable icon_arrow_left nav-pre"></span>
                 <nav>
                     <ul class="visited-items" id="visited-items">
 
                     </ul>
                     <li id="visited-item-temp" class="active-item" style="display:none;">
                         <span class="kyee-clickable"></span>
-                        <i class="icon-X kyee-clickable"></i>
+                        <i class="icon_X kyee-clickable"></i>
                     </li>
                 </nav>
-                <span class="kyee-clickable icon-arrow_right nav-next"></span>
+                <span class="kyee-clickable icon_arrow_right nav-next"></span>
             </div>
             <!-- 内容主体区 -->
             <div class="main-body-box">
@@ -88,7 +97,7 @@
                 <i class=""></i>
             </div>
             <span id="customer-services-toggle-btn" class="kyee-clickable ripple customer-services-folded">
-                <i class="icon-add"></i>
+                <i class="icon_add"></i>
             </span>
         </div>
     </div>

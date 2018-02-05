@@ -209,7 +209,7 @@ body {
             align-items: center;
             flex-direction: row;
             justify-content: space-between;
-        
+            position: relative;
             height: 70px;
             width: 100%;
             padding: 0 20px;
@@ -218,11 +218,18 @@ body {
         
             background-color: $themeColor;
             .system-name-box {
+                justify-content: flex-start;
                 height: 100%;
                 min-width: 100px;
                 color: $systemNameColor;
                 font-size: 20px;
                 font-weight: 700;
+                i{
+                    color:#FFF;
+                    font-size:12px;
+                    margin-left:8px;
+                    display: none;
+                }
             }
             .func-config-box{
                 height: 100%;
@@ -235,16 +242,51 @@ body {
                     color: #f4f4f4;
                 }
             }
+            .toggle-system-box{
+                position: absolute;
+                top:60px;
+                left: 20px;
+                display: none;
+                background-color: rgba(255, 255, 255, .9);
+                border-radius: 8px;
+                box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1);
+                z-index: 9;
+                ul{
+                    padding: 8px 12px;
+                    font-size: 16px;
+                    color: #222;
+                    li{
+                        padding:0 6px;
+                        height:36px;
+                        line-height:36px;
+                        &:hover{
+                            color: $assistItemsColor !important;
+                            transition: all .2s ease;
+                            cursor: pointer;
+                        }
+                    }
+                    &:after{
+                        border: 10px solid transparent;
+                        border-bottom: 10px solid rgba(255,255,255,.9);
+                        width: 0;
+                        height: 0;
+                        position: absolute;
+                        top: -20px;
+                        left: 30px;
+                        content: ' '
+                    }
+                }
+            }
         }
         
         .visited-nav-box{
             position: relative;
-            height: 50px;
+            height: 40px;
             border-bottom: 1px solid $visitedItemDefaultBorderColor;
             >span{
                 display: inline-block;
                 width: 18px;
-                line-height: 50px;
+                line-height: 40px;
                 text-align: center;
                 color: #BEBEBE;
                 border-right: 1px solid $visitedItemDefaultBorderColor;
@@ -276,15 +318,9 @@ body {
                     transition: transform .3s;
                     transition: transform .3s,-webkit-transform .3s
                 }
-                .nav-pre-transform{
-                    transform: translateX(40px);
-                }
-                .nav-next-transform{
-                    transform: translateX(-40px);
-                }
                 li{
                     box-sizing: border-box;
-                    line-height: 47px;
+                    line-height: 37px;
                     font-size: 13px;
                     padding: 0 16px;
                     border-top: 3px solid $visitedItemDefaultBgColor;
@@ -403,7 +439,7 @@ body {
 
     .main-body-box{
         position: absolute;
-        top: 121px;
+        top: 111px;
         bottom: 0;
         right: 0;
         left: 0;
@@ -418,11 +454,12 @@ body {
         flex-direction: column;
         align-items: flex-end;
         .customer-services-folded{
+            display: flex;
+            align-items: center;
+            justify-content: center;
             float: right;
             width: 60px;
             height: 60px;
-            line-height: 66px;
-            text-align: center;
             border-radius: 50%;
             background-color: $assistItemsColor;
             font-size: 20px;

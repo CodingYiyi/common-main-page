@@ -7,10 +7,19 @@ jQuery(function ($) {
         "PRO_FAVICON": "./assets/favicon.ico", //收藏夹图标
         "PRO_TITLE": "京颐集团", //浏览器标题
         "PRO_LOGO": "./assets/img/logo.png", //左上角项目logo
-        "PRO_NAME": "系统主界面", //项目名称
+        "PRO_NAME": "演示系统", //项目名称
         "CAN_TOGGLE_SYS": true, //是否可以切换系统
         "SYS_LIST":[
-            
+            {
+                "SYS_ID":"1",
+                "SYS_ICON":"icon_framework",
+                "SYS_LABEL":"电子报销平台"
+            },
+            {
+                "SYS_ID":"2",
+                "SYS_ICON":"icon_server",
+                "SYS_LABEL":"人力资源管理系统"
+            }
         ],
         "SCROLL_STEP": 200, // 已访问列表左、右箭头点击滑动距离
         "TOOL_BARS": [ //工具栏区域配置项
@@ -29,7 +38,7 @@ jQuery(function ($) {
             },
             {
                 "TOOL_ID": 101,
-                "TOOL_ICON": "icon-setting",
+                "TOOL_ICON": "icon_setting",
                 "TOOL_LABEL": "设置",
                 "ROUTER_LINK": "",
                 "USE_TEMPLATE": false,
@@ -49,7 +58,7 @@ jQuery(function ($) {
             },
             {
                 "TOOL_ID": 102,
-                "TOOL_ICON": "icon-switch",
+                "TOOL_ICON": "icon_switch",
                 "TOOL_LABEL": "退出",
                 "ROUTER_LINK": "",
                 "USE_TEMPLATE": false,
@@ -61,18 +70,18 @@ jQuery(function ($) {
         "CUSTOMER_SERVICES": [ //客服区域配置项
             {
                 "ITEM_ID": "1",
-                "ITEM_LABEL": "微信客服",
-                "ITEM_ICON": "icon-medicalrecord"
+                "ITEM_LABEL": "在线客服",
+                "ITEM_ICON": "icon_service"
             },
             {
                 "ITEM_ID": "2",
                 "ITEM_LABEL": "QQ客服",
-                "ITEM_ICON": "icon-favorite"
+                "ITEM_ICON": "icon_qq"
             },
             {
                 "ITEM_ID": "3",
-                "ITEM_LABEL": "电话客服",
-                "ITEM_ICON": "icon-refresh"
+                "ITEM_LABEL": "微信客服",
+                "ITEM_ICON": "icon_wechat"
             },
         ],
         "SHOW_RECENT_FUNC": false, //是否显示最近常用功能区
@@ -80,7 +89,7 @@ jQuery(function ($) {
                 "MENU_ID": 1, //菜单唯一标识
                 "MENU_LABEL": "公共模块", //页面展示的文字
                 "MENU_TYPE": "0", //0、1、2分别代表跟节点、二级节点、三级节点
-                "MENU_ICON": "icon-files", //左侧字体图标
+                "MENU_ICON": "icon_files", //左侧字体图标
                 "ROUTER_LINK": "", //点击跳转路径
                 "AUTO_EXPANDED": false, //是否默认展开
                 "AUTO_CHECKED": false, //是否默认选中
@@ -144,7 +153,7 @@ jQuery(function ($) {
                 "MENU_ID": 5, //菜单唯一标识
                 "MENU_LABEL": "公共服务及方法", //页面展示的文字
                 "MENU_TYPE": "0", //0、1、2分别代表跟节点、二级节点、三级节点
-                "MENU_ICON": "icon-save", //左侧字体图标
+                "MENU_ICON": "icon_save", //左侧字体图标
                 "ROUTER_LINK": "/app/business/home", //点击跳转路径
                 "AUTO_EXPANDED": false, //是否默认展开
                 "AUTO_CHECKED": false, //是否默认选中
@@ -153,7 +162,7 @@ jQuery(function ($) {
                 "MENU_ID": 2, //菜单唯一标识
                 "MENU_LABEL": "数据展示", //页面展示的文字
                 "MENU_TYPE": "0", //0、1、2分别代表跟节点、二级节点、三级节点
-                "MENU_ICON": "icon-pc", //左侧字体图标
+                "MENU_ICON": "icon_pc", //左侧字体图标
                 "ROUTER_LINK": "", //点击跳转路径
                 "AUTO_EXPANDED": false, //是否默认展开
                 "AUTO_CHECKED": false, //是否默认选中
@@ -264,7 +273,7 @@ jQuery(function ($) {
                 "MENU_ID": 6, //菜单唯一标识
                 "MENU_LABEL": "页面布局", //页面展示的文字
                 "MENU_TYPE": "0", //0、1、2分别代表跟节点、二级节点、三级节点
-                "MENU_ICON": "icon-save", //左侧字体图标
+                "MENU_ICON": "icon_save", //左侧字体图标
                 "ROUTER_LINK": "/app/business/home", //点击跳转路径
                 "AUTO_EXPANDED": false, //是否默认展开
                 "AUTO_CHECKED": false, //是否默认选中
@@ -286,6 +295,10 @@ jQuery(function ($) {
             $("#customer-services-box").removeAttr("hidden");
             cloneAppendCustomerServices("customer-services-item-temp", "customer-services-box", "service-itemd-"); // 页面右下角客服栏
         }
+        if(MAIN_CONFIG.CAN_TOGGLE_SYS && MAIN_CONFIG.SYS_LIST.length > 0){
+            $(".system-name-box>i").show();
+            cloneAppendSysList("toggle-system-temp", "toggle-system-items-box", "system-item-");
+        }
     }
 
     // 页面基本配置
@@ -301,7 +314,6 @@ jQuery(function ($) {
      * @param {*} templateID 克隆节点模板
      * @param {*} parentID 需要添加到父节点的ID
      * @param {*} itemIdPrefix 克隆节点ID前缀
-     * @param {*} data 需要克隆的数据
      */
     function cloneAppendToolBars(templateID, parentID, itemIdPrefix) {
         var templateHTML = $("#" + templateID);
@@ -329,9 +341,9 @@ jQuery(function ($) {
 
     /**
      * 使用jQuery遍历左侧菜单栏配置项数据，克隆节点，添加到指定位置
-     * @param {*} templateID 
-     * @param {*} parentID 
-     * @param {*} itemIdPrefix 
+     * @param {*} templateID 克隆节点模板
+     * @param {*} parentID 需要添加到父节点的ID
+     * @param {*} itemIdPrefix 克隆节点ID前缀
      */
     function cloneAppendMenuItems(templateID, parentID, itemIdPrefix) {
         var templateHTML = $("#" + templateID + " .item-level-0"); // 一级菜单模板
@@ -354,7 +366,7 @@ jQuery(function ($) {
                     childItem.ROUTER_LINK && childItemHTML.addClass("kyee-router-link-flag"); // 设置点击是否跳转标识
                     if (childItem.CHILDREN_ITEMS && childItem.CHILDREN_ITEMS.length > 0) { // 遍历三级菜单
                         var grandchildItemHTMLStr = "";
-                        childItemHTML.children("i").addClass("icon-add"); // 设置二级菜单左侧图标
+                        childItemHTML.children("i").addClass("icon_add"); // 设置二级菜单左侧图标
                         for (var k = 0, l = childItem.CHILDREN_ITEMS.length; k < l; k++) {
                             var grandchildItem = childItem.CHILDREN_ITEMS[k];
                             var grandchildItemHTML = grandchildTempHTML.clone().attr("id", itemIdPrefix + grandchildItem.MENU_ID); // 获取三级菜单模板
@@ -377,9 +389,9 @@ jQuery(function ($) {
 
     /**
      * 使用jQuery遍历右下角客服区配置项数据，克隆节点，添加到指定位置
-     * @param {*} templateID 
-     * @param {*} parentID 
-     * @param {*} itemIdPrefix 
+     * @param {*} templateID 克隆节点模板
+     * @param {*} parentID 需要添加到父节点的ID
+     * @param {*} itemIdPrefix 克隆节点ID前缀
      */
     function cloneAppendCustomerServices(templateID, parentID, itemIdPrefix) {
         var templateHTML = $("#" + templateID);
@@ -394,6 +406,31 @@ jQuery(function ($) {
         $(itemsHTML).insertBefore("#customer-services-toggle-btn");
     }
 
+    /**
+     * 使用jQuery遍历切换系统区配置项数据，克隆节点，添加到指定位置
+     * @param {*} templateID 克隆节点模板
+     * @param {*} parentID 需要添加到父节点的ID
+     * @param {*} itemIdPrefix 克隆节点ID前缀
+     */
+    function cloneAppendSysList(templateID, parentID, itemIdPrefix){
+        var templateHTML = $("#" + templateID);
+        var itemsHTML = "";
+        for (var i = 0, j = MAIN_CONFIG.SYS_LIST.length; i < j; i++) {
+            var item = MAIN_CONFIG.SYS_LIST[i];
+            var itemHTML = templateHTML.clone().attr("id", itemIdPrefix + item.SYS_ID).css("display","block");
+            itemHTML.children("i").addClass(item.SYS_ICON);
+            itemHTML.children("span")[0].innerText = item.SYS_LABEL;
+            itemsHTML += itemHTML[0].outerHTML;
+        }
+        $(itemsHTML).appendTo("#"+parentID);
+        $(".system-name-box").on("mouseenter",function(){
+            $(".toggle-system-box").show(100);
+        });
+        $(".toggle-system-box").on("mouseleave",function(){
+            $(this).hide(100);
+        })
+    }
+
     // 左上角控制侧边栏固定或悬浮按钮点击事件
     $("#toggle-aside").on("click", function () {
         toogleAsideState();
@@ -402,7 +439,7 @@ jQuery(function ($) {
     // 切换侧边栏的固定（220px）、悬浮（70px）状态
     function toogleAsideState() {
         $(".aside-box").toggleClass("aside-folded"); // 侧边栏宽度 220px与70px 来回切换。
-        KyeeToggleClass($("#toggle-aside"), "icon-menu_s", "icon-menu");
+        KyeeToggleClass($("#toggle-aside"), "icon_menu_s", "icon_menu");
         $(".aside-box").off("mouseout").one("mouseout", function () { // 鼠标离开时触发（鼠标未离开，即使点击也不会触发）
             if ($(".aside-box").hasClass("aside-folded")) { // 由固定切换至悬浮状态时，切换右侧主体内容区域的样式（flex布局切换成absolute模式）、侧边栏添加hover效果。
                 console.log("mouseout");
@@ -442,7 +479,7 @@ jQuery(function ($) {
     $("#menu-items-box").on("click", ".item-level-1", function () {
         if ($(this).parent().children("ul").length > 0) { // 若存在三级菜单，则切换三级菜单展开、折叠状态
             KyeeToggleClass($(this).parent().children("ul"), "submenu-show", "submenu-hide");
-            KyeeToggleClass($(this).children("i"), "icon-reduce", "icon-add");
+            KyeeToggleClass($(this).children("i"), "icon_reduce", "icon_add");
         }
         if ($(this).hasClass("kyee-router-link-flag")) {
             setItemToVisitedItems({ // 若可以跳转，执行跳转操作
@@ -510,7 +547,7 @@ jQuery(function ($) {
     }
 
     /**
-     * 维护以访问链接列表
+     * 维护已访问链接列表
      * @param {*} menuId 需要从已访问列表中删除的对象ID
      * @param {*} element 需要从已访问列表中删除的对象ID
      */
@@ -658,7 +695,7 @@ jQuery(function ($) {
     $("#customer-services-toggle-btn").on("click", function () {
         $(this).toggleClass("customer-services-expanded");
         $(".customer-services-item:not(#customer-services-item-temp)").fadeToggle("fast");
-        KyeeToggleClass($(this).children("i"), "icon-add", "icon-reduce");
+        KyeeToggleClass($(this).children("i"), "icon_add", "icon_reduce");
     })
 
     /**
