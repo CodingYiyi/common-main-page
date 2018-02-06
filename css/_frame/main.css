@@ -410,6 +410,8 @@ body {
     right: 0;
     left: 0;
     overflow: auto; }
+  .body .hide-recent-func-tabbar {
+    top: 70px; }
   .body .customer-services-box {
     position: fixed;
     bottom: 20px;

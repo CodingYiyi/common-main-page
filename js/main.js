@@ -8,6 +8,7 @@ jQuery(function ($) {
         "PRO_TITLE": "京颐集团", //浏览器标题
         "PRO_LOGO": "./assets/img/logo.png", //左上角项目logo
         "PRO_NAME": "演示系统", //项目名称
+        "SHOW_RECENT_FUNC": true, //是否显示最近常用功能区
         "CAN_TOGGLE_SYS": true, //是否可以切换系统
         "SYS_LIST":[
             {
@@ -75,7 +76,7 @@ jQuery(function ($) {
                 "EVENT_FUNCS": [{
                     "EVENT_NAME": "click",
                     "EVENT_FUNC": function () {
-                        $(".ui-sidebar-mask").show();
+                        $(".ui-sidebar-mask").fadeIn(200);
                         $(".kyee-next-sidebar-right").removeClass("kyee-next-sidebar-hidden").addClass("kyee-next-sidebar-show");
                     }
                 }]
@@ -100,7 +101,6 @@ jQuery(function ($) {
                 "ITEM_ICON": "icon_wechat"
             },
         ],
-        "SHOW_RECENT_FUNC": false, //是否显示最近常用功能区
         "ASIDE_MENU_ITEMS": [{
                 "MENU_ID": 1, //菜单唯一标识
                 "MENU_LABEL": "公共模块", //页面展示的文字
@@ -307,13 +307,20 @@ jQuery(function ($) {
         basicConfig(); // 页面基本配置项
         cloneAppendToolBars("func-item-temp", "func-items-box", "func-item-"); // 页面顶部工具栏
         cloneAppendMenuItems("menu-item-temp", "menu-items-box", "menu-item-"); // 页面左侧导航栏
-        if (MAIN_CONFIG.SHOW_CUSTOMER_SERVICES && MAIN_CONFIG.CUSTOMER_SERVICES.length > 0) {
+        if (MAIN_CONFIG.SHOW_CUSTOMER_SERVICES && MAIN_CONFIG.CUSTOMER_SERVICES.length > 0) { // 页面右下角客服栏
             $("#customer-services-box").removeAttr("hidden");
-            cloneAppendCustomerServices("customer-services-item-temp", "customer-services-box", "service-itemd-"); // 页面右下角客服栏
+            cloneAppendCustomerServices("customer-services-item-temp", "customer-services-box", "service-itemd-");
         }
-        if(MAIN_CONFIG.CAN_TOGGLE_SYS && MAIN_CONFIG.SYS_LIST.length > 0){
+        if(MAIN_CONFIG.CAN_TOGGLE_SYS && MAIN_CONFIG.SYS_LIST.length > 0){ // 可切换系统配置区
             $(".system-name-box>i").show();
             cloneAppendSysList("toggle-system-temp", "toggle-system-items-box", "system-item-");
+        }
+        if(!MAIN_CONFIG.SHOW_RECENT_FUNC){ // 控制已访问功能区tab页的显示与隐藏
+            $(".visited-nav-box").hide();
+            $(".main-body-box").addClass("hide-recent-func-tabbar");
+        }else{
+            $(".visited-nav-box").show();
+            $(".main-body-box").removeClass("hide-recent-func-tabbar");
         }
     }
 
@@ -440,7 +447,10 @@ jQuery(function ($) {
         }
         $(itemsHTML).appendTo("#"+parentID);
         $(".system-name-box").on("mouseenter",function(){
-            $(".toggle-system-box").show(100);
+            $(".toggle-system-box").delay(800).show(100);
+        });
+        $(".system-name-box").on("mouseleave",function(){
+            $(".toggle-system-box").clearQueue();;
         });
         $(".toggle-system-box").on("mouseleave",function(){
             $(this).hide(100);
@@ -486,7 +496,7 @@ jQuery(function ($) {
             KyeeToggleClass($(this).parent().children("ul"), "submenu-show", "submenu-hide");
             KyeeToggleClass($(this).children(".item-icon-right"), "item-icon-right-folded", "item-icon-right-expanded")
         }
-        $(this).hasClass("kyee-router-link-flag") && setItemToVisitedItems({ // 若可以跳转，执行跳转操作
+        MAIN_CONFIG.SHOW_RECENT_FUNC && $(this).hasClass("kyee-router-link-flag") && setItemToVisitedItems({ // 若可以跳转，执行跳转操作
             "MENU_ID": $(this).attr("id").substring(10),
             "MENU_LABEL": $(this).children("span")[0].innerText
         });
@@ -498,7 +508,7 @@ jQuery(function ($) {
             KyeeToggleClass($(this).children("i"), "icon_reduce", "icon_add");
         }
         if ($(this).hasClass("kyee-router-link-flag")) {
-            setItemToVisitedItems({ // 若可以跳转，执行跳转操作
+            MAIN_CONFIG.SHOW_RECENT_FUNC && setItemToVisitedItems({ // 若可以跳转，执行跳转操作
                 "MENU_ID": $(this).attr("id").substring(10),
                 "MENU_LABEL": $(this).children("span")[0].innerText
             });
@@ -508,7 +518,7 @@ jQuery(function ($) {
     // 三级菜单点击事件
     $("#menu-items-box").on("click", ".item-level-2", function () {
         if ($(this).hasClass("kyee-router-link-flag")) {
-            setItemToVisitedItems({ // 若可以跳转，执行跳转操作
+            MAIN_CONFIG.SHOW_RECENT_FUNC && setItemToVisitedItems({ // 若可以跳转，执行跳转操作
                 "MENU_ID": $(this).attr("id").substring(10),
                 "MENU_LABEL": $(this)[0].innerText
             });
@@ -717,7 +727,7 @@ jQuery(function ($) {
     // 遮罩层点击事件
     $(".ui-sidebar-mask").on("click",function(){
         $(".kyee-next-sidebar-right").removeClass("kyee-next-sidebar-show").addClass("kyee-next-sidebar-hidden");
-        $(".ui-sidebar-mask").hide();
+        $(".ui-sidebar-mask").fadeOut(200);
     })
 
     /**
