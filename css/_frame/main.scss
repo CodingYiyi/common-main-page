@@ -63,50 +63,81 @@ body {
 
 /* CSS RESET END*/
 
-.kyee-next-col-flex-box {
+.KyeeNext-col-flex-box {
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flexbox;
     display: flex;
+
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    -moz-align-items: center;
     align-items: center;
+
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    -moz-flex-direction: column;
     flex-direction: column;
+
+    -webkit-justify-content: center;
+    -moz-justify-content: center;
     justify-content: center;
 }
 
-.kyee-next-row-flex-box {
+.KyeeNext-row-flex-box {
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flexbox;
     display: flex;
+    
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    -moz-align-items: center;
     align-items: center;
+
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    -moz-flex-direction: row;
     flex-direction: row;
+
+    -webkit-justify-content: center;
+    -moz-justify-content: center;
     justify-content: center;
 }
 
-.kyee-next-clickable:hover{
+.KyeeNext-clickable:hover{
     cursor: pointer;
 }
-.kyee-next-unclickable:hover{
+.KyeeNext-unclickable:hover{
     cursor: not-allowed;
 }
 
-.kyee-next-text-ellipsis {
+.KyeeNext-text-ellipsis {
     white-space: nowrap; 
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
 
-.kyee-next-body {
+.KyeeNext-body {
     display: flex;
     box-sizing: border-box;
     height: 100%;
     // 侧边导航栏区样式
-    .kyee-next-aside-box {
+    .KyeeNext-aside-box {
         flex: none;
         width: 220px;
         height: 100%;
         overflow-x: hidden;
         overflow-y: auto;
         -webkit-transition: width .2s linear;
+        -moz-transition: width .2s linear;
+        -o-transition: width .2s linear;
         transition: width .2s linear;
+        -moz-transform: translateZ(0) scale(1, 1);
         -webkit-transform: translateZ(0) scale(1, 1);
         z-index: 3;
-        .kyee-next-logo-box{
+        .KyeeNext-logo-box{
             display: flex;
             justify-content: flex-start;
             align-items: center;
@@ -131,15 +162,19 @@ body {
                 margin-left: 10px;
             }
         }
-        .kyee-next-menu-items-box {
+        .KyeeNext-menu-items-box {
             height: calc(100% - 70px);
             width: 220px;
             background-color: $themeColor;
             color: $menuFontDefaultColor;
-            .kyee-next-item-level-1-2-active{
+            .KyeeNext-item-level-0-active{
+                color: $menuFontActiveColor !important;
+                border-left-color: $menuActiveBorderLeftColor !important;
+            }
+            .KyeeNext-item-level-1-2-active{
                 color: $menuFontActiveColor !important;
             }
-            .kyee-next-item-level-0{
+            .KyeeNext-item-level-0{
                 display: flex;
                 align-items: center;
                 position: relative;
@@ -147,7 +182,7 @@ body {
                 border-left-width: 3px;
                 border-left-style: solid;
                 padding-right: 20px;
-                .kyee-next-item-icon-left{
+                .KyeeNext-item-icon-left{
                     display: inline-block;
                     flex: none;
                     width: 67px;
@@ -156,14 +191,14 @@ body {
                     text-align: center;
                     line-height: 50px;
                 }
-                .kyee-next-item-label{
+                .KyeeNext-item-label{
                 }
-                .kyee-next-item-icon-right{
+                .KyeeNext-item-icon-right{
                     position: absolute;
                     right: 10px;
                 }
             }
-            .kyee-next-item-level-1{
+            .KyeeNext-item-level-1{
                 display: flex;
                 align-items: center;
                 padding: 0 20px 0 70px;
@@ -178,10 +213,13 @@ body {
                 &:hover{
                     background-color: $menuItemHoverBgColor;
                     color: $menuFontHoverColorSub !important;
+                    -webkit-transition: all .3s ease;
+                    -moz-transition: all .3s ease;
+                    -o-transition: all .3s ease;
                     transition: all .3s ease;
                 }
             }
-            .kyee-next-item-level-2{
+            .KyeeNext-item-level-2{
                 height: 28px;
                 line-height: 28px;
                 padding: 0 20px 0 96px;
@@ -189,24 +227,27 @@ body {
                 &:hover{
                     background-color: $menuItemHoverBgColor;
                     color: $menuFontHoverColorSub !important;
+                    -webkit-transition: all .3s ease;
+                    -moz-transition: all .3s ease;
+                    -o-transition: all .3s ease;
                     transition: all .3s ease;
                 }
             }
         }
     }
-    .kyee-next-aside-folded {
+    .KyeeNext-aside-folded {
         width: 70px;
     }
-    .kyee-next-aside-box-hover:hover{
+    .KyeeNext-aside-box-hover:hover{
         width: 220px; 
     }
 
     // 右侧内容区样式
-    .kyee-next-main-box{
+    .KyeeNext-main-box{
         height: 100%;
         margin-left: 0;
         overflow: auto;
-        .kyee-next-header-box {
+        .KyeeNext-header-box {
             display: flex;
             align-items: center;
             flex-direction: row;
@@ -217,7 +258,7 @@ body {
             padding: 0 20px;
             box-sizing: border-box;
             background-color: $themeColor;
-            .kyee-next-system-name-box {
+            .KyeeNext-system-name-box {
                 justify-content: flex-start;
                 height: 100%;
                 min-width: 100px;
@@ -231,10 +272,10 @@ body {
                     display: none;
                 }
             }
-            .kyee-next-func-config-box{
+            .KyeeNext-func-config-box{
                 height: 100%;
             }
-            .kyee-next-func-item{
+            .KyeeNext-func-item{
                 margin-left: 16px;
                 color: $systemNameColor;
                 font-size: 16px;
@@ -245,7 +286,7 @@ body {
                     color: #F4F4F4;
                 }
             }
-            .kyee-next-toggle-system-box{
+            .KyeeNext-toggle-system-box{
                 position: absolute;
                 top:60px;
                 left: 20px;
@@ -264,8 +305,11 @@ body {
                         line-height:36px;
                         &:hover{
                             color: $assistItemsColor !important;
-                            transition: all .2s ease;
                             cursor: pointer;
+                            -webkit-transition: all .2s ease;
+                            -moz-transition: all .2s ease;
+                            -o-transition: all .2s ease;
+                            transition: all .2s ease;
                         }
                     }
                     &:after{
@@ -282,7 +326,7 @@ body {
             }
         }
         
-        .kyee-next-visited-nav-box{
+        .KyeeNext-visited-nav-box{
             position: relative;
             height: 40px;
             border-bottom: 1px solid $visitedItemDefaultBorderColor;
@@ -300,11 +344,11 @@ body {
                     background-color: $visitedItemDefaultBorderColor;
                 }
             }
-            .kyee-next-nav-pre{
+            .KyeeNext-nav-pre{
                 position: absolute;
                 left: 0;
             }
-            .kyee-next-nav-next{
+            .KyeeNext-nav-next{
                 position: absolute;
                 right: 0;
             }
@@ -315,11 +359,12 @@ body {
                 -webkit-text-size-adjust:none;
                 overflow: hidden;
                 z-index: 1;
-                .kyee-next-visited-items{
+                .KyeeNext-visited-items{
                     white-space: nowrap;
-                    transition: -webkit-transform .3s;
+                    -webkit-transition: transform .3s;
+                    -moz-transition: transform .3s;
+                    -o-transition: transform .3s;
                     transition: transform .3s;
-                    transition: transform .3s,-webkit-transform .3s
                 }
                 li{
                     box-sizing: border-box;
@@ -335,7 +380,7 @@ body {
                         font-size: 12px;
                     }
                 }
-                .kyee-next-active-item{
+                .KyeeNext-active-item{
                     color: $activeVisitedItemFontColor;
                     border-top: 3px solid $activeVisitedItemBorderColor;
                     border-bottom: 1px solid $bodyBgColor;
@@ -348,51 +393,51 @@ body {
             }
         }
     }
-    .kyee-next-main-box-dynamic {
+    .KyeeNext-main-box-dynamic {
         position: relative;
         flex: auto;
     }
-    .kyee-next-main-box-fixed {
+    .KyeeNext-main-box-fixed {
         position: absolute;
         top: 0;
         right: 0;
         left: 0;
         margin-left: 70px;
     }
-    .kyee-next-submenu-hide {
+    .KyeeNext-submenu-hide {
         max-height: 0;
         visibility: hidden;
         opacity: 0;
         overflow: hidden;
-        -moz-transition-duration: .3s;
         -webkit-transition-duration: .3s;
+        -moz-transition-duration: .3s;
         -o-transition-duration: .3s;
         transition-duration: .3s;
-        -moz-transition-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
         -webkit-transition-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
+        -moz-transition-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
         -o-transition-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
         transition-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
     }
-    .kyee-next-submenu-show {
+    .KyeeNext-submenu-show {
         max-height: 1500px;
         visibility: visible;
         opacity: 1;
-        -moz-transition-duration: .3s;
         -webkit-transition-duration: .3s;
+        -moz-transition-duration: .3s;
         -o-transition-duration: .3s;
         transition-duration: .3s;
-        -moz-transition-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
         -webkit-transition-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
+        -moz-transition-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
         -o-transition-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
         transition-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
     }
-    .kyee-next-item-level-0-folded{
+    .KyeeNext-item-level-0-folded{
         background-color: $menuDefaultBgColor;
         -webkit-transition: all .3s ease-in-out;
         -moz-transition: all .3s ease-in-out;
         -o-transition: all .3s ease-in-out;
         transition: all .3s ease-in-out;
-        .kyee-next-item-level-0{
+        .KyeeNext-item-level-0{
             color: $menuFontDefaultColor;
             border-left-color: $menuDefaultBgColor;
             -webkit-transition: all .3s ease-in-out;
@@ -401,7 +446,7 @@ body {
             transition: all .3s ease-in-out;
         }
     }
-    .kyee-next-item-icon-right-folded{
+    .KyeeNext-item-icon-right-folded{
         -webkit-transform: rotate(0deg);
         -moz-transform: rotate(0deg);
         -ms-transform: rotate(0deg);
@@ -412,14 +457,14 @@ body {
         -o-transition: transform .2s ease-in-out;
         transition: transform .2s ease-in-out;
     }
-    .kyee-next-item-level-0-expanded {
+    .KyeeNext-item-level-0-expanded {
         border-left-color: $menuActiveBorderLeftColor;
         background-color: $menuActiveBgColor;
         -webkit-transition: all .3s ease-in-out;
         -moz-transition: all .3s ease-in-out;
         -o-transition: all .3s ease-in-out;
         transition: all .3s ease-in-out;
-        .kyee-next-item-level-0{
+        .KyeeNext-item-level-0{
             color: $menuFontActiveColor;
             border-left-color: $menuActiveBorderLeftColor;
             -webkit-transition: all .3s ease-in-out;
@@ -428,7 +473,7 @@ body {
             transition: all .3s ease-in-out;
         }
     }
-    .kyee-next-item-icon-right-expanded{
+    .KyeeNext-item-icon-right-expanded{
         -webkit-transform: rotate(90deg);
         -moz-transform: rotate(90deg);
         -ms-transform: rotate(90deg);
@@ -441,7 +486,7 @@ body {
     }
 
     // 业务内容区样式
-    .kyee-next-main-body-box{
+    .KyeeNext-main-body-box{
         position: absolute;
         top: 111px;
         bottom: 0;
@@ -449,19 +494,19 @@ body {
         left: 0;
         overflow: auto;
     }
-    .kyee-next-hide-recent-func-tabbar{
+    .KyeeNext-hide-recent-func-tabbar{
         top: 70px;
     }
 
     // 客服配置区样式
-    .kyee-next-customer-services-box{
+    .KyeeNext-customer-services-box{
         position: fixed;
         bottom: 20px;
         right: 20px;
         display: flex;
         flex-direction: column;
         align-items: flex-end;
-        .kyee-next-customer-services-folded{
+        .KyeeNext-customer-services-folded{
             display: flex;
             align-items: center;
             justify-content: center;
@@ -473,10 +518,10 @@ body {
             font-size: 20px;
             color: #FFF;
         }
-        .kyee-next-customer-services-expanded{
+        .KyeeNext-customer-services-expanded{
             background-color: $disabledStateColor;
         }
-        .kyee-next-customer-services-item{
+        .KyeeNext-customer-services-item{
             display: flex;
             align-items: center;
             justify-content: flex-end;
@@ -513,7 +558,7 @@ body {
     }
 
     // 公共右侧边栏区样式
-    .kyee-next-sidebar-right{
+    .KyeeNext-sidebar-right{
         position: absolute;
         top: 70px;
         right: 0px;
@@ -526,12 +571,12 @@ body {
         -o-transition: all .2s ease-in-out;
         transition: all .2s ease-in-out;
     }
-    .kyee-next-sidebar-show{
+    .KyeeNext-sidebar-show{
         -webkit-transform: translateX(0);
         -ms-transform: translateX(0);
         transform: translateX(0);
     }
-    .kyee-next-sidebar-hidden{
+    .KyeeNext-sidebar-hidden{
         -webkit-transform: translateX(100%);
         -ms-transform: translateX(100%);
         transform: translateX(100%);
@@ -539,11 +584,11 @@ body {
 }
 
 // 按钮点击波纹效果
-.kyee-next-ripple {
+.KyeeNext-ripple {
     position: relative;
     overflow: hidden;  //隐藏溢出的径向渐变背景
 }
-.kyee-next-ripple:after {
+.KyeeNext-ripple:after {
     content: "";
     display: block;
     position: absolute;
@@ -559,14 +604,14 @@ body {
     opacity: 0;
     transition: transform .3s, opacity .5s;
 }
-.kyee-next-ripple:active:after {
+.KyeeNext-ripple:active:after {
     transform: scale(0, 0);
     opacity: .3;
     transition: 0s; //设置初始状态
 }
 
 // 遮罩层样式
-.kyee-next-ui-sidebar-mask{
+.KyeeNext-ui-sidebar-mask{
     position: fixed;
     width: 100%;
     height: 100%;
