@@ -59,8 +59,13 @@ body {
     -webkit-font-smoothing: antialiased;
     font-size: 14px;
     background-color: $bodyBgColor;
+    animation: pageEnter .45s cubic-bezier(0.455, 0.03, 0.515, 0.955);
 }
-
+@keyframes pageEnter {
+    from {
+      opacity: 0;
+    }
+}
 /* CSS RESET END*/
 
 .KyeeNext-col-flex-box {
@@ -495,7 +500,7 @@ body {
         overflow: auto;
     }
     .KyeeNext-hide-recent-func-tabbar{
-        top: 70px;
+        top: 70px !important;
     }
 
     // 客服配置区样式

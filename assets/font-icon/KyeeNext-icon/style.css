@@ -1,17 +1,17 @@
 @font-face {
-  font-family: 'frame';
-  src:  url('fonts/frame.eot?6h7o4l');
-  src:  url('fonts/frame.eot?6h7o4l#iefix') format('embedded-opentype'),
-    url('fonts/frame.ttf?6h7o4l') format('truetype'),
-    url('fonts/frame.woff?6h7o4l') format('woff'),
-    url('fonts/frame.svg?6h7o4l#frame') format('svg');
+  font-family: 'kyeenext';
+  src:  url('fonts/kyeenext.eot?m55z70');
+  src:  url('fonts/kyeenext.eot?m55z70#iefix') format('embedded-opentype'),
+    url('fonts/kyeenext.ttf?m55z70') format('truetype'),
+    url('fonts/kyeenext.woff?m55z70') format('woff'),
+    url('fonts/kyeenext.svg?m55z70#kyeenext') format('svg');
   font-weight: normal;
   font-style: normal;
 }
 
-[class^="icon_"], [class*=" icon_"] {
+[class^="kyeenext-icon-"], [class*=" kyeenext-icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
-  font-family: 'frame' !important;
+  font-family: 'kyeenext' !important;
   speak: none;
   font-style: normal;
   font-weight: normal;
@@ -24,123 +24,123 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon_delta:before {
+.kyeenext-icon-delta:before {
   content: "\e900";
 }
-.icon_qq:before {
+.kyeenext-icon-qq:before {
   content: "\e901";
 }
-.icon_service:before {
+.kyeenext-icon-service:before {
   content: "\e902";
 }
-.icon_wechat:before {
+.kyeenext-icon-wechat:before {
   content: "\e903";
 }
-.icon_home:before {
+.kyeenext-icon-home:before {
   content: "\e904";
 }
-.icon_statistics:before {
+.kyeenext-icon-statistics:before {
   content: "\e905";
 }
-.icon_import:before {
+.kyeenext-icon-import:before {
   content: "\e906";
 }
-.icon_export:before {
+.kyeenext-icon-export:before {
   content: "\e907";
 }
-.icon_framework1:before {
+.kyeenext-icon-framework1:before {
   content: "\e908";
 }
-.icon_framework:before {
+.kyeenext-icon-framework:before {
   content: "\e909";
 }
-.icon_message:before {
+.kyeenext-icon-message:before {
   content: "\e90a";
 }
-.icon_medicalrecord:before {
+.kyeenext-icon-medicalrecord:before {
   content: "\e90b";
 }
-.icon_hospital:before {
+.kyeenext-icon-hospital:before {
   content: "\e90c";
 }
-.icon_bat:before {
+.kyeenext-icon-bat:before {
   content: "\e90d";
 }
-.icon_server:before {
+.kyeenext-icon-server:before {
   content: "\e90e";
 }
-.icon_trash:before {
+.kyeenext-icon-trash:before {
   content: "\e90f";
 }
-.icon_location:before {
+.kyeenext-icon-location:before {
   content: "\e910";
 }
-.icon_favorite:before {
+.kyeenext-icon-favorite:before {
   content: "\e911";
 }
-.icon_layer:before {
+.kyeenext-icon-layer:before {
   content: "\e912";
 }
-.icon_pc:before {
+.kyeenext-icon-pc:before {
   content: "\e913";
 }
-.icon_more:before {
+.kyeenext-icon-more:before {
   content: "\e914";
 }
-.icon_file:before {
+.kyeenext-icon-file:before {
   content: "\e915";
 }
-.icon_files:before {
+.kyeenext-icon-files:before {
   content: "\e916";
 }
-.icon_phone:before {
+.kyeenext-icon-phone:before {
   content: "\e917";
 }
-.icon_switch:before {
+.kyeenext-icon-switch:before {
   content: "\e918";
 }
-.icon_unlock:before {
+.kyeenext-icon-unlock:before {
   content: "\e919";
 }
-.icon_lock:before {
+.kyeenext-icon-lock:before {
   content: "\e91a";
 }
-.icon_save:before {
+.kyeenext-icon-save:before {
   content: "\e91b";
 }
-.icon_setting:before {
+.kyeenext-icon-setting:before {
   content: "\e91c";
 }
-.icon_seach:before {
+.kyeenext-icon-seach:before {
   content: "\e91d";
 }
-.icon_refresh:before {
+.kyeenext-icon-refresh:before {
   content: "\e91e";
 }
-.icon_reduce:before {
+.kyeenext-icon-reduce:before {
   content: "\e91f";
 }
-.icon_add:before {
+.kyeenext-icon-add:before {
   content: "\e920";
 }
-.icon_X:before {
+.kyeenext-icon-X:before {
   content: "\e921";
 }
-.icon_menu_s:before {
+.kyeenext-icon-menu-s:before {
   content: "\e922";
 }
-.icon_menu:before {
+.kyeenext-icon-menu:before {
   content: "\e923";
 }
-.icon_arrow_down:before {
+.kyeenext-icon-arrow-down:before {
   content: "\e926";
 }
-.icon_arrow_up:before {
+.kyeenext-icon-arrow-up:before {
   content: "\e928";
 }
-.icon_arrow_right:before {
+.kyeenext-icon-arrow-right:before {
   content: "\e92a";
 }
-.icon_arrow_left:before {
+.kyeenext-icon-arrow-left:before {
   content: "\e92c";
 }

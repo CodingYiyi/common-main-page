@@ -1,4 +1,4 @@
-jQuery(function () {
+jQuery(function ($) {
     // 页面配置项
     var KYEE_NEXT_MAIN_CONFIG;
 
@@ -15,20 +15,9 @@ jQuery(function () {
                 "PRO_TITLE": "京颐集团", //浏览器标题
                 "PRO_LOGO": "./assets/img/logo.png", //左上角项目logo
                 "PRO_NAME": "演示系统", //项目名称
+                "SCROLL_STEP": 200, //已访问列表左、右箭头点击滑动距离
                 "SHOW_RECENT_FUNC": true, //是否显示最近常用功能区
-                "CAN_TOGGLE_SYS": true, //是否可以切换系统
-                "SYS_LIST": [{
-                        "SYS_ID": "1",
-                        "SYS_ICON": "icon_framework",
-                        "SYS_LABEL": "电子报销平台"
-                    },
-                    {
-                        "SYS_ID": "2",
-                        "SYS_ICON": "icon_server",
-                        "SYS_LABEL": "人力资源管理系统"
-                    }
-                ],
-                "SCROLL_STEP": 200, // 已访问列表左、右箭头点击滑动距离
+                "EXPANDED_TO_ACTIVE_MENU": true, //是否自动展开选中的菜单
                 "TOOL_BARS": [ //工具栏区域配置项
                     {
                         "TOOL_ID": 103,
@@ -45,7 +34,7 @@ jQuery(function () {
                     },
                     {
                         "TOOL_ID": 101,
-                        "TOOL_ICON": "icon_setting",
+                        "TOOL_ICON": "kyeenext-icon-setting",
                         "TOOL_LABEL": "设置",
                         "ROUTER_LINK": "",
                         "USE_TEMPLATE": false,
@@ -65,7 +54,7 @@ jQuery(function () {
                     },
                     {
                         "TOOL_ID": 102,
-                        "TOOL_ICON": "icon_switch",
+                        "TOOL_ICON": "kyeenext-icon-switch",
                         "TOOL_LABEL": "退出",
                         "ROUTER_LINK": "",
                         "USE_TEMPLATE": false,
@@ -73,7 +62,7 @@ jQuery(function () {
                     },
                     {
                         "TOOL_ID": 103,
-                        "TOOL_ICON": "icon_message",
+                        "TOOL_ICON": "kyeenext-icon-message",
                         "TOOL_LABEL": "消息",
                         "ROUTER_LINK": "",
                         "USE_TEMPLATE": false,
@@ -89,31 +78,13 @@ jQuery(function () {
                     }
 
                 ],
-                "SHOW_CUSTOMER_SERVICES": true, //是否显示右下角客服区
-                "CUSTOMER_SERVICES": [ //客服区域配置项
-                    {
-                        "ITEM_ID": "1",
-                        "ITEM_LABEL": "在线客服",
-                        "ITEM_ICON": "icon_service"
-                    },
-                    {
-                        "ITEM_ID": "2",
-                        "ITEM_LABEL": "QQ客服",
-                        "ITEM_ICON": "icon_qq"
-                    },
-                    {
-                        "ITEM_ID": "3",
-                        "ITEM_LABEL": "微信客服",
-                        "ITEM_ICON": "icon_wechat"
-                    },
-                ],
-                "ASIDE_MENU_ITEMS": [{
+
+                "ASIDE_MENU_ITEMS": [{ //侧边栏配置
                         "MENU_ID": 1, //菜单唯一标识
                         "MENU_LABEL": "公共模块", //页面展示的文字
                         "MENU_TYPE": "0", //0、1、2分别代表跟节点、二级节点、三级节点
-                        "MENU_ICON": "icon_files", //左侧字体图标
+                        "MENU_ICON": "kyeenext-icon-files", //左侧字体图标
                         "ROUTER_LINK": "", //点击跳转路径
-                        "AUTO_EXPANDED": false, //是否默认展开
                         "AUTO_CHECKED": false, //是否默认选中
                         "BIND_FUNC": false, // 是否绑定事件
                         "EVENT_FUNCS": [{
@@ -134,7 +105,6 @@ jQuery(function () {
                                 "MENU_TYPE": "1", //0、1、2分别代表跟节点、二级节点、三级节点
                                 "MENU_ICON": "", //左侧字体图标
                                 "ROUTER_LINK": "", //点击跳转路径
-                                "AUTO_EXPANDED": false, //是否默认展开
                                 "AUTO_CHECKED": false, //是否默认选中
                                 "CHILDREN_ITEMS": [ //子节点数据
                                     {
@@ -143,8 +113,7 @@ jQuery(function () {
                                         "MENU_TYPE": "2", //0、1、2分别代表跟节点、二级节点、三级节点
                                         "MENU_ICON": "", //左侧字体图标
                                         "ROUTER_LINK": "/app/business/home", //点击跳转路径
-                                        "AUTO_EXPANDED": false, //是否默认展开
-                                        "AUTO_CHECKED": false, //是否默认选中
+                                        "AUTO_CHECKED": true, //是否默认选中
                                     },
                                     {
                                         "MENU_ID": 112, //菜单唯一标识
@@ -152,7 +121,6 @@ jQuery(function () {
                                         "MENU_TYPE": "2", //0、1、2分别代表跟节点、二级节点、三级节点
                                         "MENU_ICON": "", //左侧字体图标
                                         "ROUTER_LINK": "/app/business/home", //点击跳转路径
-                                        "AUTO_EXPANDED": false, //是否默认展开
                                         "AUTO_CHECKED": false, //是否默认选中
                                     }
                                 ]
@@ -163,7 +131,6 @@ jQuery(function () {
                                 "MENU_TYPE": "2", //0、1、2分别代表跟节点、二级节点、三级节点
                                 "MENU_ICON": "", //左侧字体图标
                                 "ROUTER_LINK": "/app/business/home", //点击跳转路径
-                                "AUTO_EXPANDED": false, //是否默认展开
                                 "AUTO_CHECKED": false, //是否默认选中
                                 "CHILDREN_ITEMS": [ //子节点数据
 
@@ -175,18 +142,16 @@ jQuery(function () {
                         "MENU_ID": 5, //菜单唯一标识
                         "MENU_LABEL": "公共服务及方法", //页面展示的文字
                         "MENU_TYPE": "0", //0、1、2分别代表跟节点、二级节点、三级节点
-                        "MENU_ICON": "icon_save", //左侧字体图标
+                        "MENU_ICON": "kyeenext-icon-save", //左侧字体图标
                         "ROUTER_LINK": "/app/business/home", //点击跳转路径
-                        "AUTO_EXPANDED": false, //是否默认展开
                         "AUTO_CHECKED": false, //是否默认选中
                     },
                     {
                         "MENU_ID": 2, //菜单唯一标识
                         "MENU_LABEL": "数据展示", //页面展示的文字
                         "MENU_TYPE": "0", //0、1、2分别代表跟节点、二级节点、三级节点
-                        "MENU_ICON": "icon_pc", //左侧字体图标
+                        "MENU_ICON": "kyeenext-icon-pc", //左侧字体图标
                         "ROUTER_LINK": "", //点击跳转路径
-                        "AUTO_EXPANDED": false, //是否默认展开
                         "AUTO_CHECKED": false, //是否默认选中
                         "CHILDREN_ITEMS": [ //子节点数据
                             {
@@ -195,7 +160,6 @@ jQuery(function () {
                                 "MENU_TYPE": "1", //0、1、2分别代表跟节点、二级节点、三级节点
                                 "MENU_ICON": "", //左侧字体图标
                                 "ROUTER_LINK": "", //点击跳转路径
-                                "AUTO_EXPANDED": false, //是否默认展开
                                 "AUTO_CHECKED": false, //是否默认选中
                                 "CHILDREN_ITEMS": [ //子节点数据
                                     {
@@ -204,8 +168,7 @@ jQuery(function () {
                                         "MENU_TYPE": "2", //0、1、2分别代表跟节点、二级节点、三级节点
                                         "MENU_ICON": "", //左侧字体图标
                                         "ROUTER_LINK": "/app/business/home", //点击跳转路径
-                                        "AUTO_EXPANDED": false, //是否默认展开
-                                        "AUTO_CHECKED": false, //是否默认选中
+                                        "AUTO_CHECKED": true, //是否默认选中
                                     },
                                     {
                                         "MENU_ID": 212, //菜单唯一标识
@@ -213,7 +176,6 @@ jQuery(function () {
                                         "MENU_TYPE": "2", //0、1、2分别代表跟节点、二级节点、三级节点
                                         "MENU_ICON": "", //左侧字体图标
                                         "ROUTER_LINK": "/app/business/home", //点击跳转路径
-                                        "AUTO_EXPANDED": false, //是否默认展开
                                         "AUTO_CHECKED": false, //是否默认选中
                                     }
                                 ]
@@ -224,7 +186,6 @@ jQuery(function () {
                                 "MENU_TYPE": "2", //0、1、2分别代表跟节点、二级节点、三级节点
                                 "MENU_ICON": "", //左侧字体图标
                                 "ROUTER_LINK": "/app/business/home", //点击跳转路径
-                                "AUTO_EXPANDED": false, //是否默认展开
                                 "AUTO_CHECKED": false, //是否默认选中
                                 "CHILDREN_ITEMS": [ //子节点数据
 
@@ -236,7 +197,6 @@ jQuery(function () {
                                 "MENU_TYPE": "2", //0、1、2分别代表跟节点、二级节点、三级节点
                                 "MENU_ICON": "", //左侧字体图标
                                 "ROUTER_LINK": "/app/business/home", //点击跳转路径
-                                "AUTO_EXPANDED": false, //是否默认展开
                                 "AUTO_CHECKED": false, //是否默认选中
                                 "CHILDREN_ITEMS": [ //子节点数据
 
@@ -248,7 +208,6 @@ jQuery(function () {
                                 "MENU_TYPE": "2", //0、1、2分别代表跟节点、二级节点、三级节点
                                 "MENU_ICON": "", //左侧字体图标
                                 "ROUTER_LINK": "", //点击跳转路径
-                                "AUTO_EXPANDED": false, //是否默认展开
                                 "AUTO_CHECKED": false, //是否默认选中
                                 "CHILDREN_ITEMS": [ //子节点数据
                                     {
@@ -257,7 +216,6 @@ jQuery(function () {
                                         "MENU_TYPE": "2", //0、1、2分别代表跟节点、二级节点、三级节点
                                         "MENU_ICON": "", //左侧字体图标
                                         "ROUTER_LINK": "/app/business/home", //点击跳转路径
-                                        "AUTO_EXPANDED": false, //是否默认展开
                                         "AUTO_CHECKED": false, //是否默认选中
                                     },
                                     {
@@ -266,7 +224,6 @@ jQuery(function () {
                                         "MENU_TYPE": "2", //0、1、2分别代表跟节点、二级节点、三级节点
                                         "MENU_ICON": "", //左侧字体图标
                                         "ROUTER_LINK": "/app/business/home", //点击跳转路径
-                                        "AUTO_EXPANDED": false, //是否默认展开
                                         "AUTO_CHECKED": false, //是否默认选中
                                     },
                                     {
@@ -275,7 +232,6 @@ jQuery(function () {
                                         "MENU_TYPE": "2", //0、1、2分别代表跟节点、二级节点、三级节点
                                         "MENU_ICON": "", //左侧字体图标
                                         "ROUTER_LINK": "/app/business/home", //点击跳转路径
-                                        "AUTO_EXPANDED": false, //是否默认展开
                                         "AUTO_CHECKED": false, //是否默认选中
                                     },
                                     {
@@ -284,7 +240,6 @@ jQuery(function () {
                                         "MENU_TYPE": "2", //0、1、2分别代表跟节点、二级节点、三级节点
                                         "MENU_ICON": "", //左侧字体图标
                                         "ROUTER_LINK": "/app/business/home", //点击跳转路径
-                                        "AUTO_EXPANDED": false, //是否默认展开
                                         "AUTO_CHECKED": false, //是否默认选中
                                     }
                                 ]
@@ -295,15 +250,50 @@ jQuery(function () {
                         "MENU_ID": 6, //菜单唯一标识
                         "MENU_LABEL": "页面布局", //页面展示的文字
                         "MENU_TYPE": "0", //0、1、2分别代表跟节点、二级节点、三级节点
-                        "MENU_ICON": "icon_save", //左侧字体图标
+                        "MENU_ICON": "kyeenext-icon-save", //左侧字体图标
                         "ROUTER_LINK": "/app/business/home", //点击跳转路径
-                        "AUTO_EXPANDED": false, //是否默认展开
-                        "AUTO_CHECKED": false, //是否默认选中
+                        "AUTO_CHECKED": true, //是否默认选中
                     }
-                ]
+                ],
+
+                "TOGGLE_SYS_CONFIG": { //切换系统配置
+                    "CAN_TOGGLE_SYS": true, //是否可以切换系统
+                    "SYS_LIST": [{
+                            "SYS_ID": "1",
+                            "SYS_ICON": "kyeenext-icon-framework",
+                            "SYS_LABEL": "电子报销平台"
+                        },
+                        {
+                            "SYS_ID": "2",
+                            "SYS_ICON": "kyeenext-icon-server",
+                            "SYS_LABEL": "人力资源管理系统"
+                        }
+                    ]
+                },
+
+                "CUSTOMER_SERVICES_CONFIG": { //右下角客服区
+                    "SHOW_CUSTOMER_SERVICES": true, //是否显示右下角客服区
+                    "CUSTOMER_SERVICES": [ //客服区域配置项
+                        {
+                            "ITEM_ID": "1",
+                            "ITEM_LABEL": "在线客服",
+                            "ITEM_ICON": "kyeenext-icon-service"
+                        },
+                        {
+                            "ITEM_ID": "2",
+                            "ITEM_LABEL": "QQ客服",
+                            "ITEM_ICON": "kyeenext-icon-qq"
+                        },
+                        {
+                            "ITEM_ID": "3",
+                            "ITEM_LABEL": "微信客服",
+                            "ITEM_ICON": "kyeenext-icon-wechat"
+                        },
+                    ]
+                }
             }
             KYEE.init(KYEE_NEXT_MAIN_CONFIG);
-        }, 1000);
+        }, 500);
     }
 
     // 页面初始化
