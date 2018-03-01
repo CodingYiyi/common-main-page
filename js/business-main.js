@@ -70,10 +70,7 @@ jQuery(function ($) {
                         "BIND_FUNC": true,
                         "EVENT_FUNCS": [{
                             "EVENT_NAME": "click",
-                            "EVENT_FUNC": function () {
-                                $(".KyeeNext-ui-sidebar-mask").fadeIn(200);
-                                $(".KyeeNext-sidebar-right").removeClass("KyeeNext-sidebar-hidden").addClass("KyeeNext-sidebar-show");
-                            }
+                            "EVENT_FUNC": showMask
                         }]
                     }
 
@@ -98,6 +95,10 @@ jQuery(function ($) {
                                 console.log("mouseout");
                             }
                         }],
+                        "KYEE_DATA":{
+                            "data1":"123",
+                            "data2":"456"
+                        },
                         "CHILDREN_ITEMS": [ //子节点数据
                             {
                                 "MENU_ID": 11, //菜单唯一标识
@@ -131,7 +132,7 @@ jQuery(function ($) {
                                 "MENU_TYPE": "2", //0、1、2分别代表跟节点、二级节点、三级节点
                                 "MENU_ICON": "", //左侧字体图标
                                 "ROUTER_LINK": "/app/business/home", //点击跳转路径
-                                "AUTO_CHECKED": false, //是否默认选中
+                                "AUTO_CHECKED": true, //是否默认选中
                                 "CHILDREN_ITEMS": [ //子节点数据
 
                                 ]
@@ -252,7 +253,7 @@ jQuery(function ($) {
                         "MENU_TYPE": "0", //0、1、2分别代表跟节点、二级节点、三级节点
                         "MENU_ICON": "kyeenext-icon-save", //左侧字体图标
                         "ROUTER_LINK": "/app/business/home", //点击跳转路径
-                        "AUTO_CHECKED": true, //是否默认选中
+                        "AUTO_CHECKED": false, //是否默认选中
                     }
                 ],
 
@@ -292,7 +293,7 @@ jQuery(function ($) {
                     ]
                 }
             }
-            KYEE.init(KYEE_NEXT_MAIN_CONFIG);
+            KYEE_MAIN.init(KYEE_NEXT_MAIN_CONFIG);
         }, 500);
     }
 
@@ -300,4 +301,9 @@ jQuery(function ($) {
     jQuery(document).ready(function () {
         setMainConfig();
     })
+
+    function showMask(){
+        $(".KyeeNext-ui-sidebar-mask").fadeIn(200);
+        $(".KyeeNext-sidebar-right").removeClass("KyeeNext-sidebar-hidden").addClass("KyeeNext-sidebar-show");
+    }
 })

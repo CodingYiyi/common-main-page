@@ -1,6 +1,6 @@
 var $K = jQuery.noConflict(); // 自定义快捷方式，以防与其他库冲突
 
-var KYEE = (function () {
+var KYEE_MAIN = (function () {
     var visitedItemsList = []; // 已访问链接列表
     var KYEE_NEXT_MAIN_CONFIG; // 页面配置项
 
@@ -81,6 +81,8 @@ var KYEE = (function () {
             itemHTML.children(".KyeeNext-item-icon-left").addClass(item.MENU_ICON); // 设置一级菜单左侧图标
             itemHTML.children("span")[0].innerHTML = item.MENU_LABEL; // 设置一级菜单名称
             item.ROUTER_LINK && itemHTML.addClass("kyee-router-link-flag"); // 设置点击是否跳转标识
+            item.ROUTER_LINK && itemHTML.attr("data-router-link", item.ROUTER_LINK); // 设置点击跳转路由
+            item.KYEE_DATA && itemHTML.attr(item.KYEE_DATA); // 设置业务额外属性
             item.AUTO_CHECKED && (activeTargetId = itemIdPrefix + item.MENU_ID);
             if (item.CHILDREN_ITEMS && item.CHILDREN_ITEMS.length > 0) { // 遍历二级菜单
                 var childItemHTMLStr = "";
@@ -89,6 +91,8 @@ var KYEE = (function () {
                     var childItemHTML = childTempHTML.clone().attr("id", itemIdPrefix + childItem.MENU_ID); // 获取二级菜单模板
                     childItemHTML.children("span")[0].innerHTML = childItem.MENU_LABEL; // 设置二级菜单的名称
                     childItem.ROUTER_LINK && childItemHTML.addClass("kyee-router-link-flag"); // 设置点击是否跳转标识
+                    childItem.ROUTER_LINK && childItemHTML.attr("data-router-link", childItem.ROUTER_LINK); // 设置点击跳转路由
+                    childItem.KYEE_DATA && childItemHTML.attr(childItem.KYEE_DATA); // 设置业务额外属性
                     childItem.AUTO_CHECKED && (activeTargetId = itemIdPrefix + childItem.MENU_ID);
                     if (childItem.CHILDREN_ITEMS && childItem.CHILDREN_ITEMS.length > 0) { // 遍历三级菜单
                         var grandchildItemHTMLStr = "";
@@ -97,6 +101,8 @@ var KYEE = (function () {
                             var grandchildItem = childItem.CHILDREN_ITEMS[k];
                             var grandchildItemHTML = grandchildTempHTML.clone().attr("id", itemIdPrefix + grandchildItem.MENU_ID); // 获取三级菜单模板
                             grandchildItem.ROUTER_LINK && grandchildItemHTML.addClass("kyee-router-link-flag"); // 设置点击是否跳转标识
+                            grandchildItem.ROUTER_LINK && grandchildItemHTML.attr("data-router-link", grandchildItem.ROUTER_LINK); // 设置点击跳转路由
+                            grandchildItem.KYEE_DATA && grandchildItemHTML.attr(grandchildItem.KYEE_DATA); // 设置业务额外属性
                             grandchildItemHTML[0].innerHTML = grandchildItem.MENU_LABEL; // 设置三级菜单名称
                             grandchildItemHTMLStr += grandchildItemHTML[0].outerHTML; // 拼接三级菜单字符串 结果："<li>...</li><li>...</li>"
                             grandchildItem.AUTO_CHECKED && (activeTargetId = itemIdPrefix + grandchildItem.MENU_ID);
@@ -112,7 +118,7 @@ var KYEE = (function () {
             htmlStr += '<li class="KyeeNext-item-level-0-folded">' + itemHTML[0].outerHTML + itemHTMLStr + '</li>'; // 拼接当前一级菜单
         }
         $K(htmlStr).appendTo($K("#" + parentID)); // 将拼接完的菜单插入到目标容器中
-        expandedToMenuItem(activeTargetId); // 自动展开目标菜单
+        activeTargetId && expandedToMenuItem(activeTargetId); // 自动展开目标菜单
     }
 
     /**
@@ -234,10 +240,11 @@ var KYEE = (function () {
     })
 
     /**
-     * 设置左侧菜单栏中的target为选中状态
+     * 设置左侧菜单栏中的target为选中状态 && 路由跳转、设置iframe的src属性值
      * @param {*} target 目标DOM节点
      */
     function setMenuItemActive(target) {
+        // 设置左侧菜单栏中的target为选中状态
         $K(".KyeeNext-item-level-1-2-active").removeClass("KyeeNext-item-level-1-2-active");
         $K(".KyeeNext-item-level-0-active").removeClass("KyeeNext-item-level-0-active");
         if (target.hasClass("KyeeNext-item-level-0")) {
@@ -245,29 +252,42 @@ var KYEE = (function () {
         } else {
             target.addClass("KyeeNext-item-level-1-2-active");
         }
+        // 路由跳转、设置iframe的src属性值
+        $K("#KyeeNext-workspace-iframe").attr("src", target.attr("data-router-link"));
     }
 
     /**
      * 自动展开目标菜单
      * @param {*} targetId 目标菜单
      */
-    function expandedToMenuItem(targetId){
-        var target=$K("#"+targetId);
-        if(target.hasClass("KyeeNext-item-level-0")){
+    function expandedToMenuItem(targetId) {
+        var target = $K("#" + targetId);
+        $K(".KyeeNext-item-level-1-2-active").removeClass("KyeeNext-item-level-1-2-active");
+        $K(".KyeeNext-item-level-0-active").removeClass("KyeeNext-item-level-0-active");
+        $K(".KyeeNext-menu-items-box").children(".KyeeNext-item-level-0-expanded").each(function () { // 折叠其他已展开的一级菜单
+            if (this != target.parents("li[class^='KyeeNext-item-level-0-']")[0]) {
+                $K(this).removeClass("KyeeNext-item-level-0-expanded").addClass("KyeeNext-item-level-0-folded");
+                if ($K(this).children("ul").length > 0) {
+                    $K(this).children("ul").removeClass("KyeeNext-submenu-show").addClass("KyeeNext-submenu-hide");
+                    $K(this).children(".KyeeNext-item-level-0").children(".KyeeNext-item-icon-right").removeClass("KyeeNext-item-icon-right-expanded").addClass("KyeeNext-item-icon-right-folded");
+                }
+            }
+        });
+        if (target.hasClass("KyeeNext-item-level-0")) {
             target.addClass("KyeeNext-item-level-0-active");
-        }else if(target.hasClass("KyeeNext-item-level-1")){
-            target.parents(".KyeeNext-item-level-0-folded").removeClass("KyeeNext-item-level-0-folded").addClass("KyeeNext-item-level-0-expanded");
+        } else if (target.hasClass("KyeeNext-item-level-1")) {
+            target.parents(".KyeeNext-item-level-0-folded").removeClass("KyeeNext-item-level-0-folded").addClass("KyeeNext-item-level-0-expanded").find("i.KyeeNext-item-icon-right").removeClass("KyeeNext-item-icon-right-folded").addClass("KyeeNext-item-icon-right-expanded");
             target.parents(".KyeeNext-submenu-hide").removeClass("KyeeNext-submenu-hide").addClass("KyeeNext-submenu-show");
             target.addClass("KyeeNext-item-level-1-2-active");
-        }else if(target.hasClass("KyeeNext-item-level-2")){
-            target.parents(".KyeeNext-item-level-0-folded").removeClass("KyeeNext-item-level-0-folded").addClass("KyeeNext-item-level-0-expanded");
+        } else if (target.hasClass("KyeeNext-item-level-2")) {
+            target.parents(".KyeeNext-item-level-0-folded").removeClass("KyeeNext-item-level-0-folded").addClass("KyeeNext-item-level-0-expanded").find("i.KyeeNext-item-icon-right").removeClass("KyeeNext-item-icon-right-folded").addClass("KyeeNext-item-icon-right-expanded");
             target.parents(".KyeeNext-submenu-hide").removeClass("KyeeNext-submenu-hide").addClass("KyeeNext-submenu-show");
             target.parent().prev().children("i").removeClass("kyeenext-icon-add").addClass("kyeenext-icon-reduce");
             target.addClass("KyeeNext-item-level-1-2-active");
         }
         setItemToVisitedItems({
             "MENU_ID": target.attr("id").substring(19),
-            "MENU_LABEL": target.children("span")[0]?target.children("span")[0].innerHTML:target[0].innerHTML
+            "MENU_LABEL": target.children("span")[0] ? target.children("span")[0].innerHTML : target[0].innerHTML
         });
     }
 
@@ -276,7 +296,7 @@ var KYEE = (function () {
      * @param {*} val 需要插入到已访问列表中的对象
      */
     function setItemToVisitedItems(val) {
-        if(!KYEE_NEXT_MAIN_CONFIG.SHOW_RECENT_FUNC){
+        if (!KYEE_NEXT_MAIN_CONFIG.SHOW_RECENT_FUNC) {
             return;
         }
         if (findArray(visitedItemsList, {
@@ -387,15 +407,10 @@ var KYEE = (function () {
 
     // 已访问链接导航栏列表项目点击事件
     $K("#KyeeNext-visited-items").on("click", "li", function () {
-        if (!$K(this).hasClass("KyeeNext-active-item")) { // 设置活跃对象
-            $K(this).parent().children("li").removeClass("KyeeNext-active-item");
-            $K(this).addClass("KyeeNext-active-item");
-        }
         var id = $K(this).attr("id").substring(22);
-        alignToElement($K("#KyeeNext-visited-item-" + id)); // 设置活跃对象完全可见
-        var targetId = "#KyeeNext-menu-item-" + id;
-        if (!$K(targetId).hasClass("KyeeNext-item-level-1-2-active")) {
-            setMenuItemActive($K(targetId)); // 设置活跃对象对应的左侧菜单的选中（active）状态
+        var targetId = "KyeeNext-menu-item-" + id;
+        if (!$K("#" + targetId).hasClass("KyeeNext-item-level-1-2-active")) {
+            expandedToMenuItem(targetId); // 展开左侧相应菜单
         }
     })
     // 已访问链接导航栏列表项目关闭按钮点击事件
@@ -467,4 +482,5 @@ var KYEE = (function () {
     return {
         init: initPage
     }
+
 })();

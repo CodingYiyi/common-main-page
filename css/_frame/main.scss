@@ -54,11 +54,12 @@ body {
     padding: 0;
     overflow-x: hidden;
     overflow-y: auto;
-    font-family: "Microsoft YaHei",helvetica, arial, verdana, sans-serif;
-    font-weight: normal;
-    -webkit-font-smoothing: antialiased;
-    font-size: 14px;
+    font-family: "Microsoft YaHei",helvetica, arial, verdana, sans-serif !important;
+    font-weight: normal !important;
+    -webkit-font-smoothing: antialiased !important;
+    font-size: 14px !important;
     background-color: $bodyBgColor;
+    box-sizing: border-box !important;
     animation: pageEnter .45s cubic-bezier(0.455, 0.03, 0.515, 0.955);
 }
 @keyframes pageEnter {
@@ -133,8 +134,7 @@ body {
         flex: none;
         width: 220px;
         height: 100%;
-        overflow-x: hidden;
-        overflow-y: auto;
+        overflow: hidden;
         -webkit-transition: width .2s linear;
         -moz-transition: width .2s linear;
         -o-transition: width .2s linear;
@@ -172,6 +172,7 @@ body {
             width: 220px;
             background-color: $themeColor;
             color: $menuFontDefaultColor;
+            overflow-y: auto;
             .KyeeNext-item-level-0-active{
                 color: $menuFontActiveColor !important;
                 border-left-color: $menuActiveBorderLeftColor !important;
@@ -333,12 +334,14 @@ body {
         
         .KyeeNext-visited-nav-box{
             position: relative;
+            box-sizing: border-box;
             height: 40px;
             border-bottom: 1px solid $visitedItemDefaultBorderColor;
             >span{
                 display: inline-block;
-                width: 18px;
-                line-height: 40px;
+                box-sizing: border-box;
+                width: 20px;
+                line-height: 39px;
                 text-align: center;
                 color: #BEBEBE;
                 border-right: 1px solid $visitedItemDefaultBorderColor;
@@ -373,7 +376,7 @@ body {
                 }
                 li{
                     box-sizing: border-box;
-                    line-height: 37px;
+                    line-height: 36px;
                     font-size: 13px;
                     padding: 0 16px;
                     border-top: 3px solid $visitedItemDefaultBgColor;
@@ -493,11 +496,11 @@ body {
     // 业务内容区样式
     .KyeeNext-main-body-box{
         position: absolute;
-        top: 111px;
+        top: 110px;
         bottom: 0;
         right: 0;
         left: 0;
-        overflow: auto;
+        overflow: hidden;
     }
     .KyeeNext-hide-recent-func-tabbar{
         top: 70px !important;
