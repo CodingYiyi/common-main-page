@@ -153,6 +153,7 @@ body {
     transition: width .2s linear;
     -moz-transform: translateZ(0) scale(1, 1);
     -webkit-transform: translateZ(0) scale(1, 1);
+    transform: translateZ(0) scale(1, 1);
     z-index: 3; }
     .KyeeNext-body .KyeeNext-aside-box .KyeeNext-logo-box {
       display: flex;
@@ -488,6 +489,7 @@ body {
       -webkit-transition: width .2s linear;
       transition: width .2s linear;
       -webkit-transform: translateZ(0) scale(1, 1);
+      transform: translateZ(0) scale(1, 1);
       overflow: hidden;
       color: #C0C4CA;
       border: 2px #DCE0E0 solid;

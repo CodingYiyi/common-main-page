@@ -289,6 +289,8 @@ var KYEE_MAIN = (function () {
             "MENU_ID": target.attr("id").substring(19),
             "MENU_LABEL": target.children("span")[0] ? target.children("span")[0].innerHTML : target[0].innerHTML
         });
+        // 路由跳转、设置iframe的src属性值
+        $K("#KyeeNext-workspace-iframe").attr("src", target.attr("data-router-link"));
     }
 
     /**
@@ -328,13 +330,13 @@ var KYEE_MAIN = (function () {
             if (index == visitedItemsList.length - 1 && visitedItemsList.length > 1) { // 若为最后一个tab页，则前一个tab页获焦
                 $K("#KyeeNext-visited-item-" + visitedItemsList[index - 1].MENU_ID).addClass("KyeeNext-active-item");
                 target = $K("#KyeeNext-menu-item-" + visitedItemsList[index - 1].MENU_ID);
-                setMenuItemActive(target);
+                expandedToMenuItem(target.attr("id"));
             } else if (index == 0 && visitedItemsList.length == 1) { // 若只有一个tab页，清除侧边栏相应菜单的选中样式
                 $K(".KyeeNext-item-level-1-2-active").removeClass("KyeeNext-item-level-1-2-active");
             } else if (index < visitedItemsList.length - 1) { // 若删除的tab页为中间的某一项，则后一个tab获焦
                 $K("#KyeeNext-visited-item-" + visitedItemsList[index + 1].MENU_ID).addClass("KyeeNext-active-item");
                 target = $K("#KyeeNext-menu-item-" + visitedItemsList[index + 1].MENU_ID);
-                setMenuItemActive(target);
+                expandedToMenuItem(target.attr("id"));
             }
         } else {
             target = $K("#KyeeNext-visited-items>.KyeeNext-active-item"); // 若被删除对象非当前活跃对象，则活跃对象不变
@@ -480,7 +482,8 @@ var KYEE_MAIN = (function () {
     }
 
     return {
-        init: initPage
+        init: initPage,
+        expandedTarget: expandedToMenuItem
     }
 
 })();
