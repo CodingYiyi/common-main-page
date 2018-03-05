@@ -43,7 +43,7 @@ jQuery(function ($) {
                         "EVENT_FUNCS": [{
                             "EVENT_NAME": "click",
                             "EVENT_FUNC": function () {
-                                console.log("click");
+                                alert("click");
                             }
                         }, {
                             "EVENT_NAME": "mouseout",
@@ -84,20 +84,10 @@ jQuery(function ($) {
                         "ROUTER_LINK": "", //点击跳转路径
                         "AUTO_CHECKED": false, //是否默认选中
                         "BIND_FUNC": false, // 是否绑定事件
-                        "EVENT_FUNCS": [{
-                            "EVENT_NAME": "click",
-                            "EVENT_FUNC": function () {
-                                console.log("click");
-                            }
-                        }, {
-                            "EVENT_NAME": "mouseout",
-                            "EVENT_FUNC": function () {
-                                console.log("mouseout");
-                            }
-                        }],
-                        "KYEE_DATA":{
-                            "data1":"123",
-                            "data2":"456"
+                        "EVENT_FUNCS": [], // 绑定事件列表
+                        "KYEE_DATA": {
+                            "data1": "123",
+                            "data2": "456"
                         },
                         "CHILDREN_ITEMS": [ //子节点数据
                             {
@@ -133,6 +123,18 @@ jQuery(function ($) {
                                 "MENU_ICON": "", //左侧字体图标
                                 "ROUTER_LINK": "/app/business/home", //点击跳转路径
                                 "AUTO_CHECKED": true, //是否默认选中
+                                "BIND_FUNC": true, // 是否绑定事件
+                                "EVENT_FUNCS": [{
+                                    "EVENT_NAME": "click",
+                                    "EVENT_FUNC": function () {
+                                        console.log("click");
+                                    }
+                                }, {
+                                    "EVENT_NAME": "mouseout",
+                                    "EVENT_FUNC": function () {
+                                        console.log("mouseout");
+                                    }
+                                }],
                                 "CHILDREN_ITEMS": [ //子节点数据
 
                                 ]
@@ -169,7 +171,14 @@ jQuery(function ($) {
                                         "MENU_TYPE": "2", //0、1、2分别代表跟节点、二级节点、三级节点
                                         "MENU_ICON": "", //左侧字体图标
                                         "ROUTER_LINK": "/app/business/home", //点击跳转路径
-                                        "AUTO_CHECKED": true, //是否默认选中
+                                        "AUTO_CHECKED": false, //是否默认选中
+                                        "BIND_FUNC": true, // 是否绑定事件
+                                        "EVENT_FUNCS": [{
+                                            "EVENT_NAME": "click",
+                                            "EVENT_FUNC": function () {
+                                                alert("click");
+                                            }
+                                        }],
                                     },
                                     {
                                         "MENU_ID": 212, //菜单唯一标识
@@ -254,6 +263,18 @@ jQuery(function ($) {
                         "MENU_ICON": "kyeenext-icon-save", //左侧字体图标
                         "ROUTER_LINK": "/app/business/home", //点击跳转路径
                         "AUTO_CHECKED": false, //是否默认选中
+                        "BIND_FUNC": true, // 是否绑定事件
+                        "EVENT_FUNCS": [{
+                            "EVENT_NAME": "click",
+                            "EVENT_FUNC": function () {
+                                console.log("click");
+                            }
+                        }, {
+                            "EVENT_NAME": "mouseout",
+                            "EVENT_FUNC": function () {
+                                console.log("mouseout");
+                            }
+                        }]
                     }
                 ],
 
@@ -262,12 +283,22 @@ jQuery(function ($) {
                     "SYS_LIST": [{
                             "SYS_ID": "1",
                             "SYS_ICON": "kyeenext-icon-framework",
-                            "SYS_LABEL": "电子报销平台"
+                            "SYS_LABEL": "电子报销平台",
+                            "SYS_HREF": "www.baidu.com",
+                            "BIND_FUNC": true,
+                            "EVENT_FUNCS": [{
+                                "EVENT_NAME": "click",
+                                "EVENT_FUNC": function () {
+                                    alert("href");
+                                }
+                            }]
                         },
                         {
                             "SYS_ID": "2",
                             "SYS_ICON": "kyeenext-icon-server",
-                            "SYS_LABEL": "人力资源管理系统"
+                            "SYS_LABEL": "人力资源管理系统",
+                            "SYS_HREF": "http://www.qq.com",
+                            "BIND_FUNC": false
                         }
                     ]
                 },
@@ -302,7 +333,7 @@ jQuery(function ($) {
         setMainConfig();
     })
 
-    function showMask(){
+    function showMask() {
         $(".KyeeNext-ui-sidebar-mask").fadeIn(200);
         $(".KyeeNext-sidebar-right").removeClass("KyeeNext-sidebar-hidden").addClass("KyeeNext-sidebar-show");
     }

@@ -45,13 +45,7 @@ var KYEE_MAIN = (function () {
             var item = KYEE_NEXT_MAIN_CONFIG.TOOL_BARS[i];
             if (!item.USE_TEMPLATE) {
                 var itemHTML = templateHTML.clone().attr("id", itemIdPrefix + item.TOOL_ID).removeAttr("style");
-                if (item.BIND_FUNC) { // 指定元素绑定事件
-                    for (var x = 0, y = item.EVENT_FUNCS.length; x < y; x++) {
-                        $K("#KyeeNext-func-items-box").on(item.EVENT_FUNCS[x].EVENT_NAME, "#" + (itemIdPrefix + item.TOOL_ID), item.EVENT_FUNCS[x].EVENT_FUNC);
-                    }
-                } else if (item.ROUTER_LINK) {
-
-                }
+                item.BIND_FUNC && bindFuncToTarget("KyeeNext-func-items-box", itemIdPrefix + item.TOOL_ID, item.EVENT_FUNCS);
                 itemHTML.children("i").addClass(item.TOOL_ICON);
                 itemHTML.children("span")[0].innerHTML = item.TOOL_LABEL;
                 itemsHTML += itemHTML[0].outerHTML;
@@ -80,8 +74,12 @@ var KYEE_MAIN = (function () {
             var itemHTML = templateHTML.clone().attr("id", itemIdPrefix + item.MENU_ID); // 获取一级菜单模板
             itemHTML.children(".KyeeNext-item-icon-left").addClass(item.MENU_ICON); // 设置一级菜单左侧图标
             itemHTML.children("span")[0].innerHTML = item.MENU_LABEL; // 设置一级菜单名称
-            item.ROUTER_LINK && itemHTML.addClass("kyee-router-link-flag"); // 设置点击是否跳转标识
-            item.ROUTER_LINK && itemHTML.attr("data-router-link", item.ROUTER_LINK); // 设置点击跳转路由
+            if (item.ROUTER_LINK && !item.BIND_FUNC) { // 设置跳转路径且没有绑定额外事件时，框架提供默认的跳转操作；反之由用户绑定的事件处理
+                itemHTML.addClass("kyee-router-link-flag"); // 设置点击是否跳转标识
+                itemHTML.attr("data-router-link", item.ROUTER_LINK); // 设置点击跳转路由
+            } else if (item.BIND_FUNC) { // 绑定事件
+                bindFuncToTarget("KyeeNext-menu-items-box", itemIdPrefix + item.MENU_ID, item.EVENT_FUNCS);
+            }
             item.KYEE_DATA && itemHTML.attr(item.KYEE_DATA); // 设置业务额外属性
             item.AUTO_CHECKED && (activeTargetId = itemIdPrefix + item.MENU_ID);
             if (item.CHILDREN_ITEMS && item.CHILDREN_ITEMS.length > 0) { // 遍历二级菜单
@@ -90,8 +88,12 @@ var KYEE_MAIN = (function () {
                     var childItem = item.CHILDREN_ITEMS[x];
                     var childItemHTML = childTempHTML.clone().attr("id", itemIdPrefix + childItem.MENU_ID); // 获取二级菜单模板
                     childItemHTML.children("span")[0].innerHTML = childItem.MENU_LABEL; // 设置二级菜单的名称
-                    childItem.ROUTER_LINK && childItemHTML.addClass("kyee-router-link-flag"); // 设置点击是否跳转标识
-                    childItem.ROUTER_LINK && childItemHTML.attr("data-router-link", childItem.ROUTER_LINK); // 设置点击跳转路由
+                    if (childItem.ROUTER_LINK && !childItem.BIND_FUNC) { // 设置跳转路径且没有绑定额外事件时，框架提供默认的跳转操作；反之由用户绑定的事件处理
+                        childItemHTML.addClass("kyee-router-link-flag"); // 设置点击是否跳转标识
+                        childItemHTML.attr("data-router-link", childItem.ROUTER_LINK); // 设置点击跳转路由
+                    } else if (childItem.BIND_FUNC) { // 绑定事件
+                        bindFuncToTarget("KyeeNext-menu-items-box", itemIdPrefix + childItem.MENU_ID, childItem.EVENT_FUNCS);
+                    }
                     childItem.KYEE_DATA && childItemHTML.attr(childItem.KYEE_DATA); // 设置业务额外属性
                     childItem.AUTO_CHECKED && (activeTargetId = itemIdPrefix + childItem.MENU_ID);
                     if (childItem.CHILDREN_ITEMS && childItem.CHILDREN_ITEMS.length > 0) { // 遍历三级菜单
@@ -100,8 +102,12 @@ var KYEE_MAIN = (function () {
                         for (var k = 0, l = childItem.CHILDREN_ITEMS.length; k < l; k++) {
                             var grandchildItem = childItem.CHILDREN_ITEMS[k];
                             var grandchildItemHTML = grandchildTempHTML.clone().attr("id", itemIdPrefix + grandchildItem.MENU_ID); // 获取三级菜单模板
-                            grandchildItem.ROUTER_LINK && grandchildItemHTML.addClass("kyee-router-link-flag"); // 设置点击是否跳转标识
-                            grandchildItem.ROUTER_LINK && grandchildItemHTML.attr("data-router-link", grandchildItem.ROUTER_LINK); // 设置点击跳转路由
+                            if (grandchildItem.ROUTER_LINK && !grandchildItem.BIND_FUNC) { // 设置跳转路径且没有绑定额外事件时，框架提供默认的跳转操作；反之由用户绑定的事件处理
+                                grandchildItemHTML.addClass("kyee-router-link-flag"); // 设置点击是否跳转标识
+                                grandchildItemHTML.attr("data-router-link", grandchildItem.ROUTER_LINK); // 设置点击跳转路由
+                            } else if (grandchildItem.BIND_FUNC) { // 绑定事件
+                                bindFuncToTarget("KyeeNext-menu-items-box", itemIdPrefix + grandchildItem.MENU_ID, grandchildItem.EVENT_FUNCS);
+                            }
                             grandchildItem.KYEE_DATA && grandchildItemHTML.attr(grandchildItem.KYEE_DATA); // 设置业务额外属性
                             grandchildItemHTML[0].innerHTML = grandchildItem.MENU_LABEL; // 设置三级菜单名称
                             grandchildItemHTMLStr += grandchildItemHTML[0].outerHTML; // 拼接三级菜单字符串 结果："<li>...</li><li>...</li>"
@@ -152,6 +158,13 @@ var KYEE_MAIN = (function () {
         for (var i = 0, j = KYEE_NEXT_MAIN_CONFIG.TOGGLE_SYS_CONFIG.SYS_LIST.length; i < j; i++) {
             var item = KYEE_NEXT_MAIN_CONFIG.TOGGLE_SYS_CONFIG.SYS_LIST[i];
             var itemHTML = templateHTML.clone().attr("id", itemIdPrefix + item.SYS_ID).css("display", "block");
+            if (item.BIND_FUNC) {
+                bindFuncToTarget("KyeeNext-toggle-system-items-box", itemIdPrefix + item.SYS_ID, item.EVENT_FUNCS);
+            } else {
+                $K("#KyeeNext-toggle-system-items-box").on("click", "#" + itemIdPrefix + item.SYS_ID, function () {
+                    window.location.href = item.SYS_HREF;
+                })
+            }
             itemHTML.children("i").addClass(item.SYS_ICON);
             itemHTML.children("span")[0].innerHTML = item.SYS_LABEL;
             itemsHTML += itemHTML[0].outerHTML;
@@ -261,7 +274,13 @@ var KYEE_MAIN = (function () {
      * @param {*} targetId 目标菜单
      */
     function expandedToMenuItem(targetId) {
-        var target = $K("#" + targetId);
+        if (targetId instanceof jQuery) {
+            var target = targetId;
+        } else if (typeof targetId == 'string') {
+            var target = $K("#" + targetId);
+        } else {
+            var target = $K(targetId);
+        }
         $K(".KyeeNext-item-level-1-2-active").removeClass("KyeeNext-item-level-1-2-active");
         $K(".KyeeNext-item-level-0-active").removeClass("KyeeNext-item-level-0-active");
         $K(".KyeeNext-menu-items-box").children(".KyeeNext-item-level-0-expanded").each(function () { // 折叠其他已展开的一级菜单
@@ -330,13 +349,13 @@ var KYEE_MAIN = (function () {
             if (index == visitedItemsList.length - 1 && visitedItemsList.length > 1) { // 若为最后一个tab页，则前一个tab页获焦
                 $K("#KyeeNext-visited-item-" + visitedItemsList[index - 1].MENU_ID).addClass("KyeeNext-active-item");
                 target = $K("#KyeeNext-menu-item-" + visitedItemsList[index - 1].MENU_ID);
-                expandedToMenuItem(target.attr("id"));
+                expandedToMenuItem(target);
             } else if (index == 0 && visitedItemsList.length == 1) { // 若只有一个tab页，清除侧边栏相应菜单的选中样式
                 $K(".KyeeNext-item-level-1-2-active").removeClass("KyeeNext-item-level-1-2-active");
             } else if (index < visitedItemsList.length - 1) { // 若删除的tab页为中间的某一项，则后一个tab获焦
                 $K("#KyeeNext-visited-item-" + visitedItemsList[index + 1].MENU_ID).addClass("KyeeNext-active-item");
                 target = $K("#KyeeNext-menu-item-" + visitedItemsList[index + 1].MENU_ID);
-                expandedToMenuItem(target.attr("id"));
+                expandedToMenuItem(target);
             }
         } else {
             target = $K("#KyeeNext-visited-items>.KyeeNext-active-item"); // 若被删除对象非当前活跃对象，则活跃对象不变
@@ -478,6 +497,20 @@ var KYEE_MAIN = (function () {
             target.removeClass(className1).addClass(className2);
         } else if (target.hasClass(className2)) {
             target.removeClass(className2).addClass(className1);
+        }
+    }
+
+    /**
+     * 为目标DOM节点绑定事件
+     * @param {*} containerId 父容器ID
+     * @param {*} targetId 目标对象ID
+     * @param {*} funcs 事件列表
+     */
+    function bindFuncToTarget(containerId, targetId, funcs) {
+        if (funcs && funcs.length > 0) {
+            for (var i = 0, j = funcs.length; i < j; i++) {
+                $K("#" + containerId).on(funcs[i].EVENT_NAME, "#" + targetId, funcs[i].EVENT_FUNC);
+            }
         }
     }
 
