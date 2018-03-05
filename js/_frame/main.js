@@ -1,5 +1,3 @@
-var $K = jQuery.noConflict(); // 自定义快捷方式，以防与其他库冲突
-
 var KYEE_MAIN = (function () {
     var visitedItemsList = []; // 已访问链接列表
     var KYEE_NEXT_MAIN_CONFIG; // 页面配置项
@@ -11,25 +9,25 @@ var KYEE_MAIN = (function () {
         cloneAppendToolBars("KyeeNext-func-item-temp", "KyeeNext-func-items-box", "KyeeNext-func-item-"); // 页面顶部工具栏
         cloneAppendMenuItems("KyeeNext-menu-item-temp", "KyeeNext-menu-items-box", "KyeeNext-menu-item-"); // 页面左侧导航栏
         if (KYEE_NEXT_MAIN_CONFIG.CUSTOMER_SERVICES_CONFIG.SHOW_CUSTOMER_SERVICES && KYEE_NEXT_MAIN_CONFIG.CUSTOMER_SERVICES_CONFIG.CUSTOMER_SERVICES.length > 0) { // 页面右下角客服栏显示
-            $K("#KyeeNext-customer-services-box").fadeIn(300);
+            $("#KyeeNext-customer-services-box").fadeIn(300);
             cloneAppendCustomerServices("KyeeNext-customer-services-item-temp", "KyeeNext-customer-services-box", "KyeeNext-service-itemd-");
         }
         if (KYEE_NEXT_MAIN_CONFIG.TOGGLE_SYS_CONFIG.CAN_TOGGLE_SYS && KYEE_NEXT_MAIN_CONFIG.TOGGLE_SYS_CONFIG.SYS_LIST.length > 0) { // 可切换系统配置区显示
-            $K(".KyeeNext-system-name-box>i").show();
+            $(".KyeeNext-system-name-box>i").show();
             cloneAppendSysList("KyeeNext-toggle-system-temp", "KyeeNext-toggle-system-items-box", "KyeeNext-system-item-");
         }
         if (KYEE_NEXT_MAIN_CONFIG.SHOW_RECENT_FUNC) { // 控制已访问功能区tab页显示
-            $K(".KyeeNext-visited-nav-box").fadeIn(300);
-            $K(".KyeeNext-main-body-box").removeClass("KyeeNext-hide-recent-func-tabbar");
+            $(".KyeeNext-visited-nav-box").fadeIn(300);
+            $(".KyeeNext-main-body-box").removeClass("KyeeNext-hide-recent-func-tabbar");
         }
     }
 
     // 页面基本配置
     function basicConfig() {
-        $K("title")[0].innerHTML = KYEE_NEXT_MAIN_CONFIG.PRO_TITLE; // 设置页面标题
-        $K("link[rel='icon']").attr("href", KYEE_NEXT_MAIN_CONFIG.PRO_FAVICON); // 设置页面收藏夹图标
-        $K("#KyeeNext-pro-logo").attr("src", KYEE_NEXT_MAIN_CONFIG.PRO_LOGO); // 设置项目logo
-        $K("#KyeeNext-system-name")[0].innerHTML = KYEE_NEXT_MAIN_CONFIG.PRO_NAME; // 设置项目名称
+        $("title")[0].innerHTML = KYEE_NEXT_MAIN_CONFIG.PRO_TITLE; // 设置页面标题
+        $("link[rel='icon']").attr("href", KYEE_NEXT_MAIN_CONFIG.PRO_FAVICON); // 设置页面收藏夹图标
+        $("#KyeeNext-pro-logo").attr("src", KYEE_NEXT_MAIN_CONFIG.PRO_LOGO); // 设置项目logo
+        $("#KyeeNext-system-name")[0].innerHTML = KYEE_NEXT_MAIN_CONFIG.PRO_NAME; // 设置项目名称
     }
 
     /**
@@ -39,7 +37,7 @@ var KYEE_MAIN = (function () {
      * @param {*} itemIdPrefix 克隆节点ID前缀
      */
     function cloneAppendToolBars(templateID, parentID, itemIdPrefix) {
-        var templateHTML = $K("#" + templateID);
+        var templateHTML = $("#" + templateID);
         var itemsHTML = "";
         for (var i = 0, j = KYEE_NEXT_MAIN_CONFIG.TOOL_BARS.length; i < j; i++) {
             var item = KYEE_NEXT_MAIN_CONFIG.TOOL_BARS[i];
@@ -53,7 +51,7 @@ var KYEE_MAIN = (function () {
                 itemsHTML += item.TEMPLATE;
             }
         }
-        $K(itemsHTML).appendTo($K("#" + parentID));
+        $(itemsHTML).appendTo($("#" + parentID));
     }
 
     /**
@@ -63,9 +61,9 @@ var KYEE_MAIN = (function () {
      * @param {*} itemIdPrefix 克隆节点ID前缀
      */
     function cloneAppendMenuItems(templateID, parentID, itemIdPrefix) {
-        var templateHTML = $K("#" + templateID + " .KyeeNext-item-level-0"); // 一级菜单模板
-        var childTempHTML = $K("#" + templateID + " .KyeeNext-item-level-1"); // 二级菜单模板
-        var grandchildTempHTML = $K("#" + templateID + " .KyeeNext-item-level-2"); // 三级菜单模板
+        var templateHTML = $("#" + templateID + " .KyeeNext-item-level-0"); // 一级菜单模板
+        var childTempHTML = $("#" + templateID + " .KyeeNext-item-level-1"); // 二级菜单模板
+        var grandchildTempHTML = $("#" + templateID + " .KyeeNext-item-level-2"); // 三级菜单模板
         var htmlStr = ""; // 最终需要插入到DOM树中的DOM节点字符串
         var activeTargetId = ""; // 默认选中的节点ID
         for (var i = 0, j = KYEE_NEXT_MAIN_CONFIG.ASIDE_MENU_ITEMS.length; i < j; i++) { // 遍历一级菜单
@@ -123,7 +121,7 @@ var KYEE_MAIN = (function () {
             }
             htmlStr += '<li class="KyeeNext-item-level-0-folded">' + itemHTML[0].outerHTML + itemHTMLStr + '</li>'; // 拼接当前一级菜单
         }
-        $K(htmlStr).appendTo($K("#" + parentID)); // 将拼接完的菜单插入到目标容器中
+        $(htmlStr).appendTo($("#" + parentID)); // 将拼接完的菜单插入到目标容器中
         activeTargetId && expandedToMenuItem(activeTargetId); // 自动展开目标菜单
     }
 
@@ -134,7 +132,7 @@ var KYEE_MAIN = (function () {
      * @param {*} itemIdPrefix 克隆节点ID前缀
      */
     function cloneAppendCustomerServices(templateID, parentID, itemIdPrefix) {
-        var templateHTML = $K("#" + templateID);
+        var templateHTML = $("#" + templateID);
         var itemsHTML = "";
         for (var i = 0, j = KYEE_NEXT_MAIN_CONFIG.CUSTOMER_SERVICES_CONFIG.CUSTOMER_SERVICES.length; i < j; i++) {
             var item = KYEE_NEXT_MAIN_CONFIG.CUSTOMER_SERVICES_CONFIG.CUSTOMER_SERVICES[i];
@@ -143,7 +141,7 @@ var KYEE_MAIN = (function () {
             itemHTML.children("i").addClass(item.ITEM_ICON);
             itemsHTML += itemHTML[0].outerHTML;
         }
-        $K(itemsHTML).insertBefore("#KyeeNext-customer-services-toggle-btn");
+        $(itemsHTML).insertBefore("#KyeeNext-customer-services-toggle-btn");
     }
 
     /**
@@ -153,7 +151,7 @@ var KYEE_MAIN = (function () {
      * @param {*} itemIdPrefix 克隆节点ID前缀
      */
     function cloneAppendSysList(templateID, parentID, itemIdPrefix) {
-        var templateHTML = $K("#" + templateID);
+        var templateHTML = $("#" + templateID);
         var itemsHTML = "";
         for (var i = 0, j = KYEE_NEXT_MAIN_CONFIG.TOGGLE_SYS_CONFIG.SYS_LIST.length; i < j; i++) {
             var item = KYEE_NEXT_MAIN_CONFIG.TOGGLE_SYS_CONFIG.SYS_LIST[i];
@@ -161,7 +159,7 @@ var KYEE_MAIN = (function () {
             if (item.BIND_FUNC) {
                 bindFuncToTarget("KyeeNext-toggle-system-items-box", itemIdPrefix + item.SYS_ID, item.EVENT_FUNCS);
             } else {
-                $K("#KyeeNext-toggle-system-items-box").on("click", "#" + itemIdPrefix + item.SYS_ID, function () {
+                $("#KyeeNext-toggle-system-items-box").on("click", "#" + itemIdPrefix + item.SYS_ID, function () {
                     window.location.href = item.SYS_HREF;
                 })
             }
@@ -169,86 +167,86 @@ var KYEE_MAIN = (function () {
             itemHTML.children("span")[0].innerHTML = item.SYS_LABEL;
             itemsHTML += itemHTML[0].outerHTML;
         }
-        $K(itemsHTML).appendTo("#" + parentID);
-        $K(".KyeeNext-system-name-box").on("mouseenter", function () {
-            $K(".KyeeNext-toggle-system-box").delay(600).fadeIn(100);
+        $(itemsHTML).appendTo("#" + parentID);
+        $(".KyeeNext-system-name-box").on("mouseenter", function () {
+            $(".KyeeNext-toggle-system-box").delay(600).fadeIn(100);
         });
-        $K(".KyeeNext-system-name-box").on("mouseleave", function () {
-            $K(".KyeeNext-toggle-system-box").clearQueue();;
+        $(".KyeeNext-system-name-box").on("mouseleave", function () {
+            $(".KyeeNext-toggle-system-box").clearQueue();;
         });
-        $K(".KyeeNext-toggle-system-box").on("mouseleave", function () {
-            $K(this).fadeOut(100);
+        $(".KyeeNext-toggle-system-box").on("mouseleave", function () {
+            $(this).fadeOut(100);
         })
     }
 
     // 左上角控制侧边栏固定或悬浮按钮点击事件
-    $K("#KyeeNext-toggle-aside").on("click", function () {
+    $("#KyeeNext-toggle-aside").on("click", function () {
         toogleAsideState();
     })
 
     // 切换侧边栏的固定（220px）、悬浮（70px）状态
     function toogleAsideState() {
-        $K(".KyeeNext-aside-box").toggleClass("KyeeNext-aside-folded"); // 侧边栏宽度 220px与70px 来回切换。
-        KyeeToggleClass($K("#KyeeNext-toggle-aside"), "kyeenext-icon-menu-s", "kyeenext-icon-menu");
-        $K(".KyeeNext-aside-box").off("mouseout").one("mouseout", function () { // 鼠标离开时触发（鼠标未离开，即使点击也不会触发）
-            if ($K(".KyeeNext-aside-box").hasClass("KyeeNext-aside-folded")) { // 由固定切换至悬浮状态时，切换右侧主体内容区域的样式（flex布局切换成absolute模式）、侧边栏添加hover效果。
-                KyeeToggleClass($K(".KyeeNext-main-box"), "KyeeNext-main-box-fixed", "KyeeNext-main-box-dynamic");
-                $K(".KyeeNext-aside-box").addClass("KyeeNext-aside-box-hover");
+        $(".KyeeNext-aside-box").toggleClass("KyeeNext-aside-folded"); // 侧边栏宽度 220px与70px 来回切换。
+        KyeeToggleClass($("#KyeeNext-toggle-aside"), "kyeenext-icon-menu-s", "kyeenext-icon-menu");
+        $(".KyeeNext-aside-box").off("mouseout").one("mouseout", function () { // 鼠标离开时触发（鼠标未离开，即使点击也不会触发）
+            if ($(".KyeeNext-aside-box").hasClass("KyeeNext-aside-folded")) { // 由固定切换至悬浮状态时，切换右侧主体内容区域的样式（flex布局切换成absolute模式）、侧边栏添加hover效果。
+                KyeeToggleClass($(".KyeeNext-main-box"), "KyeeNext-main-box-fixed", "KyeeNext-main-box-dynamic");
+                $(".KyeeNext-aside-box").addClass("KyeeNext-aside-box-hover");
             }
         })
-        if ($K(".KyeeNext-aside-box").hasClass("KyeeNext-aside-box-hover")) { // 判断是否真的切换到了悬浮状态（只有上述鼠标离开了，才算真正切换至悬浮状态）
-            KyeeToggleClass($K(".KyeeNext-main-box"), "KyeeNext-main-box-fixed", "KyeeNext-main-box-dynamic"); // 若目前状态为悬浮状态，则切换至固定状态。
-            $K(".KyeeNext-aside-box").removeClass("KyeeNext-aside-box-hover");
+        if ($(".KyeeNext-aside-box").hasClass("KyeeNext-aside-box-hover")) { // 判断是否真的切换到了悬浮状态（只有上述鼠标离开了，才算真正切换至悬浮状态）
+            KyeeToggleClass($(".KyeeNext-main-box"), "KyeeNext-main-box-fixed", "KyeeNext-main-box-dynamic"); // 若目前状态为悬浮状态，则切换至固定状态。
+            $(".KyeeNext-aside-box").removeClass("KyeeNext-aside-box-hover");
         }
     }
 
     // 一级菜单点击事件
-    $K("#KyeeNext-menu-items-box").on("click", ".KyeeNext-item-level-0", function () {
+    $("#KyeeNext-menu-items-box").on("click", ".KyeeNext-item-level-0", function () {
         var me = this;
-        $K(".KyeeNext-menu-items-box").children(".KyeeNext-item-level-0-expanded").each(function () { // 折叠其他已展开的一级菜单
-            if ($K(me).parent()[0] != this) {
-                $K(this).removeClass("KyeeNext-item-level-0-expanded").addClass("KyeeNext-item-level-0-folded");
-                if ($K(this).children("ul").length > 0) {
-                    $K(this).children("ul").removeClass("KyeeNext-submenu-show").addClass("KyeeNext-submenu-hide");
-                    $K(this).children(".KyeeNext-item-level-0").children(".KyeeNext-item-icon-right").removeClass("KyeeNext-item-icon-right-expanded").addClass("KyeeNext-item-icon-right-folded");
+        $(".KyeeNext-menu-items-box").children(".KyeeNext-item-level-0-expanded").each(function () { // 折叠其他已展开的一级菜单
+            if ($(me).parent()[0] != this) {
+                $(this).removeClass("KyeeNext-item-level-0-expanded").addClass("KyeeNext-item-level-0-folded");
+                if ($(this).children("ul").length > 0) {
+                    $(this).children("ul").removeClass("KyeeNext-submenu-show").addClass("KyeeNext-submenu-hide");
+                    $(this).children(".KyeeNext-item-level-0").children(".KyeeNext-item-icon-right").removeClass("KyeeNext-item-icon-right-expanded").addClass("KyeeNext-item-icon-right-folded");
                 }
             }
         });
-        if ($K(this).parent().children("ul").length > 0) { // 若存在二级菜单，则切换二级菜单展开、折叠状态
-            KyeeToggleClass($K(this).parent(), "KyeeNext-item-level-0-expanded", "KyeeNext-item-level-0-folded"); // 切换一级菜单的展开折叠状态
-            KyeeToggleClass($K(this).parent().children("ul"), "KyeeNext-submenu-show", "KyeeNext-submenu-hide");
-            KyeeToggleClass($K(this).children(".KyeeNext-item-icon-right"), "KyeeNext-item-icon-right-folded", "KyeeNext-item-icon-right-expanded")
+        if ($(this).parent().children("ul").length > 0) { // 若存在二级菜单，则切换二级菜单展开、折叠状态
+            KyeeToggleClass($(this).parent(), "KyeeNext-item-level-0-expanded", "KyeeNext-item-level-0-folded"); // 切换一级菜单的展开折叠状态
+            KyeeToggleClass($(this).parent().children("ul"), "KyeeNext-submenu-show", "KyeeNext-submenu-hide");
+            KyeeToggleClass($(this).children(".KyeeNext-item-icon-right"), "KyeeNext-item-icon-right-folded", "KyeeNext-item-icon-right-expanded")
         }
-        if ($K(this).hasClass("kyee-router-link-flag")) {
+        if ($(this).hasClass("kyee-router-link-flag")) {
             setItemToVisitedItems({ // 若可以跳转，执行跳转操作
-                "MENU_ID": $K(this).attr("id").substring(19),
-                "MENU_LABEL": $K(this).children("span")[0].innerHTML
+                "MENU_ID": $(this).attr("id").substring(19),
+                "MENU_LABEL": $(this).children("span")[0].innerHTML
             });
-            setMenuItemActive($K(this)); // 设置菜单选中（active）状态
+            setMenuItemActive($(this)); // 设置菜单选中（active）状态
         }
     })
     // 二级菜单点击事件
-    $K("#KyeeNext-menu-items-box").on("click", ".KyeeNext-item-level-1", function () {
-        if ($K(this).parent().children("ul").length > 0) { // 若存在三级菜单，则切换三级菜单展开、折叠状态
-            KyeeToggleClass($K(this).parent().children("ul"), "KyeeNext-submenu-show", "KyeeNext-submenu-hide");
-            KyeeToggleClass($K(this).children("i"), "kyeenext-icon-reduce", "kyeenext-icon-add");
+    $("#KyeeNext-menu-items-box").on("click", ".KyeeNext-item-level-1", function () {
+        if ($(this).parent().children("ul").length > 0) { // 若存在三级菜单，则切换三级菜单展开、折叠状态
+            KyeeToggleClass($(this).parent().children("ul"), "KyeeNext-submenu-show", "KyeeNext-submenu-hide");
+            KyeeToggleClass($(this).children("i"), "kyeenext-icon-reduce", "kyeenext-icon-add");
         }
-        if ($K(this).hasClass("kyee-router-link-flag")) {
+        if ($(this).hasClass("kyee-router-link-flag")) {
             setItemToVisitedItems({ // 若可以跳转，执行跳转操作
-                "MENU_ID": $K(this).attr("id").substring(19),
-                "MENU_LABEL": $K(this).children("span")[0].innerHTML
+                "MENU_ID": $(this).attr("id").substring(19),
+                "MENU_LABEL": $(this).children("span")[0].innerHTML
             });
-            setMenuItemActive($K(this)); // 设置菜单选中（active）状态
+            setMenuItemActive($(this)); // 设置菜单选中（active）状态
         }
     })
     // 三级菜单点击事件
-    $K("#KyeeNext-menu-items-box").on("click", ".KyeeNext-item-level-2", function () {
-        if ($K(this).hasClass("kyee-router-link-flag")) {
+    $("#KyeeNext-menu-items-box").on("click", ".KyeeNext-item-level-2", function () {
+        if ($(this).hasClass("kyee-router-link-flag")) {
             setItemToVisitedItems({ // 若可以跳转，执行跳转操作
-                "MENU_ID": $K(this).attr("id").substring(19),
-                "MENU_LABEL": $K(this)[0].innerHTML
+                "MENU_ID": $(this).attr("id").substring(19),
+                "MENU_LABEL": $(this)[0].innerHTML
             });
-            setMenuItemActive($K(this)); // 设置菜单选中（active）状态
+            setMenuItemActive($(this)); // 设置菜单选中（active）状态
         }
     })
 
@@ -258,15 +256,15 @@ var KYEE_MAIN = (function () {
      */
     function setMenuItemActive(target) {
         // 设置左侧菜单栏中的target为选中状态
-        $K(".KyeeNext-item-level-1-2-active").removeClass("KyeeNext-item-level-1-2-active");
-        $K(".KyeeNext-item-level-0-active").removeClass("KyeeNext-item-level-0-active");
+        $(".KyeeNext-item-level-1-2-active").removeClass("KyeeNext-item-level-1-2-active");
+        $(".KyeeNext-item-level-0-active").removeClass("KyeeNext-item-level-0-active");
         if (target.hasClass("KyeeNext-item-level-0")) {
             target.addClass("KyeeNext-item-level-0-active");
         } else {
             target.addClass("KyeeNext-item-level-1-2-active");
         }
         // 路由跳转、设置iframe的src属性值
-        $K("#KyeeNext-workspace-iframe").attr("src", target.attr("data-router-link"));
+        $("#KyeeNext-workspace-iframe").attr("src", target.attr("data-router-link"));
     }
 
     /**
@@ -277,18 +275,18 @@ var KYEE_MAIN = (function () {
         if (targetId instanceof jQuery) {
             var target = targetId;
         } else if (typeof targetId == 'string') {
-            var target = $K("#" + targetId);
+            var target = $("#" + targetId);
         } else {
-            var target = $K(targetId);
+            var target = $(targetId);
         }
-        $K(".KyeeNext-item-level-1-2-active").removeClass("KyeeNext-item-level-1-2-active");
-        $K(".KyeeNext-item-level-0-active").removeClass("KyeeNext-item-level-0-active");
-        $K(".KyeeNext-menu-items-box").children(".KyeeNext-item-level-0-expanded").each(function () { // 折叠其他已展开的一级菜单
+        $(".KyeeNext-item-level-1-2-active").removeClass("KyeeNext-item-level-1-2-active");
+        $(".KyeeNext-item-level-0-active").removeClass("KyeeNext-item-level-0-active");
+        $(".KyeeNext-menu-items-box").children(".KyeeNext-item-level-0-expanded").each(function () { // 折叠其他已展开的一级菜单
             if (this != target.parents("li[class^='KyeeNext-item-level-0-']")[0]) {
-                $K(this).removeClass("KyeeNext-item-level-0-expanded").addClass("KyeeNext-item-level-0-folded");
-                if ($K(this).children("ul").length > 0) {
-                    $K(this).children("ul").removeClass("KyeeNext-submenu-show").addClass("KyeeNext-submenu-hide");
-                    $K(this).children(".KyeeNext-item-level-0").children(".KyeeNext-item-icon-right").removeClass("KyeeNext-item-icon-right-expanded").addClass("KyeeNext-item-icon-right-folded");
+                $(this).removeClass("KyeeNext-item-level-0-expanded").addClass("KyeeNext-item-level-0-folded");
+                if ($(this).children("ul").length > 0) {
+                    $(this).children("ul").removeClass("KyeeNext-submenu-show").addClass("KyeeNext-submenu-hide");
+                    $(this).children(".KyeeNext-item-level-0").children(".KyeeNext-item-icon-right").removeClass("KyeeNext-item-icon-right-expanded").addClass("KyeeNext-item-icon-right-folded");
                 }
             }
         });
@@ -309,7 +307,7 @@ var KYEE_MAIN = (function () {
             "MENU_LABEL": target.children("span")[0] ? target.children("span")[0].innerHTML : target[0].innerHTML
         });
         // 路由跳转、设置iframe的src属性值
-        $K("#KyeeNext-workspace-iframe").attr("src", target.attr("data-router-link"));
+        $("#KyeeNext-workspace-iframe").attr("src", target.attr("data-router-link"));
     }
 
     /**
@@ -324,15 +322,15 @@ var KYEE_MAIN = (function () {
                 MENU_ID: val.MENU_ID
             }) < 0) { // 若不存在于已访问列表中，则插入相应数据
             visitedItemsList.push(val);
-            $K("#KyeeNext-visited-items").children("li").removeClass("KyeeNext-active-item");
-            var visitedItem = $K("#KyeeNext-visited-item-temp").clone().attr("id", "KyeeNext-visited-item-" + val.MENU_ID).css("display", "inline-block");
+            $("#KyeeNext-visited-items").children("li").removeClass("KyeeNext-active-item");
+            var visitedItem = $("#KyeeNext-visited-item-temp").clone().attr("id", "KyeeNext-visited-item-" + val.MENU_ID).css("display", "inline-block");
             visitedItem.children("span")[0].innerHTML = val.MENU_LABEL;
-            visitedItem.appendTo($K("#KyeeNext-visited-items"));
-        } else if (!$K("#KyeeNext-visited-item-" + val.MENU_ID).hasClass("KyeeNext-active-item")) { // 若已存在于访问列表中，使其为active状态
-            $K("#KyeeNext-visited-items").children("li").removeClass("KyeeNext-active-item");
-            $K("#KyeeNext-visited-item-" + val.MENU_ID).addClass("KyeeNext-active-item");
+            visitedItem.appendTo($("#KyeeNext-visited-items"));
+        } else if (!$("#KyeeNext-visited-item-" + val.MENU_ID).hasClass("KyeeNext-active-item")) { // 若已存在于访问列表中，使其为active状态
+            $("#KyeeNext-visited-items").children("li").removeClass("KyeeNext-active-item");
+            $("#KyeeNext-visited-item-" + val.MENU_ID).addClass("KyeeNext-active-item");
         }
-        alignToElement($K("#KyeeNext-visited-item-" + val.MENU_ID)[0]); // 计算偏移量，进行偏移，使完整显示
+        alignToElement($("#KyeeNext-visited-item-" + val.MENU_ID)[0]); // 计算偏移量，进行偏移，使完整显示
     }
 
     /**
@@ -347,18 +345,18 @@ var KYEE_MAIN = (function () {
         var target; // 删除后需要显示的活跃对象
         if (element.hasClass("KyeeNext-active-item")) { // 若被删除对象为当前活跃对象，根据条件设置删除后的活跃对象
             if (index == visitedItemsList.length - 1 && visitedItemsList.length > 1) { // 若为最后一个tab页，则前一个tab页获焦
-                $K("#KyeeNext-visited-item-" + visitedItemsList[index - 1].MENU_ID).addClass("KyeeNext-active-item");
-                target = $K("#KyeeNext-menu-item-" + visitedItemsList[index - 1].MENU_ID);
+                $("#KyeeNext-visited-item-" + visitedItemsList[index - 1].MENU_ID).addClass("KyeeNext-active-item");
+                target = $("#KyeeNext-menu-item-" + visitedItemsList[index - 1].MENU_ID);
                 expandedToMenuItem(target);
             } else if (index == 0 && visitedItemsList.length == 1) { // 若只有一个tab页，清除侧边栏相应菜单的选中样式
-                $K(".KyeeNext-item-level-1-2-active").removeClass("KyeeNext-item-level-1-2-active");
+                $(".KyeeNext-item-level-1-2-active").removeClass("KyeeNext-item-level-1-2-active");
             } else if (index < visitedItemsList.length - 1) { // 若删除的tab页为中间的某一项，则后一个tab获焦
-                $K("#KyeeNext-visited-item-" + visitedItemsList[index + 1].MENU_ID).addClass("KyeeNext-active-item");
-                target = $K("#KyeeNext-menu-item-" + visitedItemsList[index + 1].MENU_ID);
+                $("#KyeeNext-visited-item-" + visitedItemsList[index + 1].MENU_ID).addClass("KyeeNext-active-item");
+                target = $("#KyeeNext-menu-item-" + visitedItemsList[index + 1].MENU_ID);
                 expandedToMenuItem(target);
             }
         } else {
-            target = $K("#KyeeNext-visited-items>.KyeeNext-active-item"); // 若被删除对象非当前活跃对象，则活跃对象不变
+            target = $("#KyeeNext-visited-items>.KyeeNext-active-item"); // 若被删除对象非当前活跃对象，则活跃对象不变
         }
         if (index > -1) {
             visitedItemsList.splice(index, 1); // 维护已访问列表
@@ -410,7 +408,7 @@ var KYEE_MAIN = (function () {
         }
         var left = target.offsetLeft; // 获取目标节点相对于父容器的偏移量（位置）
         var width = target.offsetWidth; // 获取目标节点的宽度
-        var container = $K("#KyeeNext-visited-items"); // 获取父容器
+        var container = $("#KyeeNext-visited-items"); // 获取父容器
         var transformVal = container.css("transform") && container.css("transform") !== "none" ? +(container.css("transform").substring(7).split(',')[4]) : 0;
         var containerWidth = container.outerWidth(); // 外层父容器的宽度
         if (left >= -transformVal && left + width <= containerWidth - transformVal) {
@@ -427,22 +425,22 @@ var KYEE_MAIN = (function () {
     }
 
     // 已访问链接导航栏列表项目点击事件
-    $K("#KyeeNext-visited-items").on("click", "li", function () {
-        var id = $K(this).attr("id").substring(22);
+    $("#KyeeNext-visited-items").on("click", "li", function () {
+        var id = $(this).attr("id").substring(22);
         var targetId = "KyeeNext-menu-item-" + id;
-        if (!$K("#" + targetId).hasClass("KyeeNext-item-level-1-2-active")) {
+        if (!$("#" + targetId).hasClass("KyeeNext-item-level-1-2-active")) {
             expandedToMenuItem(targetId); // 展开左侧相应菜单
         }
     })
     // 已访问链接导航栏列表项目关闭按钮点击事件
-    $K("#KyeeNext-visited-items").on("click", "li>i", function (e) {
-        $K(this).parent().remove(); // 从DOM树中删除节点元素
-        removeItemFromVisitedItems($K(this).parent().attr("id").substring(22), $K(this).parent()); // 从访问列表中删除节点信息
+    $("#KyeeNext-visited-items").on("click", "li>i", function (e) {
+        $(this).parent().remove(); // 从DOM树中删除节点元素
+        removeItemFromVisitedItems($(this).parent().attr("id").substring(22), $(this).parent()); // 从访问列表中删除节点信息
         e.stopPropagation();
     })
     // 已访问菜单左箭头点击事件（向左偏移）
-    $K(".KyeeNext-nav-pre").on("click", function () {
-        var container = $K("#KyeeNext-visited-items");
+    $(".KyeeNext-nav-pre").on("click", function () {
+        var container = $("#KyeeNext-visited-items");
         var transformVal = container.css("transform") && container.css("transform") !== "none" ? +(container.css("transform").substring(7).split(',')[4]) : 0;
         var containerWidth = container.outerWidth();
         var visitedItemsWidthSum = getVisitedItemsWidthSum();
@@ -453,8 +451,8 @@ var KYEE_MAIN = (function () {
         }
     })
     // 已访问菜单右箭头点击事件（向右偏移）
-    $K(".KyeeNext-nav-next").on("click", function () {
-        var container = $K("#KyeeNext-visited-items");
+    $(".KyeeNext-nav-next").on("click", function () {
+        var container = $("#KyeeNext-visited-items");
         var transformVal = container.css("transform") && container.css("transform") !== "none" ? +(container.css("transform").substring(7).split(',')[4]) : 0;
         if (transformVal < 0) {
             container.css({
@@ -465,7 +463,7 @@ var KYEE_MAIN = (function () {
     // 获取已访问菜单的总宽度
     function getVisitedItemsWidthSum() {
         var width = 0;
-        var visitedItems = $K("#KyeeNext-visited-items>li");
+        var visitedItems = $("#KyeeNext-visited-items>li");
         for (var i = 0, j = visitedItems.length; i < j; i++) {
             width += visitedItems[i].offsetWidth;
         }
@@ -474,16 +472,16 @@ var KYEE_MAIN = (function () {
 
 
     // 右下角客服按钮点击事件
-    $K("#KyeeNext-customer-services-toggle-btn").on("click", function () {
-        $K(this).toggleClass("KyeeNext-customer-services-expanded");
-        $K(".KyeeNext-customer-services-item:not(#KyeeNext-customer-services-item-temp)").fadeToggle("fast");
-        KyeeToggleClass($K(this).children("i"), "kyeenext-icon-add", "kyeenext-icon-reduce");
+    $("#KyeeNext-customer-services-toggle-btn").on("click", function () {
+        $(this).toggleClass("KyeeNext-customer-services-expanded");
+        $(".KyeeNext-customer-services-item:not(#KyeeNext-customer-services-item-temp)").fadeToggle("fast");
+        KyeeToggleClass($(this).children("i"), "kyeenext-icon-add", "kyeenext-icon-reduce");
     })
 
     // 遮罩层点击事件
-    $K(".KyeeNext-ui-sidebar-mask").on("click", function () {
-        $K(".KyeeNext-sidebar-right").removeClass("KyeeNext-sidebar-show").addClass("KyeeNext-sidebar-hidden");
-        $K(".KyeeNext-ui-sidebar-mask").fadeOut(200);
+    $(".KyeeNext-ui-sidebar-mask").on("click", function () {
+        $(".KyeeNext-sidebar-right").removeClass("KyeeNext-sidebar-show").addClass("KyeeNext-sidebar-hidden");
+        $(".KyeeNext-ui-sidebar-mask").fadeOut(200);
     })
 
     /**
@@ -509,7 +507,7 @@ var KYEE_MAIN = (function () {
     function bindFuncToTarget(containerId, targetId, funcs) {
         if (funcs && funcs.length > 0) {
             for (var i = 0, j = funcs.length; i < j; i++) {
-                $K("#" + containerId).on(funcs[i].EVENT_NAME, "#" + targetId, funcs[i].EVENT_FUNC);
+                $("#" + containerId).on(funcs[i].EVENT_NAME, "#" + targetId, funcs[i].EVENT_FUNC);
             }
         }
     }
