@@ -324,7 +324,7 @@ jQuery(function ($) {
                     ]
                 }
             }
-            KYEE_MAIN.init(KYEE_NEXT_MAIN_CONFIG);
+            $.KYEE_MAIN_INIT().init(KYEE_NEXT_MAIN_CONFIG);
         }, 500);
     }
 
