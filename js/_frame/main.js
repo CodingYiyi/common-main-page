@@ -34,11 +34,15 @@
                     $(".KyeeNext-visited-nav-box").fadeIn(300);
                     $(".KyeeNext-main-body-box").removeClass("KyeeNext-hide-recent-func-tabbar");
                 }
+                if (KYEE_NEXT_MAIN_CONFIG.COPYRIGHT_CONFIG && KYEE_NEXT_MAIN_CONFIG.COPYRIGHT_CONFIG.SHOW_COPYRIGHT) { // 控制底部版权区显示
+                    $(".KyeeNext-copyright-box").css("display", "block")[0].innerHTML = KYEE_NEXT_MAIN_CONFIG.COPYRIGHT_CONFIG.COPYRIGHT_DETAIL;
+                    $(".KyeeNext-main-body-box").css("bottom", "40px");
+                }
             }
 
             // 页面基本配置
             function basicConfig() {
-                if(options.platform === 0){ // portalface版本不用设置页面标题与收藏夹图标
+                if (options.platform === 0) { // portalface版本不用设置页面标题与收藏夹图标
                     $("title")[0].innerHTML = KYEE_NEXT_MAIN_CONFIG.PRO_TITLE; // 设置页面标题
                     $("link[rel='icon']").attr("href", KYEE_NEXT_MAIN_CONFIG.PRO_FAVICON); // 设置页面收藏夹图标
                 }
@@ -101,7 +105,7 @@
                         for (var x = 0, y = item.CHILDREN_ITEMS.length; x < y; x++) {
                             var childItem = item.CHILDREN_ITEMS[x];
                             var childItemHTML = childTempHTML.clone().attr("id", itemIdPrefix + childItem.MENU_ID); // 获取二级菜单模板
-                            childItemHTML.children("span")[0].innerHTML = childItem.MENU_LABEL; // 设置二级菜单的名称
+                            childItemHTML.children("span").attr("title", childItem.MENU_LABEL)[0].innerHTML = childItem.MENU_LABEL; // 设置二级菜单的名称
                             if (childItem.ROUTER_LINK && !childItem.BIND_FUNC) { // 设置跳转路径且没有绑定额外事件时，框架提供默认的跳转操作；反之由用户绑定的事件处理
                                 childItemHTML.addClass("kyee-router-link-flag"); // 设置点击是否跳转标识
                                 childItemHTML.attr("data-router-link", childItem.ROUTER_LINK); // 设置点击跳转路由
@@ -123,7 +127,7 @@
                                         bindFuncToTarget("KyeeNext-menu-items-box", itemIdPrefix + grandchildItem.MENU_ID, grandchildItem.EVENT_FUNCS);
                                     }
                                     grandchildItem.KYEE_DATA && grandchildItemHTML.attr(grandchildItem.KYEE_DATA); // 设置业务额外属性
-                                    grandchildItemHTML[0].innerHTML = grandchildItem.MENU_LABEL; // 设置三级菜单名称
+                                    grandchildItemHTML.attr("title", grandchildItem.MENU_LABEL)[0].innerHTML = grandchildItem.MENU_LABEL; // 设置三级菜单名称
                                     grandchildItemHTMLStr += grandchildItemHTML[0].outerHTML; // 拼接三级菜单字符串 结果："<li>...</li><li>...</li>"
                                     grandchildItem.AUTO_CHECKED && (activeTargetId = itemIdPrefix + grandchildItem.MENU_ID);
                                 }

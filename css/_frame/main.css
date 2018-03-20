@@ -160,16 +160,16 @@ body {
       justify-content: flex-start;
       align-items: center;
       width: 220px;
-      height: 70px;
+      height: 56px;
       background-color: #22345E; }
       .KyeeNext-body .KyeeNext-aside-box .KyeeNext-logo-box > span {
         display: inline-block;
-        width: 70px;
+        width: 56px;
         height: 100%;
         font-size: 20px;
         color: #FFF;
         text-align: center;
-        line-height: 70px;
+        line-height: 56px;
         background-color: #132142; }
         .KyeeNext-body .KyeeNext-aside-box .KyeeNext-logo-box > span:hover {
           color: #52A3F6; }
@@ -177,7 +177,7 @@ body {
         width: 100px;
         margin-left: 10px; }
     .KyeeNext-body .KyeeNext-aside-box .KyeeNext-menu-items-box {
-      height: calc(100% - 70px);
+      height: calc(100% - 56px);
       width: 220px;
       background-color: #22345E;
       color: #E9ECF2;
@@ -198,7 +198,7 @@ body {
         .KyeeNext-body .KyeeNext-aside-box .KyeeNext-menu-items-box .KyeeNext-item-level-0 .KyeeNext-item-icon-left {
           display: inline-block;
           flex: none;
-          width: 67px;
+          width: 53px;
           height: 50px;
           font-size: 20px;
           text-align: center;
@@ -209,7 +209,7 @@ body {
       .KyeeNext-body .KyeeNext-aside-box .KyeeNext-menu-items-box .KyeeNext-item-level-1 {
         display: flex;
         align-items: center;
-        padding: 0 20px 0 70px;
+        padding: 0 20px 0 56px;
         height: 30px;
         line-height: 30px;
         color: #5B6E99; }
@@ -227,7 +227,7 @@ body {
       .KyeeNext-body .KyeeNext-aside-box .KyeeNext-menu-items-box .KyeeNext-item-level-2 {
         height: 28px;
         line-height: 28px;
-        padding: 0 20px 0 96px;
+        padding: 0 20px 0 86px;
         color: #5B6E99; }
         .KyeeNext-body .KyeeNext-aside-box .KyeeNext-menu-items-box .KyeeNext-item-level-2:hover {
           background-color: #52A3F6;
@@ -237,7 +237,7 @@ body {
           -o-transition: all .3s ease;
           transition: all .3s ease; }
   .KyeeNext-body .KyeeNext-aside-folded {
-    width: 70px; }
+    width: 56px; }
   .KyeeNext-body .KyeeNext-aside-box-hover:hover {
     width: 220px; }
   .KyeeNext-body .KyeeNext-main-box {
@@ -250,7 +250,7 @@ body {
       flex-direction: row;
       justify-content: space-between;
       position: relative;
-      height: 70px;
+      height: 56px;
       width: 100%;
       padding: 0 20px;
       box-sizing: border-box;
@@ -279,7 +279,7 @@ body {
           color: #F4F4F4; }
       .KyeeNext-body .KyeeNext-main-box .KyeeNext-header-box .KyeeNext-toggle-system-box {
         position: absolute;
-        top: 60px;
+        top: 50px;
         left: 20px;
         display: none;
         background-color: rgba(255, 255, 255, 0.9);
@@ -313,21 +313,22 @@ body {
     .KyeeNext-body .KyeeNext-main-box .KyeeNext-visited-nav-box {
       position: relative;
       box-sizing: border-box;
-      height: 40px;
-      border-bottom: 1px solid #D7D7D7; }
+      height: 40px; }
       .KyeeNext-body .KyeeNext-main-box .KyeeNext-visited-nav-box > span {
         display: inline-block;
         box-sizing: border-box;
         width: 20px;
-        line-height: 39px;
+        line-height: 40px;
         text-align: center;
         color: #BEBEBE;
-        border-right: 1px solid #D7D7D7;
-        border-left: 1px solid #D7D7D7;
-        background-color: #F2F2F2;
+        background-color: #EFEEEE;
         z-index: 2; }
         .KyeeNext-body .KyeeNext-main-box .KyeeNext-visited-nav-box > span:active {
           background-color: #D7D7D7; }
+        .KyeeNext-body .KyeeNext-main-box .KyeeNext-visited-nav-box > span:first-child {
+          border-right: 1px solid #D7D7D7; }
+        .KyeeNext-body .KyeeNext-main-box .KyeeNext-visited-nav-box > span:last-child {
+          border-left: 1px solid #D7D7D7; }
       .KyeeNext-body .KyeeNext-main-box .KyeeNext-visited-nav-box .KyeeNext-nav-pre {
         position: absolute;
         left: 0; }
@@ -339,6 +340,7 @@ body {
         padding: 0 20px;
         font-size: 0;
         -webkit-text-size-adjust: none;
+        background-color: #F7F8FA;
         overflow: hidden;
         z-index: 1; }
         .KyeeNext-body .KyeeNext-main-box .KyeeNext-visited-nav-box > nav .KyeeNext-visited-items {
@@ -349,25 +351,33 @@ body {
           transition: transform .3s; }
         .KyeeNext-body .KyeeNext-main-box .KyeeNext-visited-nav-box > nav li {
           box-sizing: border-box;
-          line-height: 36px;
+          margin-right: 2px;
+          line-height: 37px;
           font-size: 13px;
           padding: 0 16px;
-          border-top: 3px solid #F2F2F2;
-          border-right: 1px solid #D7D7D7;
-          border-bottom: 1px solid #D7D7D7;
-          background-color: #F2F2F2; }
+          border-top: 3px solid #EFEEEE;
+          background-color: #EFEEEE; }
           .KyeeNext-body .KyeeNext-main-box .KyeeNext-visited-nav-box > nav li i {
             margin-left: 10px;
             font-size: 12px; }
         .KyeeNext-body .KyeeNext-main-box .KyeeNext-visited-nav-box > nav .KyeeNext-active-item {
           color: #EB370B;
           border-top: 3px solid #EB370B;
-          border-bottom: 1px solid #FFF;
           background-color: #FFF;
           -webkit-transition: all .2s linear;
           -moz-transition: all .2s linear;
           -o-transition: all .2s linear;
           transition: all .2s linear; }
+    .KyeeNext-body .KyeeNext-main-box .KyeeNext-copyright-box {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 40px;
+      line-height: 40px;
+      font-size: 12px;
+      text-align: center;
+      color: #9B9AA0;
+      background-color: #F7F8FA; }
   .KyeeNext-body .KyeeNext-main-box-dynamic {
     position: relative;
     flex: auto; }
@@ -376,7 +386,7 @@ body {
     top: 0;
     right: 0;
     left: 0;
-    margin-left: 70px; }
+    margin-left: 56px; }
   .KyeeNext-body .KyeeNext-submenu-hide {
     max-height: 0;
     visibility: hidden;
@@ -451,16 +461,16 @@ body {
     transition: transform .2s ease-in-out; }
   .KyeeNext-body .KyeeNext-main-body-box {
     position: absolute;
-    top: 110px;
+    top: 96px;
     bottom: 0;
     right: 0;
     left: 0;
     overflow: hidden; }
   .KyeeNext-body .KyeeNext-hide-recent-func-tabbar {
-    top: 70px !important; }
+    top: 56px !important; }
   .KyeeNext-body .KyeeNext-customer-services-box {
     position: fixed;
-    bottom: 20px;
+    bottom: 50px;
     right: 20px;
     display: flex;
     flex-direction: column;
@@ -470,8 +480,8 @@ body {
       align-items: center;
       justify-content: center;
       float: right;
-      width: 60px;
-      height: 60px;
+      width: 50px;
+      height: 50px;
       border-radius: 50%;
       background-color: #006EFF;
       font-size: 20px;
@@ -482,10 +492,8 @@ body {
       display: flex;
       align-items: center;
       justify-content: flex-end;
-      position: relative;
-      right: -5px;
-      height: 70px;
-      width: 70px;
+      height: 50px;
+      width: 50px;
       -webkit-transition: width .2s linear;
       transition: width .2s linear;
       -webkit-transform: translateZ(0) scale(1, 1);
@@ -496,22 +504,22 @@ body {
       box-sizing: border-box;
       margin-bottom: 8px; }
       .KyeeNext-body .KyeeNext-customer-services-box .KyeeNext-customer-services-item span {
-        font-size: 18px;
-        width: 90px;
+        font-size: 16px;
+        width: 70px;
         flex: none;
         text-align: right; }
       .KyeeNext-body .KyeeNext-customer-services-box .KyeeNext-customer-services-item i {
-        font-size: 36px;
-        width: 70px;
+        font-size: 32px;
+        width: 48px;
         flex: none;
         text-align: center; }
       .KyeeNext-body .KyeeNext-customer-services-box .KyeeNext-customer-services-item:hover {
-        width: 160px;
+        width: 140px;
         color: #52A3F6;
         border-color: #52A3F6; }
   .KyeeNext-body .KyeeNext-sidebar-right {
     position: absolute;
-    top: 70px;
+    top: 56px;
     right: 0px;
     bottom: 0;
     min-width: 200px;

@@ -322,6 +322,11 @@ jQuery(function ($) {
                             "ITEM_ICON": "kyeenext-icon-wechat"
                         },
                     ]
+                },
+
+                "COPYRIGHT_CONFIG":{ //底部版权区配置
+                    "SHOW_COPYRIGHT":false, //是否展示底部版权区
+                    "COPYRIGHT_DETAIL":"Copyright 2015-2018 上海京颐科技股份有限公司 沪ICP11014634" //版权信息明细
                 }
             }
             $.KYEE_MAIN_INIT().init(KYEE_NEXT_MAIN_CONFIG);
