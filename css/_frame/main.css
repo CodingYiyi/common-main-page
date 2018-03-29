@@ -175,12 +175,13 @@ body {
           color: #52A3F6; }
       .KyeeNext-body .KyeeNext-aside-box .KyeeNext-logo-box > img {
         width: 100px;
-        margin-left: 10px; }
+        margin-left: 20px; }
     .KyeeNext-body .KyeeNext-aside-box .KyeeNext-menu-items-box {
       height: calc(100% - 56px);
       width: 220px;
       background-color: #22345E;
       color: #E9ECF2;
+      border-top: 1px solid #5B6E99;
       overflow-y: auto; }
       .KyeeNext-body .KyeeNext-aside-box .KyeeNext-menu-items-box .KyeeNext-item-level-0-active {
         color: #52A3F6 !important;
@@ -205,7 +206,8 @@ body {
           line-height: 50px; }
         .KyeeNext-body .KyeeNext-aside-box .KyeeNext-menu-items-box .KyeeNext-item-level-0 .KyeeNext-item-icon-right {
           position: absolute;
-          right: 10px; }
+          right: 15px;
+          font-size: 12px; }
       .KyeeNext-body .KyeeNext-aside-box .KyeeNext-menu-items-box .KyeeNext-item-level-1 {
         display: flex;
         align-items: center;
@@ -426,15 +428,16 @@ body {
       -o-transition: all .3s ease-in-out;
       transition: all .3s ease-in-out; }
   .KyeeNext-body .KyeeNext-item-icon-right-folded {
+    color: #8CA0B3;
     -webkit-transform: rotate(0deg);
     -moz-transform: rotate(0deg);
     -ms-transform: rotate(0deg);
     -o-transform: rotate(0deg);
     transform: rotate(0deg);
-    -webkit-transition: transform .2s ease-in-out;
-    -moz-transition: transform .2s ease-in-out;
-    -o-transition: transform .2s ease-in-out;
-    transition: transform .2s ease-in-out; }
+    -webkit-transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out; }
   .KyeeNext-body .KyeeNext-item-level-0-expanded {
     border-left-color: #52A3F6;
     background-color: #172850;
@@ -449,16 +452,19 @@ body {
       -moz-transition: all .3s ease-in-out;
       -o-transition: all .3s ease-in-out;
       transition: all .3s ease-in-out; }
+    .KyeeNext-body .KyeeNext-item-level-0-expanded > .KyeeNext-submenu-show {
+      padding-bottom: 10px; }
   .KyeeNext-body .KyeeNext-item-icon-right-expanded {
+    color: #52A3F6;
     -webkit-transform: rotate(90deg);
     -moz-transform: rotate(90deg);
     -ms-transform: rotate(90deg);
     -o-transform: rotate(90deg);
     transform: rotate(90deg);
-    -webkit-transition: transform .2s ease-in-out;
-    -moz-transition: transform .2s ease-in-out;
-    -o-transition: transform .2s ease-in-out;
-    transition: transform .2s ease-in-out; }
+    -webkit-transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out; }
   .KyeeNext-body .KyeeNext-main-body-box {
     position: absolute;
     top: 96px;

@@ -165,7 +165,7 @@ body {
             }
             >img{
                 width: $logoWidth;
-                margin-left: 10px;
+                margin-left: 20px;
             }
         }
         .KyeeNext-menu-items-box {
@@ -173,6 +173,7 @@ body {
             width: 220px;
             background-color: $themeColor;
             color: $menuFontDefaultColor;
+            border-top: 1px solid $menuFontDefaultColorSub;
             overflow-y: auto;
             .KyeeNext-item-level-0-active{
                 color: $menuFontActiveColor !important;
@@ -202,7 +203,8 @@ body {
                 }
                 .KyeeNext-item-icon-right{
                     position: absolute;
-                    right: 10px;
+                    right: 15px;
+                    font-size: 12px;
                 }
             }
             .KyeeNext-item-level-1{
@@ -470,15 +472,16 @@ body {
         }
     }
     .KyeeNext-item-icon-right-folded{
+        color: #8CA0B3;
         -webkit-transform: rotate(0deg);
         -moz-transform: rotate(0deg);
         -ms-transform: rotate(0deg);
         -o-transform: rotate(0deg);
         transform: rotate(0deg);
-        -webkit-transition: transform .2s ease-in-out;
-        -moz-transition: transform .2s ease-in-out;
-        -o-transition: transform .2s ease-in-out;
-        transition: transform .2s ease-in-out;
+        -webkit-transition: all .2s ease-in-out;
+        -moz-transition: all .2s ease-in-out;
+        -o-transition: all .2s ease-in-out;
+        transition: all .2s ease-in-out;
     }
     .KyeeNext-item-level-0-expanded {
         border-left-color: $menuActiveBorderLeftColor;
@@ -495,17 +498,21 @@ body {
             -o-transition: all .3s ease-in-out;
             transition: all .3s ease-in-out;
         }
+        >.KyeeNext-submenu-show{
+            padding-bottom: 10px;
+        }
     }
     .KyeeNext-item-icon-right-expanded{
+        color: $menuFontActiveColor;
         -webkit-transform: rotate(90deg);
         -moz-transform: rotate(90deg);
         -ms-transform: rotate(90deg);
         -o-transform: rotate(90deg);
         transform: rotate(90deg);
-        -webkit-transition: transform .2s ease-in-out;
-        -moz-transition: transform .2s ease-in-out;
-        -o-transition: transform .2s ease-in-out;
-        transition: transform .2s ease-in-out;
+        -webkit-transition: all .2s ease-in-out;
+        -moz-transition: all .2s ease-in-out;
+        -o-transition: all .2s ease-in-out;
+        transition: all .2s ease-in-out;
     }
 
     // 业务内容区样式
