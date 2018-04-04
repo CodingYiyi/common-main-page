@@ -5,7 +5,7 @@ jQuery(function ($) {
     /**
      * 初始化调用，根据各项目需求，组织页面配置项
      */
-    function setMainConfig() {
+    function setMainConfig(KYEE_MAIN) {
         var userInfo = {
             name: "管理员"
         };
@@ -16,7 +16,20 @@ jQuery(function ($) {
                 "PRO_LOGO": "./assets/img/logo.png", //左上角项目logo
                 "PRO_NAME": "演示系统", //项目名称
                 "SCROLL_STEP": 200, //已访问列表左、右箭头点击滑动距离
-                "SHOW_RECENT_FUNC": true, //是否显示最近常用功能区
+                "SHOW_RECENT_FUNC": true, //是否显示以访问tab页签
+                "FIXED_MENU_ITEMS":[ // 不可关闭tab页
+                    { // 初始化显示的tab页、不可关闭（例如首页、主页等）
+                        "MENU_ID": "01",
+                        "MENU_LABEL":"百度",
+                        "ROUTER_LINK": "https://www.baidu.com", //点击跳转路径
+                        "AUTO_CHECKED":false
+                    },{ // 初始化显示的tab页、不可关闭（例如首页、主页等）
+                        "MENU_ID": "02",
+                        "MENU_LABEL":"360主页",
+                        "ROUTER_LINK": "https://www.360.com", //点击跳转路径
+                        "AUTO_CHECKED":true
+                    }
+                ],
                 "EXPANDED_TO_ACTIVE_MENU": true, //是否自动展开选中的菜单
                 "TOOL_BARS": [ //工具栏区域配置项
                     {
@@ -103,15 +116,15 @@ jQuery(function ($) {
                                         "MENU_LABEL": "弹出消息", //页面展示的文字
                                         "MENU_TYPE": "2", //0、1、2分别代表跟节点、二级节点、三级节点
                                         "MENU_ICON": "", //左侧字体图标
-                                        "ROUTER_LINK": "/app/business/home", //点击跳转路径
-                                        "AUTO_CHECKED": true, //是否默认选中
+                                        "ROUTER_LINK": "http://118.190.120.97/kyee_nextframework_portalface_ins/#/business/description/common-desc/growl", //点击跳转路径
+                                        "AUTO_CHECKED": false, //是否默认选中
                                     },
                                     {
                                         "MENU_ID": 112, //菜单唯一标识
                                         "MENU_LABEL": "内联消息", //页面展示的文字
                                         "MENU_TYPE": "2", //0、1、2分别代表跟节点、二级节点、三级节点
                                         "MENU_ICON": "", //左侧字体图标
-                                        "ROUTER_LINK": "/app/business/home", //点击跳转路径
+                                        "ROUTER_LINK": "http://118.190.120.97/kyee_nextframework_portalface_ins/#/business/description/common-desc/messages", //点击跳转路径
                                         "AUTO_CHECKED": false, //是否默认选中
                                     }
                                 ]
@@ -121,8 +134,8 @@ jQuery(function ($) {
                                 "MENU_LABEL": "手风琴面板", //页面展示的文字
                                 "MENU_TYPE": "2", //0、1、2分别代表跟节点、二级节点、三级节点
                                 "MENU_ICON": "", //左侧字体图标
-                                "ROUTER_LINK": "/app/business/home", //点击跳转路径
-                                "AUTO_CHECKED": true, //是否默认选中
+                                "ROUTER_LINK": "", //点击跳转路径
+                                "AUTO_CHECKED": false, //是否默认选中
                                 "BIND_FUNC": true, // 是否绑定事件
                                 "EVENT_FUNCS": [{
                                     "EVENT_NAME": "click",
@@ -146,7 +159,7 @@ jQuery(function ($) {
                         "MENU_LABEL": "公共服务及方法", //页面展示的文字
                         "MENU_TYPE": "0", //0、1、2分别代表跟节点、二级节点、三级节点
                         "MENU_ICON": "kyeenext-icon-save", //左侧字体图标
-                        "ROUTER_LINK": "/app/business/home", //点击跳转路径
+                        "ROUTER_LINK": "http://118.190.120.97/kyee_nextframework_portalface_ins/#/business/description/service-desc/desc", //点击跳转路径
                         "AUTO_CHECKED": false, //是否默认选中
                     },
                     {
@@ -170,13 +183,14 @@ jQuery(function ($) {
                                         "MENU_LABEL": "基本功能", //页面展示的文字
                                         "MENU_TYPE": "2", //0、1、2分别代表跟节点、二级节点、三级节点
                                         "MENU_ICON": "", //左侧字体图标
-                                        "ROUTER_LINK": "/app/business/home", //点击跳转路径
+                                        "ROUTER_LINK": "http://118.190.120.97/kyee_nextframework_portalface_ins/#/business/description/datatable-desc/basic", //点击跳转路径
                                         "AUTO_CHECKED": false, //是否默认选中
                                         "BIND_FUNC": true, // 是否绑定事件
                                         "EVENT_FUNCS": [{
                                             "EVENT_NAME": "click",
                                             "EVENT_FUNC": function () {
-                                                alert("click");
+                                                console.log("click2222");
+                                                KYEE_MAIN.appendTabs($(this));
                                             }
                                         }],
                                     },
@@ -185,7 +199,7 @@ jQuery(function ($) {
                                         "MENU_LABEL": "增删改查", //页面展示的文字
                                         "MENU_TYPE": "2", //0、1、2分别代表跟节点、二级节点、三级节点
                                         "MENU_ICON": "", //左侧字体图标
-                                        "ROUTER_LINK": "/app/business/home", //点击跳转路径
+                                        "ROUTER_LINK": "http://118.190.120.97/kyee_nextframework_portalface_ins/#/business/description/datatable-desc/crud", //点击跳转路径
                                         "AUTO_CHECKED": false, //是否默认选中
                                     }
                                 ]
@@ -195,7 +209,7 @@ jQuery(function ($) {
                                 "MENU_LABEL": "排序列表", //页面展示的文字
                                 "MENU_TYPE": "2", //0、1、2分别代表跟节点、二级节点、三级节点
                                 "MENU_ICON": "", //左侧字体图标
-                                "ROUTER_LINK": "/app/business/home", //点击跳转路径
+                                "ROUTER_LINK": "http://118.190.120.97/kyee_nextframework_portalface_ins/#/business/description/datatable-desc/sort", //点击跳转路径
                                 "AUTO_CHECKED": false, //是否默认选中
                                 "CHILDREN_ITEMS": [ //子节点数据
 
@@ -206,7 +220,7 @@ jQuery(function ($) {
                                 "MENU_LABEL": "时间表", //页面展示的文字
                                 "MENU_TYPE": "2", //0、1、2分别代表跟节点、二级节点、三级节点
                                 "MENU_ICON": "", //左侧字体图标
-                                "ROUTER_LINK": "/app/business/home", //点击跳转路径
+                                "ROUTER_LINK": "http://118.190.120.97/kyee_nextframework_portalface_ins/#/business/description/schedule-desc/schedule", //点击跳转路径
                                 "AUTO_CHECKED": false, //是否默认选中
                                 "CHILDREN_ITEMS": [ //子节点数据
 
@@ -225,7 +239,7 @@ jQuery(function ($) {
                                         "MENU_LABEL": "基础树", //页面展示的文字
                                         "MENU_TYPE": "2", //0、1、2分别代表跟节点、二级节点、三级节点
                                         "MENU_ICON": "", //左侧字体图标
-                                        "ROUTER_LINK": "/app/business/home", //点击跳转路径
+                                        "ROUTER_LINK": "http://118.190.120.97/kyee_nextframework_portalface_ins/#/business/description/tree-desc/basic", //点击跳转路径
                                         "AUTO_CHECKED": false, //是否默认选中
                                     },
                                     {
@@ -233,7 +247,7 @@ jQuery(function ($) {
                                         "MENU_LABEL": "下拉树", //页面展示的文字
                                         "MENU_TYPE": "2", //0、1、2分别代表跟节点、二级节点、三级节点
                                         "MENU_ICON": "", //左侧字体图标
-                                        "ROUTER_LINK": "/app/business/home", //点击跳转路径
+                                        "ROUTER_LINK": "http://118.190.120.97/kyee_nextframework_portalface_ins/#/business/description/tree-desc/dropdown", //点击跳转路径
                                         "AUTO_CHECKED": false, //是否默认选中
                                     },
                                     {
@@ -241,7 +255,7 @@ jQuery(function ($) {
                                         "MENU_LABEL": "右键菜单", //页面展示的文字
                                         "MENU_TYPE": "2", //0、1、2分别代表跟节点、二级节点、三级节点
                                         "MENU_ICON": "", //左侧字体图标
-                                        "ROUTER_LINK": "/app/business/home", //点击跳转路径
+                                        "ROUTER_LINK": "http://118.190.120.97/kyee_nextframework_portalface_ins/#/business/description/tree-desc/context", //点击跳转路径
                                         "AUTO_CHECKED": false, //是否默认选中
                                     },
                                     {
@@ -249,7 +263,7 @@ jQuery(function ($) {
                                         "MENU_LABEL": "调整树宽度", //页面展示的文字
                                         "MENU_TYPE": "2", //0、1、2分别代表跟节点、二级节点、三级节点
                                         "MENU_ICON": "", //左侧字体图标
-                                        "ROUTER_LINK": "/app/business/home", //点击跳转路径
+                                        "ROUTER_LINK": "http://118.190.120.97/kyee_nextframework_portalface_ins/#/business/description/FAQ/index", //点击跳转路径
                                         "AUTO_CHECKED": false, //是否默认选中
                                     }
                                 ]
@@ -261,7 +275,7 @@ jQuery(function ($) {
                         "MENU_LABEL": "页面布局", //页面展示的文字
                         "MENU_TYPE": "0", //0、1、2分别代表跟节点、二级节点、三级节点
                         "MENU_ICON": "kyeenext-icon-save", //左侧字体图标
-                        "ROUTER_LINK": "/app/business/home", //点击跳转路径
+                        "ROUTER_LINK": "http://118.190.120.97/kyee_nextframework_portalface_ins/#/business/description/layout-desc/gridlayout", //点击跳转路径
                         "AUTO_CHECKED": false, //是否默认选中
                         "BIND_FUNC": true, // 是否绑定事件
                         "EVENT_FUNCS": [{
@@ -325,17 +339,18 @@ jQuery(function ($) {
                 },
 
                 "COPYRIGHT_CONFIG":{ //底部版权区配置
-                    "SHOW_COPYRIGHT":false, //是否展示底部版权区
+                    "SHOW_COPYRIGHT":true, //是否展示底部版权区
                     "COPYRIGHT_DETAIL":"Copyright 2015-2018 上海京颐科技股份有限公司 沪ICP11014634" //版权信息明细
                 }
             }
-            $.KYEE_MAIN_INIT().init(KYEE_NEXT_MAIN_CONFIG);
+            KYEE_MAIN.init(KYEE_NEXT_MAIN_CONFIG);
         }, 500);
     }
 
     // 页面初始化
     jQuery(document).ready(function () {
-        setMainConfig();
+        var KYEE_MAIN = $.KYEE_MAIN_INIT();
+        setMainConfig(KYEE_MAIN);
     })
 
     function showMask() {
