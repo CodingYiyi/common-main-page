@@ -18,17 +18,17 @@ jQuery(function ($) {
                 "SCROLL_STEP": 200, //已访问列表左、右箭头点击滑动距离
                 "SHOW_RECENT_FUNC": true, //是否显示以访问tab页签
                 "FIXED_MENU_ITEMS":[ // 不可关闭tab页
-                    { // 初始化显示的tab页、不可关闭（例如首页、主页等）
-                        "MENU_ID": "01",
-                        "MENU_LABEL":"百度",
-                        "ROUTER_LINK": "https://www.baidu.com", //点击跳转路径
-                        "AUTO_CHECKED":false
-                    },{ // 初始化显示的tab页、不可关闭（例如首页、主页等）
-                        "MENU_ID": "02",
-                        "MENU_LABEL":"360主页",
-                        "ROUTER_LINK": "https://www.360.com", //点击跳转路径
-                        "AUTO_CHECKED":true
-                    }
+                    // { // 初始化显示的tab页、不可关闭（例如首页、主页等）
+                    //     "MENU_ID": "01",
+                    //     "MENU_LABEL":"百度",
+                    //     "ROUTER_LINK": "https://www.baidu.com", //点击跳转路径
+                    //     "AUTO_CHECKED":false
+                    // },{ // 初始化显示的tab页、不可关闭（例如首页、主页等）
+                    //     "MENU_ID": "02",
+                    //     "MENU_LABEL":"360主页",
+                    //     "ROUTER_LINK": "https://www.360.com", //点击跳转路径
+                    //     "AUTO_CHECKED":true
+                    // }
                 ],
                 "EXPANDED_TO_ACTIVE_MENU": true, //是否自动展开选中的菜单
                 "TOOL_BARS": [ //工具栏区域配置项
@@ -37,6 +37,7 @@ jQuery(function ($) {
                         "TOOL_ICON": "",
                         "TOOL_LABEL": "",
                         "ROUTER_LINK": "",
+                        "HIDDEN":true,
                         "USE_TEMPLATE": true,
                         "TEMPLATE": `
                     <li class="user-info KyeeNext-row-flex-box">
@@ -49,6 +50,7 @@ jQuery(function ($) {
                         "TOOL_ID": 101,
                         "TOOL_ICON": "kyeenext-icon-setting",
                         "TOOL_LABEL": "设置",
+                        "HIDDEN":true,
                         "ROUTER_LINK": "",
                         "USE_TEMPLATE": false,
                         "TEMPLATE": "",
@@ -69,6 +71,7 @@ jQuery(function ($) {
                         "TOOL_ID": 102,
                         "TOOL_ICON": "kyeenext-icon-switch",
                         "TOOL_LABEL": "退出",
+                        "HIDDEN":false,
                         "ROUTER_LINK": "",
                         "USE_TEMPLATE": false,
                         "TEMPLATE": ""
@@ -77,6 +80,7 @@ jQuery(function ($) {
                         "TOOL_ID": 103,
                         "TOOL_ICON": "kyeenext-icon-message",
                         "TOOL_LABEL": "消息",
+                        "HIDDEN":false,
                         "ROUTER_LINK": "",
                         "USE_TEMPLATE": false,
                         "TEMPLATE": "",
@@ -125,7 +129,7 @@ jQuery(function ($) {
                                         "MENU_TYPE": "2", //0、1、2分别代表跟节点、二级节点、三级节点
                                         "MENU_ICON": "", //左侧字体图标
                                         "ROUTER_LINK": "http://118.190.120.97/kyee_nextframework_portalface_ins/#/business/description/common-desc/messages", //点击跳转路径
-                                        "AUTO_CHECKED": false, //是否默认选中
+                                        "AUTO_CHECKED": true, //是否默认选中
                                     }
                                 ]
                             },

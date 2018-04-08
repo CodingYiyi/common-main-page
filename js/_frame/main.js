@@ -186,14 +186,14 @@ var context = context || (function () {
                     $(".KyeeNext-main-body-box").removeClass("KyeeNext-hide-recent-func-tabbar");
                     // 渲染不可关闭页签
                     if (KYEE_NEXT_MAIN_CONFIG.FIXED_MENU_ITEMS && KYEE_NEXT_MAIN_CONFIG.FIXED_MENU_ITEMS.length > 0) {
-                        let fixedItems = KYEE_NEXT_MAIN_CONFIG.FIXED_MENU_ITEMS
-                        let activedId;
-                        for (let i = fixedItems.length - 1; i >= 0; i--) {
+                        var fixedItems = KYEE_NEXT_MAIN_CONFIG.FIXED_MENU_ITEMS
+                        var activedId;
+                        for (var i = fixedItems.length - 1; i >= 0; i--) {
                             visitedItemsList.push({
                                 "MENU_ID": fixedItems[i].MENU_ID,
                                 "MENU_LABEL": fixedItems[i].MENU_LABEL
                             });
-                            let fixedItem = $("#KyeeNext-visited-item-temp").clone().attr({
+                            var fixedItem = $("#KyeeNext-visited-item-temp").clone().attr({
                                 "id": "KyeeNext-visited-item-" + fixedItems[i].MENU_ID,
                                 "data-fixed-item": true,
                                 "data-router-link": fixedItems[i].ROUTER_LINK
@@ -204,7 +204,7 @@ var context = context || (function () {
                                 activedId = fixedItems[i].MENU_ID;
                             }
                             fixedItem.prependTo($("#KyeeNext-visited-items"));
-                            let iframeItem = $("#KyeeNext-workspace-iframe-temp").clone().attr({
+                            var iframeItem = $("#KyeeNext-workspace-iframe-temp").clone().attr({
                                 "id": "KyeeNext-workspace-iframe-" + fixedItems[i].MENU_ID,
                                 "src": fixedItems[i].ROUTER_LINK
                             });
@@ -288,14 +288,16 @@ var context = context || (function () {
                 var itemsHTML = "";
                 for (var i = 0, j = KYEE_NEXT_MAIN_CONFIG.TOOL_BARS.length; i < j; i++) {
                     var item = KYEE_NEXT_MAIN_CONFIG.TOOL_BARS[i];
-                    if (!item.USE_TEMPLATE) {
-                        var itemHTML = templateHTML.clone().attr("id", itemIdPrefix + item.TOOL_ID).removeAttr("style");
-                        item.BIND_FUNC && bindFuncToTarget("KyeeNext-func-items-box", itemIdPrefix + item.TOOL_ID, item.EVENT_FUNCS);
-                        itemHTML.children("i").addClass(item.TOOL_ICON);
-                        itemHTML.children("span")[0].innerHTML = item.TOOL_LABEL;
-                        itemsHTML += itemHTML[0].outerHTML;
-                    } else {
-                        itemsHTML += item.TEMPLATE;
+                    if(!item.HIDDEN){
+                        if (!item.USE_TEMPLATE) {
+                            var itemHTML = templateHTML.clone().attr("id", itemIdPrefix + item.TOOL_ID).removeAttr("style");
+                            item.BIND_FUNC && bindFuncToTarget("KyeeNext-func-items-box", itemIdPrefix + item.TOOL_ID, item.EVENT_FUNCS);
+                            itemHTML.children("i").addClass(item.TOOL_ICON);
+                            itemHTML.children("span")[0].innerHTML = item.TOOL_LABEL;
+                            itemsHTML += itemHTML[0].outerHTML;
+                        } else {
+                            itemsHTML += item.TEMPLATE;
+                        }
                     }
                 }
                 $(itemsHTML).appendTo($("#" + parentID));
@@ -419,7 +421,7 @@ var context = context || (function () {
                     $(".KyeeNext-toggle-system-box").delay(600).fadeIn(100);
                 });
                 $(".KyeeNext-system-name-box").on("mouseleave", function () {
-                    $(".KyeeNext-toggle-system-box").clearQueue();;
+                    $(".KyeeNext-toggle-system-box").clearQueue();
                 });
                 $(".KyeeNext-toggle-system-box").on("mouseleave", function () {
                     $(this).fadeOut(100);
@@ -463,7 +465,7 @@ var context = context || (function () {
              */
             function click2ExpandMenu(target) {
                 if (target.hasClass("KyeeNext-item-level-0")) { // 一级菜单点击事件
-                    let me = target;
+                    var me = target;
                     $(".KyeeNext-menu-items-box").children(".KyeeNext-item-level-0-expanded").each(function () { // 折叠其他已展开的一级菜单
                         if (me.parent()[0] != this) {
                             $(this).removeClass("KyeeNext-item-level-0-expanded").addClass("KyeeNext-item-level-0-folded");
@@ -594,7 +596,7 @@ var context = context || (function () {
                 });
                 var target; // 删除后需要显示的活跃对象(侧边栏和tab页签)
                 if (element.hasClass("KyeeNext-active-item")) { // 若被删除对象为当前活跃对象，根据条件设置删除后的活跃对象
-                    let targetId;
+                    var targetId;
                     if (index == visitedItemsList.length - 1 && visitedItemsList.length > 1) { // 若为最后一个tab页，则前一个tab页获焦
                         targetId = visitedItemsList[index - 1].MENU_ID;
                         $("#KyeeNext-visited-item-" + targetId).addClass("KyeeNext-active-item");
@@ -734,7 +736,7 @@ var context = context || (function () {
                     $("#KyeeNext-workspace-iframe-" + targetId).removeAttr("hidden");
                 } else { //若不存在，隐藏其他所有，再将当前iframe添加到页面中
                     $(".KyeeNext-main-body-box").children("iframe").attr("hidden", "hidden");
-                    let iframeItem = $("#KyeeNext-workspace-iframe-temp").clone().attr({
+                    var iframeItem = $("#KyeeNext-workspace-iframe-temp").clone().attr({
                         "id": "KyeeNext-workspace-iframe-" + targetId,
                         "src": $("#KyeeNext-menu-item-" + targetId).attr("data-router-link")
                     }).removeAttr("hidden");
@@ -797,7 +799,7 @@ var context = context || (function () {
              */
             function appendUDF2Tabs(target) {
                 if (target) {
-                    let targetJquery = target;
+                    var targetJquery = target;
                     if (!(target instanceof jQuery)) {
                         targetJquery = $(target);
                     }
