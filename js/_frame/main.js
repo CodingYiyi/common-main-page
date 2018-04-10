@@ -418,13 +418,13 @@ var context = context || (function () {
                 }
                 $(itemsHTML).appendTo("#" + parentID);
                 $(".KyeeNext-system-name-box").on("mouseenter", function () {
-                    $(".KyeeNext-toggle-system-box").delay(600).fadeIn(100);
+                    $(".KyeeNext-toggle-system-box").delay(600).css("display","block");
                 });
+                // $(".KyeeNext-system-name-box").on("mouseleave", function () {
+                //     $(".KyeeNext-toggle-system-box").clearQueue();
+                // });
                 $(".KyeeNext-system-name-box").on("mouseleave", function () {
-                    $(".KyeeNext-toggle-system-box").clearQueue();
-                });
-                $(".KyeeNext-toggle-system-box").on("mouseleave", function () {
-                    $(this).fadeOut(100);
+                    $(".KyeeNext-toggle-system-box").fadeOut(100);
                 })
             }
 
@@ -522,8 +522,9 @@ var context = context || (function () {
             /**
              * 自动展开目标菜单
              * @param {*} targetId 目标菜单
+             * @param {*} withoutGo 是否进行页面跳转（默认跳转，true-不跳转）
              */
-            function expandedToMenuItem(targetId) {
+            function expandedToMenuItem(targetId,withoutGo) {
                 var target;
                 if (targetId instanceof jQuery) {
                     target = targetId;
@@ -559,7 +560,7 @@ var context = context || (function () {
                     "MENU_ID": target.attr("id").substring(19),
                     "MENU_LABEL": target.children("span")[0] ? target.children("span")[0].innerHTML : target[0].innerHTML
                 });
-                gotoPage(target); // 页面跳转操作
+                !withoutGo && gotoPage(target); // 页面跳转操作
             }
 
             /**
@@ -635,6 +636,7 @@ var context = context || (function () {
                     visitedItemsList.splice(index, 1); // 维护已访问列表
                     target.length > 0 && alignToElement(target); // 设置活跃对象完全可见
                 }
+                removePage(menuId);// 移除对应的iframe页面
             }
 
             /**
@@ -660,6 +662,17 @@ var context = context || (function () {
                     container.css({
                         "transform": "translateX(" + (containerWidth - left - width - 80 < 0 ? containerWidth - left - width - 80 : 0) + "px)"
                     });
+                }
+            }
+
+            /**
+             * 移除iframe页面
+             * @param {*} id 需要移除的页面id
+             */
+            function removePage(id){
+                var target = $("#KyeeNext-workspace-iframe-"+id);
+                if(options.platform == 0 && !options.goToFunc){
+                    target.remove();
                 }
             }
 
@@ -797,15 +810,8 @@ var context = context || (function () {
              * 用户自定义点击事件触发维护tab页功能
              * @param {*} target 
              */
-            function appendUDF2Tabs(target) {
-                if (target) {
-                    var targetJquery = target;
-                    if (!(target instanceof jQuery)) {
-                        targetJquery = $(target);
-                    }
-                    click2ExpandMenu(targetJquery);
-                    handleVisitedItems(targetJquery);
-                }
+            function appendUDF2Tabs(id,label,url,beforRender,afterRender) {
+                
             }
 
             // 右下角客服按钮点击事件
