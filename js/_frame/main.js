@@ -288,7 +288,7 @@ var context = context || (function () {
                 var itemsHTML = "";
                 for (var i = 0, j = KYEE_NEXT_MAIN_CONFIG.TOOL_BARS.length; i < j; i++) {
                     var item = KYEE_NEXT_MAIN_CONFIG.TOOL_BARS[i];
-                    if(!item.HIDDEN){
+                    if (!item.HIDDEN) {
                         if (!item.USE_TEMPLATE) {
                             var itemHTML = templateHTML.clone().attr("id", itemIdPrefix + item.TOOL_ID).removeAttr("style");
                             item.BIND_FUNC && bindFuncToTarget("KyeeNext-func-items-box", itemIdPrefix + item.TOOL_ID, item.EVENT_FUNCS);
@@ -418,7 +418,7 @@ var context = context || (function () {
                 }
                 $(itemsHTML).appendTo("#" + parentID);
                 $(".KyeeNext-system-name-box").on("mouseenter", function () {
-                    $(".KyeeNext-toggle-system-box").delay(600).css("display","block");
+                    $(".KyeeNext-toggle-system-box").delay(600).css("display", "block");
                 });
                 // $(".KyeeNext-system-name-box").on("mouseleave", function () {
                 //     $(".KyeeNext-toggle-system-box").clearQueue();
@@ -524,7 +524,7 @@ var context = context || (function () {
              * @param {*} targetId 目标菜单
              * @param {*} withoutGo 是否进行页面跳转（默认跳转，true-不跳转）
              */
-            function expandedToMenuItem(targetId,withoutGo) {
+            function expandedToMenuItem(targetId, withoutGo) {
                 var target;
                 if (targetId instanceof jQuery) {
                     target = targetId;
@@ -532,6 +532,9 @@ var context = context || (function () {
                     target = $("#" + targetId);
                 } else {
                     target = $(targetId);
+                }
+                if (target.length === 0) {
+                    return;
                 }
                 $(".KyeeNext-item-level-1-2-active").removeClass("KyeeNext-item-level-1-2-active");
                 $(".KyeeNext-item-level-0-active").removeClass("KyeeNext-item-level-0-active");
@@ -636,7 +639,7 @@ var context = context || (function () {
                     visitedItemsList.splice(index, 1); // 维护已访问列表
                     target.length > 0 && alignToElement(target); // 设置活跃对象完全可见
                 }
-                removePage(menuId);// 移除对应的iframe页面
+                removePage(menuId); // 移除对应的iframe页面
             }
 
             /**
@@ -669,9 +672,9 @@ var context = context || (function () {
              * 移除iframe页面
              * @param {*} id 需要移除的页面id
              */
-            function removePage(id){
-                var target = $("#KyeeNext-workspace-iframe-"+id);
-                if(options.platform == 0 && !options.goToFunc){
+            function removePage(id) {
+                var target = $("#KyeeNext-workspace-iframe-" + id);
+                if (options.platform == 0 && !options.goToFunc) {
                     target.remove();
                 }
             }
@@ -742,8 +745,9 @@ var context = context || (function () {
             /**
              * 点击侧边栏或者tab页签（非固定页签）时调用的页面跳转函数
              * @param {*} targetId 需要跳转到iframeId
+             * @param {*} url 需要跳转到iframe 地址
              */
-            function gotoIframe(targetId) {
+            function gotoIframe(targetId, url) {
                 if ($("#KyeeNext-workspace-iframe-" + targetId).length > 0) { //先判断是否已存在iframe缓存，若存在，隐藏其他，显示当前iframe
                     $(".KyeeNext-main-body-box").children("iframe").attr("hidden", "hidden");
                     $("#KyeeNext-workspace-iframe-" + targetId).removeAttr("hidden");
@@ -751,7 +755,7 @@ var context = context || (function () {
                     $(".KyeeNext-main-body-box").children("iframe").attr("hidden", "hidden");
                     var iframeItem = $("#KyeeNext-workspace-iframe-temp").clone().attr({
                         "id": "KyeeNext-workspace-iframe-" + targetId,
-                        "src": $("#KyeeNext-menu-item-" + targetId).attr("data-router-link")
+                        "src": url ? url : $("#KyeeNext-menu-item-" + targetId).attr("data-router-link")
                     }).removeAttr("hidden");
                     iframeItem.appendTo(".KyeeNext-main-body-box");
                 }
@@ -808,10 +812,25 @@ var context = context || (function () {
 
             /**
              * 用户自定义点击事件触发维护tab页功能
-             * @param {*} target 
+             * @param {*} id tab页签及iframe的ID
+             * @param {*} label tab页签显示文字
+             * @param {*} url iframe地址
+             * @param {*} closeable 是否可以关闭
+             * @param {*} autoReload 是否自动刷新
+             * @param {*} afterRender 渲染完后回调函数
              */
-            function appendUDF2Tabs(id,label,url,beforRender,afterRender) {
-                
+            function appendUDF2Tabs(id, label, url, closeable, autoReload, afterRender) {
+                setItemToVisitedItems({ // 设置对应的tab菜单（不存在的情况-添加、存在的情况-切换显示）
+                    "MENU_ID": id,
+                    "MENU_LABEL": label
+                });
+                gotoIframe(id,url); //页面跳转
+                if (autoReload) { //需要刷新
+                    $("#KyeeNext-workspace-iframe-" + id).attr("src", url);
+                }
+                if (typeof afterRender == "function") {
+                    afterRender();
+                }
             }
 
             // 右下角客服按钮点击事件
@@ -892,7 +911,7 @@ var context = context || (function () {
             return {
                 init: initPage,
                 expandedTarget: expandedToMenuItem,
-                appendTabs: appendUDF2Tabs
+                addUrlTab: appendUDF2Tabs
             }
 
         }
