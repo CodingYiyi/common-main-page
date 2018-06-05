@@ -173,7 +173,7 @@ body {
             width: 220px;
             background-color: $themeColor;
             color: $menuFontDefaultColor;
-            border-top: 1px solid $menuFontDefaultColorSub;
+            border-top: 1px solid $menuCommonBorderTopColor;
             overflow-y: auto;
             .KyeeNext-item-level-0-active{
                 color: $menuFontActiveColor !important;

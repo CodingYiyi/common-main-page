@@ -616,10 +616,10 @@ var context = context || (function () {
                                     $(".KyeeNext-main-body-box").children("iframe:not(#KyeeNext-workspace-iframe-" + targetId + ")").attr("hidden", "hidden");
                                     $("#KyeeNext-workspace-iframe-" + targetId).removeAttr("hidden");
                                 } else {
-                                    options.goToFunc($(this));
+                                    options.goToFunc(target);
                                 }
                             } else if (options.platform == 1) {
-                                options.goToFunc($(this).attr("data-router-link"));
+                                options.goToFunc(target.attr("data-router-link"));
                             }
                         }
                         target = $("#KyeeNext-visited-item-" + targetId);
@@ -669,13 +669,18 @@ var context = context || (function () {
             }
 
             /**
-             * 移除iframe页面
+             * 关闭Tab页签时，移除对应页面
              * @param {*} id 需要移除的页面id
              */
             function removePage(id) {
                 var target = $("#KyeeNext-workspace-iframe-" + id);
-                if (options.platform == 0 && !options.goToFunc) {
+                if (options.platform == 0 && !options.goToFunc) { // jQuery版本
                     target.remove();
+                } else if (options.platform == 1) { // portalface版本
+                    var callback = KYEE_NEXT_MAIN_CONFIG.CALLBACK_FUNCS.AFTER_CLOSE_TAB;
+                    if (callback && typeof callback == "function") {
+                        callback(id);
+                    }
                 }
             }
 
