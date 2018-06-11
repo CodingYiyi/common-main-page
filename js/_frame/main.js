@@ -367,6 +367,8 @@ var context = context || (function () {
                             }
                         }
                         itemHTMLStr = '<ul class="KyeeNext-submenu-hide">' + childItemHTMLStr + "</ul>"; // 拼接二级菜单容器
+                    } else { //没有二级菜单的情况下，隐藏右侧 > 箭头
+                        itemHTML.children(".KyeeNext-item-icon-right").css("display","none");
                     }
                     htmlStr += '<li class="KyeeNext-item-level-0-folded">' + itemHTML[0].outerHTML + itemHTMLStr + '</li>'; // 拼接当前一级菜单
                 }
@@ -715,8 +717,18 @@ var context = context || (function () {
                 }
                 e.stopPropagation();
             })
-            // 已访问菜单左箭头点击事件（向左偏移）
+            // 已访问菜单左箭头点击事件（向右偏移）
             $(".KyeeNext-nav-pre").on("click", function () {
+                var container = $("#KyeeNext-visited-items");
+                var transformVal = container.css("transform") && container.css("transform") !== "none" ? +(container.css("transform").substring(7).split(',')[4]) : 0;
+                if (transformVal < 0) {
+                    container.css({
+                        "transform": "translateX(" + (transformVal + KYEE_NEXT_MAIN_CONFIG.SCROLL_STEP <= 0 ? transformVal + KYEE_NEXT_MAIN_CONFIG.SCROLL_STEP : 0) + "px)"
+                    });
+                }
+            })
+            // 已访问菜单右箭头点击事件（向左偏移）
+            $(".KyeeNext-nav-next").on("click", function () {
                 var container = $("#KyeeNext-visited-items");
                 var transformVal = container.css("transform") && container.css("transform") !== "none" ? +(container.css("transform").substring(7).split(',')[4]) : 0;
                 var containerWidth = container.outerWidth();
@@ -726,16 +738,7 @@ var context = context || (function () {
                         "transform": "translateX(" + (transformVal - KYEE_NEXT_MAIN_CONFIG.SCROLL_STEP) + "px)"
                     });
                 }
-            })
-            // 已访问菜单右箭头点击事件（向右偏移）
-            $(".KyeeNext-nav-next").on("click", function () {
-                var container = $("#KyeeNext-visited-items");
-                var transformVal = container.css("transform") && container.css("transform") !== "none" ? +(container.css("transform").substring(7).split(',')[4]) : 0;
-                if (transformVal < 0) {
-                    container.css({
-                        "transform": "translateX(" + (transformVal + KYEE_NEXT_MAIN_CONFIG.SCROLL_STEP <= 0 ? transformVal + KYEE_NEXT_MAIN_CONFIG.SCROLL_STEP : 0) + "px)"
-                    });
-                }
+
             })
             // 获取已访问菜单的总宽度
             function getVisitedItemsWidthSum() {
