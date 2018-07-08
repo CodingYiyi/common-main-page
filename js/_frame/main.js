@@ -710,7 +710,7 @@ var context = context || (function () {
                 }
             })
             // 已访问链接导航栏列表项目关闭按钮点击事件
-            $("#KyeeNext-visited-items").on("click", "li>i", function (e) {
+            $("#KyeeNext-visited-items").on("click", "li>i.kyeenext-icon-X", function (e) {
                 if (visitedItemsList.length > 1) {
                     $(this).parent().remove(); // 从DOM树中删除节点元素
                     removeItemFromVisitedItems($(this).parent().attr("id").substring(22), $(this).parent()); // 从访问列表中删除节点信息
@@ -916,10 +916,36 @@ var context = context || (function () {
                 }
             }
 
+            /**
+             * 获取当前active标签的相关信息
+             */
+            function getActiveTab(){
+                var activeTab = $(".KyeeNext-active-item")[0];
+                var id = activeTab.id.substring(22);
+                var activeFrame = $("#KyeeNext-workspace-iframe-"+id);
+                return {
+                    id : id,
+                    label: $(activeTab).children("span")[0].innerHTML,
+                    url: activeFrame.attr("src")
+                }
+            }
+
+            /**
+             * 关闭指定ID的tab页签
+             * @param {*} targetId 目标tab页签ID
+             */
+            function closeTargetTab(targetId){
+                var target = $("#KyeeNext-visited-item-"+targetId);
+                target.remove(); // 从DOM树中删除节点元素
+                removeItemFromVisitedItems(targetId, target); // 从访问列表中删除节点信息
+            }
+
             return {
                 init: initPage,
                 expandedTarget: expandedToMenuItem,
-                addUrlTab: appendUDF2Tabs
+                addUrlTab: appendUDF2Tabs,
+                getActiveTab: getActiveTab,
+                closeTab: closeTargetTab
             }
 
         }
