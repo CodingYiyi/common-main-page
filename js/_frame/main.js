@@ -189,7 +189,7 @@ var context = context || (function () {
                         var fixedItems = KYEE_NEXT_MAIN_CONFIG.FIXED_MENU_ITEMS
                         var activedId;
                         for (var i = fixedItems.length - 1; i >= 0; i--) {
-                            visitedItemsList.push({
+                            visitedItemsList.unshift({
                                 "MENU_ID": fixedItems[i].MENU_ID,
                                 "MENU_LABEL": fixedItems[i].MENU_LABEL
                             });
