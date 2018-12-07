@@ -796,8 +796,10 @@ var context = context || (function () {
              * @param {*} e 浏览器事件
              */
             function closeSelf(e) {
+                var bindContextTarget = e.data.target.target; //绑定右键事件的tab页签对象
+                $(bindContextTarget).remove(); // 从DOM树中删除节点元素
+                removeItemFromVisitedItems(bindContextTarget.id.substring(22), $(bindContextTarget)); // 从访问列表中删除节点信息
                 e.preventDefault();
-
             }
 
             /**
@@ -805,8 +807,16 @@ var context = context || (function () {
              * @param {*} e 浏览器事件
              */
             function closeOthers(e) {
+                var bindContextTarget = e.data.target.target;
+                for (var i = 0; i < visitedItemsList.length; i++) {
+                    var item = $("#KyeeNext-visited-item-" + visitedItemsList[i].MENU_ID)
+                    if (item.data("fixedItem") !== true && visitedItemsList[i].MENU_ID != bindContextTarget.id.substring(22)) {
+                        item.remove();
+                        removeItemFromVisitedItems(item.attr("id").substring(22), item);
+                        i--;
+                    }
+                }
                 e.preventDefault();
-
             }
 
             /**
@@ -814,8 +824,15 @@ var context = context || (function () {
              * @param {*} e 浏览器事件
              */
             function closeAll(e) {
+                for (var i = 0; i < visitedItemsList.length; i++) {
+                    var item = $("#KyeeNext-visited-item-" + visitedItemsList[i].MENU_ID)
+                    if (item.data("fixedItem") !== true) {
+                        item.remove();
+                        removeItemFromVisitedItems(item.attr("id").substring(22), item);
+                        i--;
+                    }
+                }
                 e.preventDefault();
-
             }
 
             /**
